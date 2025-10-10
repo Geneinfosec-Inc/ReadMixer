@@ -129,7 +129,7 @@ The tool automatically:
 
 ReadMixer has been extensively benchmarked on high-performance systems. The following chart shows actual performance data from a production AMD Ryzen 9 9950X system (32 cores, 96GB RAM):
 
-![ReadMixer Performance Analysis](readmixer_performance.png)
+![ReadMixer Performance Analysis](/readmixer/readmixer_performance.png)
 
 **Key Performance Metrics:**
 - **Average Processing Rate**: 1.150 ± 0.008 GB/min
