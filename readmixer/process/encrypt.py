@@ -13,7 +13,7 @@ import process.util as util
 
 
 def encrypt(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None, 
-            chunk_size=None, num_workers=None, max_ram_gb=None):
+            chunk_size=None, num_workers=None, max_ram_gb=None, split_compress=False):
     """
     Encrypt FASTQ files using a memory-efficient streaming approach with external sorting.
     Now generates separate key files for each input file.
@@ -26,6 +26,7 @@ def encrypt(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None,
         chunk_size: Number of reads to process at once (None for auto-detection)
         num_workers: Number of worker processes to use (None for auto-detection)
         max_ram_gb: Maximum RAM to use in GB (None for auto-detection)
+        split_compress: Whether to use split compression (separate FASTQ components before compression)
     """
     # Set up logger functionality
     logging.basicConfig()
@@ -150,8 +151,13 @@ def encrypt(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None,
         
         # Compress if needed - now handles multiple FASTQ output files and multiple key files
         if should_compress:
-            compress_output_files_multiple_parts(output_files_created, out_file_name, 
-                                               outputdir, read_info, resource_manager)
+            if split_compress:
+                logging.info("Using split compression for better compression ratios")
+                compress_output_files_split(output_files_created, out_file_name, 
+                                          outputdir, read_info, resource_manager)
+            else:
+                compress_output_files_multiple_parts(output_files_created, out_file_name, 
+                                                   outputdir, read_info, resource_manager)
         
     except Exception as e:
         logging.error(f"Fatal error: {e}")
@@ -588,6 +594,162 @@ def compress_output_files_multiple_parts(output_files_created, out_file_name,
         logging.info("Successfully compressed all output files.")
     except Exception as e:
         logging.error(f"Error compressing files: {e}")
+
+
+def compress_output_files_split(output_files_created, out_file_name, 
+                               outputdir, read_info, resource_manager):
+    """
+    Compress output files using split compression for better ratios.
+    Separates FASTQ components (headers, sequences, quality scores) into separate files.
+    """
+    try:
+        logging.info("Starting split compression (separating FASTQ components)...")
+        buffer_size = resource_manager.get_optimal_buffer_size()
+        
+        # Create a manifest file to track the split files
+        manifest_name = f"ReadMixer.{out_file_name}.manifest.txt"
+        if outputdir:
+            manifest_name = os.path.join(outputdir, manifest_name)
+        
+        manifest_entries = []
+        
+        # Process each FASTQ output file
+        for output_file in output_files_created:
+            base_name = os.path.basename(output_file)
+            logging.info(f"Split-compressing: {base_name}")
+            
+            # Create component files
+            headers_file = output_file + ".headers"
+            sequences_file = output_file + ".sequences"
+            plus_file = output_file + ".plus"
+            qualities_file = output_file + ".qualities"
+            
+            # Split the FASTQ file into components
+            read_count = split_fastq_into_components(output_file, headers_file, 
+                                                    sequences_file, plus_file, 
+                                                    qualities_file, buffer_size)
+            
+            # Compress each component
+            component_files = [
+                (headers_file, headers_file + ".gz"),
+                (sequences_file, sequences_file + ".gz"),
+                (plus_file, plus_file + ".gz"),
+                (qualities_file, qualities_file + ".gz")
+            ]
+            
+            compressed_sizes = {}
+            for source_file, compressed_file in component_files:
+                with open(source_file, "rb") as f_in:
+                    with gzip.open(compressed_file, "wb", compresslevel=9) as f_out:
+                        shutil.copyfileobj(f_in, f_out, buffer_size)
+                
+                # Get compressed size
+                compressed_size = os.path.getsize(compressed_file)
+                compressed_sizes[os.path.basename(compressed_file)] = compressed_size
+                
+                # Remove uncompressed component file
+                os.remove(source_file)
+                logging.info(f"  Compressed: {os.path.basename(compressed_file)} "
+                           f"({resource_manager.capabilities.format_bytes(compressed_size)})")
+            
+            # Remove original FASTQ file
+            if os.path.exists(output_file):
+                original_size = os.path.getsize(output_file)
+                os.remove(output_file)
+                
+                # Calculate total compressed size and ratio
+                total_compressed = sum(compressed_sizes.values())
+                ratio = (1 - total_compressed / original_size) * 100 if original_size > 0 else 0
+                logging.info(f"  Original size: {resource_manager.capabilities.format_bytes(original_size)}")
+                logging.info(f"  Compressed size: {resource_manager.capabilities.format_bytes(total_compressed)}")
+                logging.info(f"  Compression ratio: {ratio:.1f}% reduction")
+            
+            # Add to manifest
+            manifest_entries.append({
+                'fastq_file': base_name,
+                'read_count': read_count,
+                'headers': base_name + ".headers.gz",
+                'sequences': base_name + ".sequences.gz",
+                'plus': base_name + ".plus.gz",
+                'qualities': base_name + ".qualities.gz"
+            })
+        
+        # Compress key files (same as before)
+        for file_path, file_name, _, _ in read_info:
+            keyfile_name = f"ReadMixerKeys.{out_file_name}.{file_name}.csv"
+            gzkeyfile_name = f"ReadMixerKeys.{out_file_name}.{file_name}.csv.gz"
+            
+            if outputdir:
+                keyfile_name = os.path.join(outputdir, keyfile_name)
+                gzkeyfile_name = os.path.join(outputdir, gzkeyfile_name)
+            
+            if os.path.exists(keyfile_name):
+                with open(keyfile_name, "rb") as key_in:
+                    with gzip.open(gzkeyfile_name, "wb", compresslevel=9) as key_out:
+                        shutil.copyfileobj(key_in, key_out, buffer_size)
+                
+                os.remove(keyfile_name)
+                logging.info(f"Compressed key file: {os.path.basename(gzkeyfile_name)}")
+        
+        # Write manifest file
+        with open(manifest_name, 'w') as manifest_file:
+            manifest_file.write("# ReadMixer Split Compression Manifest\n")
+            manifest_file.write("# This file describes how FASTQ files were split and compressed\n")
+            manifest_file.write("# Use the readmixer_reconstruct.py script to reconstruct original FASTQ files\n\n")
+            
+            for entry in manifest_entries:
+                manifest_file.write(f"[FASTQ_FILE]\n")
+                manifest_file.write(f"original_name={entry['fastq_file']}\n")
+                manifest_file.write(f"read_count={entry['read_count']}\n")
+                manifest_file.write(f"headers={entry['headers']}\n")
+                manifest_file.write(f"sequences={entry['sequences']}\n")
+                manifest_file.write(f"plus={entry['plus']}\n")
+                manifest_file.write(f"qualities={entry['qualities']}\n\n")
+        
+        logging.info(f"Created manifest file: {os.path.basename(manifest_name)}")
+        logging.info("Split compression completed successfully.")
+        
+    except Exception as e:
+        logging.error(f"Error during split compression: {e}")
+        import traceback
+        logging.error(traceback.format_exc())
+        raise
+
+
+def split_fastq_into_components(fastq_file, headers_file, sequences_file, 
+                                plus_file, qualities_file, buffer_size):
+    """
+    Split a FASTQ file into its component parts.
+    Returns the number of reads processed.
+    """
+    read_count = 0
+    
+    with open(fastq_file, 'r', buffering=buffer_size) as f_in, \
+         open(headers_file, 'w', buffering=buffer_size) as f_headers, \
+         open(sequences_file, 'w', buffering=buffer_size) as f_sequences, \
+         open(plus_file, 'w', buffering=buffer_size) as f_plus, \
+         open(qualities_file, 'w', buffering=buffer_size) as f_qualities:
+        
+        while True:
+            header = f_in.readline()
+            if not header:
+                break
+            sequence = f_in.readline()
+            plus = f_in.readline()
+            quality = f_in.readline()
+            
+            if not (sequence and plus and quality):
+                break
+            
+            # Write each component to its respective file
+            f_headers.write(header)
+            f_sequences.write(sequence)
+            f_plus.write(plus)
+            f_qualities.write(quality)
+            
+            read_count += 1
+    
+    return read_count
 
 
 def cleanup_temp_dir(temp_dir):
