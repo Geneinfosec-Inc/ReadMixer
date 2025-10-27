@@ -82,12 +82,9 @@ python readmixer.py -e -p /path/to/fastq/files
 python readmixer.py -e -p /path/to/fastq/files -o /output/directory -z -m 16 -w 8 -c 1000000 -l info
 ```
 
-#### Split Compression for Better Compression Ratios
+#### Compression Example
 ```bash
-# Enable split compression (best compression)
-python readmixer.py -e -p /path/to/fastq/files -o /output/directory -z -s -l info
-
-# Standard compression (faster)
+# Enable compression
 python readmixer.py -e -p /path/to/fastq/files -o /output/directory -z -l info
 ```
 
@@ -105,10 +102,6 @@ python readmixer.py -e -p /path/to/fastq/files -o /output/directory -z -l info
 
 ### Compression Options
 - `-z, --zip`: Enable gzip compression of output files (by default, output files are NOT compressed)
-- `-s, --split-compress`: Enable split compression for better compression ratios (requires `-z` flag)
-  - Separates FASTQ components (headers, sequences, quality scores) into separate files before compression
-  - Typically achieves 10-30% better compression than standard gzip
-  - Creates a manifest file for reconstruction
 
 ### Additional Options
 - `-l, --loglevel`: Logging level (error, warning, info, debug, critical)
@@ -311,100 +304,6 @@ The tool includes comprehensive error handling:
 - Graceful cleanup of temporary files
 - Detailed error messages with suggestions
 
-## Advanced Compression: Split Compression
-
-### Overview
-
-ReadMixer offers an advanced compression mode that significantly improves compression ratios by separating FASTQ file components before compression. This technique is inspired by specialized FASTQ compression tools like fqzcomp and DSRC.
-
-### How It Works
-
-FASTQ files have a repetitive structure with 4 lines per read:
-1. **Header line** (starts with `@`) - often contains repetitive patterns
-2. **Sequence line** - DNA bases (A, C, G, T, N) - limited alphabet
-3. **Plus line** (starts with `+`) - usually just "+" character
-4. **Quality scores** - limited character set with patterns
-
-By separating these components into separate files before compression, each component can be compressed more efficiently:
-- **Headers**: Similar patterns compress better together
-- **Sequences**: Limited alphabet (ACGT) improves compression
-- **Quality scores**: Repetitive patterns compress efficiently
-- **Plus lines**: Highly redundant, compress to minimal size
-
-### Usage
-
-Enable split compression with the `-s` flag (requires `-z`):
-
-```bash
-python readmixer.py -e -p /data/fastq -o /output -z -s -l info
-```
-
-### Output Files
-
-Split compression creates:
-1. **Component files** (for each FASTQ part):
-   - `*.fastq.part000.headers.gz` - Header lines
-   - `*.fastq.part000.sequences.gz` - Sequence lines
-   - `*.fastq.part000.qualities.gz` - Quality score lines
-   - `*.fastq.part000.plus.gz` - Plus lines
-2. **Manifest file**: `ReadMixer.*.manifest.txt` - Maps components for reconstruction
-3. **Key files**: `ReadMixerKeys.*.csv.gz` - Encryption keys (as usual)
-
-### Reconstruction
-
-To reconstruct the original FASTQ files from split-compressed components:
-
-```bash
-python readmixer_reconstruct.py -m ReadMixer.*.manifest.txt -o /output/directory
-```
-
-With optional compression of reconstructed files:
-
-```bash
-python readmixer_reconstruct.py -m ReadMixer.*.manifest.txt -o /output -c
-```
-
-### Compression Performance
-
-Split compression typically achieves:
-- **10-30% better compression** than standard gzip on FASTQ files
-- **20-40% better compression** on high-quality sequencing data with repetitive headers
-- **Best results** with Illumina data that has structured headers
-
-### Example Comparison
-
-```bash
-# Standard compression
-# Input: 10 GB FASTQ
-# Output: 3.2 GB compressed (68% reduction)
-python readmixer.py -e -p /data -o /output -z
-
-# Split compression
-# Input: 10 GB FASTQ  
-# Output: 2.4 GB compressed (76% reduction)
-python readmixer.py -e -p /data -o /output -z -s
-```
-
-### When to Use Split Compression
-
-**Use split compression when:**
-- Disk space is limited
-- Archiving data long-term
-- Transferring large datasets over network
-- Working with high-quality sequencing data
-
-**Use standard compression when:**
-- Processing speed is more important than space
-- You need simpler file management
-- Working with already-compressed input files
-
-### Technical Details
-
-- Uses gzip compression level 9 for maximum compression
-- Processes files with streaming I/O for memory efficiency
-- Buffer sizes automatically optimized based on available RAM
-- Manifest file enables easy reconstruction
-- Compatible with all ReadMixer encryption features
 
 ## Advanced Features
 
@@ -449,17 +348,16 @@ python readmixer.py -e -p /data -o /output -z -s
 - Use SSD storage for better I/O performance
 - Ensure sufficient RAM for larger chunk sizes
 - Consider using `-z` for compression to reduce final file sizes
-- Note: Split compression (`-s`) adds processing time but saves significant disk space
 
 ### Performance Tips
 
 1. **For large datasets**: Let the system auto-optimize resources (recommended)
 2. **For repeated processing**: Note the optimal parameters from logs and reuse them
-3. **For limited disk space**: Use `-z -s` flags for split compression (best compression ratio)
+3. **For limited disk space**: Use `-z` flag for compression to reduce file sizes
 4. **For limited resources**: Set explicit RAM limits with `-m`
 5. **For debugging**: Use `-l info` for processing status or `-l debug` for detailed information
 6. **Expected timing**: ~2-3 hours for 100M reads, ~30-60 minutes for 10M reads
-7. **For archiving**: Use split compression (`-z -s`) to minimize long-term storage costs
+7. **For archiving**: Use compression (`-z`) to minimize long-term storage costs
 
 ## License
 
