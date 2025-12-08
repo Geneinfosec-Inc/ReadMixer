@@ -1,0 +1,144 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2025-12-08T12:00:00Z",
+    "tools": [
+      {
+        "vendor": "GeneInfoSec",
+        "name": "Manual SBOM Generation",
+        "version": "1.0.1"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:pypi/readmixer@1.0.1",
+      "name": "ReadMixer",
+      "version": "1.0.1",
+      "description": "A high-performance tool for encrypting FASTQ files with dynamic resource management capabilities",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "GeneInfoSec"
+      },
+      "author": "Joseph Parks",
+      "purl": "pkg:pypi/readmixer@1.0.1"
+    },
+    "manufacture": {
+      "name": "GeneInfoSec"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycryptodome@3.21.0",
+      "name": "pycryptodome",
+      "version": "3.21.0",
+      "description": "Cryptographic library for Python - used for secure random number generation",
+      "purl": "pkg:pypi/pycryptodome@3.21.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pypi.org/project/pycryptodome/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/numpy@2.2.0",
+      "name": "numpy",
+      "version": "2.2.0",
+      "description": "Fundamental package for array computing in Python - used for read shuffling operations",
+      "purl": "pkg:pypi/numpy@2.2.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pypi.org/project/numpy/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@6.0.0",
+      "name": "psutil",
+      "version": "6.0.0",
+      "description": "Cross-platform lib for process and system monitoring - used for resource detection",
+      "purl": "pkg:pypi/psutil@6.0.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pypi.org/project/psutil/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/matplotlib@3.5.0",
+      "name": "matplotlib",
+      "version": "3.5.0",
+      "description": "Python plotting package - optional, used only for performance chart generation",
+      "purl": "pkg:pypi/matplotlib@3.5.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pypi.org/project/matplotlib/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/contourpy@1.3",
+      "name": "contourpy",
+      "version": "1.3",
+      "description": "Python library for calculating contours - matplotlib dependency",
+      "purl": "pkg:pypi/contourpy@1.3",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pypi.org/project/contourpy/"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/python@3.11",
+      "name": "python",
+      "version": "3.11",
+      "description": "Python programming language runtime",
+      "purl": "pkg:generic/python@3.11",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://www.python.org/"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/readmixer@1.0.1",
+      "dependsOn": [
+        "pkg:pypi/pycryptodome@3.21.0",
+        "pkg:pypi/numpy@2.2.0",
+        "pkg:pypi/psutil@6.0.0",
+        "pkg:pypi/matplotlib@3.5.0",
+        "pkg:generic/python@3.11"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/matplotlib@3.5.0",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.2.0",
+        "pkg:pypi/contourpy@1.3"
+      ]
+    }
+  ]
+}

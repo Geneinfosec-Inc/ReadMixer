@@ -13,8 +13,8 @@ A high-performance tool for encrypting FASTQ files with dynamic resource managem
 
 ## System Requirements
 
-- Python 3.7+
-- Required packages: `pip install -r requirements.txt`
+- Python 3.11 (recommended for best compatibility)
+- GCC >= 9.3 (for pip-only installation) OR Anaconda/Miniconda (recommended for older systems)
 - Minimum 1GB RAM (will auto-adjust for available resources)
 - Sufficient disk space (tool will check requirements automatically)
 
@@ -24,31 +24,80 @@ A high-performance tool for encrypting FASTQ files with dynamic resource managem
 
 ## Installation
 
-### Using Conda (Recommended)
+### Method 1: Using Conda with environment.yml (Recommended)
+
+This method is **strongly recommended** for cluster environments or systems with older GCC versions (< 9.3):
+
 ```bash
 # Install Anaconda/Miniconda if not already installed
-# Create a conda environment for ReadMixer
-conda create -y -n readmixer-env python=3.11
+# Navigate to the readmixer directory
+cd readmixer
+
+# Create environment from environment.yml file
+conda env create -f environment.yml
+
 # Activate the environment
+conda activate readmixer-env
+# OR on some systems:
 source $HOME/anaconda3/bin/activate readmixer-env
-# Install dependencies
-pip install -r requirements.txt
 ```
 
-### Using pip
+### Method 2: Using Conda with Manual Package Installation
+
+For systems with GCC < 9.3 (e.g., GCC 4.8.5 on older cluster systems):
+
+```bash
+# Create conda environment with numpy and contourpy pre-installed
+conda create -y -n readmixer-env python=3.11 numpy=2.3 contourpy=1.3
+
+# Activate the environment
+conda activate readmixer-env
+# OR on some systems:
+source $HOME/anaconda3/bin/activate readmixer-env
+
+# Install remaining dependencies with pip
+pip install -r requirements-pip.txt
+```
+
+**Why this method?** NumPy and contourpy require GCC >= 9.3 to build from source. Using conda pre-compiled binaries bypasses this requirement, making installation possible on older systems.
+
+### Method 3: Using pip (Requires GCC >= 9.3)
+
+Only use this method if you have GCC 9.3 or newer:
+
 ```bash
 # Clone repository
 git clone <repository-url>
-cd ReadMixer
+cd ReadMixer/readmixer
 
 # Using virtual environment (recommended)
 python -m venv readmixer-env
 source readmixer-env/bin/activate  # On Windows: readmixer-env\Scripts\activate
 pip install -r requirements.txt
 
-# Using system Python (not recommended for large files)
+# Using system Python (not recommended)
 pip install -r requirements.txt
 ```
+
+### Method 4: Using Docker
+
+For users who prefer containerized deployment:
+
+**Standard Docker (requires base image with GCC >= 9.3):**
+```bash
+docker build -t readmixer:latest .
+docker run -v /path/to/data:/data readmixer:latest -e -p /data
+```
+
+**Docker with Conda (works on any system):**
+```bash
+docker build -f Dockerfile.conda -t readmixer-conda:latest .
+docker run -v /path/to/data:/data readmixer-conda:latest -e -p /data
+```
+
+### Additional Resources
+
+For detailed installation instructions, troubleshooting, and environment-specific recommendations, see [INSTALLATION.md](INSTALLATION.md).
 
 ## Usage
 
@@ -325,7 +374,39 @@ The tool includes comprehensive error handling:
 
 ## Troubleshooting
 
-### Common Issues
+### Installation Issues
+
+**"NumPy requires GCC >= 9.3" error when running `pip install -r requirements.txt`:**
+
+This error occurs on systems with older GCC versions (e.g., GCC 4.8.5 on older cluster systems). The error message looks like:
+```
+../meson.build:28:4: ERROR: Problem encountered: NumPy requires GCC >= 9.3
+```
+
+**Quick Fix:** See [QUICKSTART_OLD_GCC.md](QUICKSTART_OLD_GCC.md) for a step-by-step guide.
+
+**Solution:** Use conda to install numpy and contourpy instead of pip:
+```bash
+# Method 1: Use environment.yml (easiest)
+conda env create -f environment.yml
+conda activate readmixer-env
+
+# Method 2: Manual installation
+conda create -y -n readmixer-env python=3.11 numpy=2.3 contourpy=1.3
+conda activate readmixer-env
+pip install -r requirements-pip.txt
+```
+
+**"contourpy" build error:**
+Similar to numpy, contourpy may fail with older GCC versions. Use the same conda-based solution above.
+
+**Checking your GCC version:**
+```bash
+gcc --version
+```
+If the version is less than 9.3, use the conda installation method.
+
+### Runtime Issues
 
 **"Insufficient disk space" error:**
 - Check available disk space in output directory

@@ -1,0 +1,16 @@
+name: readmixer-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy>=2.2
+  - contourpy>=1.3
+  - pip
+  - pip:
+    # Cryptographic random number generation (Crypto.Random)
+    - pycryptodome>=3.21.0
+    # System resource detection (RAM, CPU cores, disk space)
+    - psutil>=6.0.0
+    # Performance chart generation (optional)
+    - matplotlib>=3.5.0
