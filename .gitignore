@@ -32,3 +32,5 @@ readmixer/anaconda.sh
 .DS_Store
 Thumbs.db
 
+# Internal documentation
+SECURITY.md
