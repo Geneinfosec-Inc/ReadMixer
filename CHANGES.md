@@ -47,7 +47,7 @@ Alternative Dockerfile using conda base image for maximum compatibility.
 **Usage:**
 ```bash
 docker build -f Dockerfile.conda -t readmixer-conda:latest .
-docker run -v /path/to/data:/data readmixer-conda:latest -e -p /data
+docker run -v /path/to/data:/data readmixer-conda:latest -s -p /data
 ```
 
 ### 4. **INSTALLATION.md**
@@ -113,7 +113,7 @@ Location: `readmixer/Dockerfile`
 
 Users now have 5 installation methods to choose from:
 
-### Method 1: Conda with environment.yml (Recommended) ⭐
+### Method 1: Conda with environment.yml (Recommended)
 ```bash
 conda env create -f environment.yml
 conda activate readmixer-env
@@ -139,14 +139,14 @@ pip install -r requirements.txt
 ### Method 4: Docker Standard
 ```bash
 docker build -t readmixer:latest .
-docker run -v /path/to/data:/data readmixer:latest -e -p /data
+docker run -v /path/to/data:/data readmixer:latest -s -p /data
 ```
 **Best for:** Docker users with compatible base images
 
 ### Method 5: Docker with Conda
 ```bash
 docker build -f Dockerfile.conda -t readmixer-conda:latest .
-docker run -v /path/to/data:/data readmixer-conda:latest -e -p /data
+docker run -v /path/to/data:/data readmixer-conda:latest -s -p /data
 ```
 **Best for:** Docker users needing maximum compatibility
 

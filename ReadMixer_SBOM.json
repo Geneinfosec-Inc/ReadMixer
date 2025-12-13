@@ -17,7 +17,7 @@
       "bom-ref": "pkg:pypi/readmixer@1.0.1",
       "name": "ReadMixer",
       "version": "1.0.1",
-      "description": "A high-performance tool for encrypting FASTQ files with dynamic resource management capabilities",
+      "description": "A high-performance tool for obfuscating/scrambling FASTQ files with dynamic resource management capabilities",
       "licenses": [
         {
           "license": {

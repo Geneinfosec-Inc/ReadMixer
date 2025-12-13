@@ -1,1 +1,1 @@
-from .encrypt import encrypt
+from .scramble import scramble

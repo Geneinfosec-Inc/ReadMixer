@@ -165,7 +165,7 @@ class ResourceManager:
     
     def check_disk_space_requirements(self, input_size, output_path='.'):
         """
-        Check if there's enough disk space for encryption.
+        Check if there's enough disk space for scrambling/obfuscation.
         
         Args:
             input_size: Size of input data in bytes
@@ -174,7 +174,7 @@ class ResourceManager:
         Returns:
             bool: True if sufficient space, False otherwise
         """
-        # Realistic disk space estimation for encryption based on actual usage patterns
+        # Realistic disk space estimation for scrambling based on actual usage patterns
         # Estimate final output size based on observed expansion ratios
         estimated_fastq_size = input_size * 3.2  # Realistic decompression + formatting
         estimated_csv_size = input_size * 1.7    # CSV metadata with read descriptions

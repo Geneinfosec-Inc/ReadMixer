@@ -26,10 +26,10 @@ import numpy as np
 import process.util as util
 
 
-def encrypt(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None, 
+def scramble(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None, 
             chunk_size=None, num_workers=None, max_ram_gb=None):
     """
-    Encrypt FASTQ files using a memory-efficient streaming approach with external sorting.
+    Scramble/obfuscate FASTQ files using a memory-efficient streaming approach with external sorting.
     Now generates separate key files for each input file.
     
     Args:
@@ -143,7 +143,7 @@ def encrypt(loglevel="ERROR", workingpath=None, zipup=None, outputdir=None,
         chunk_count = (total_reads + chunk_size - 1) // chunk_size
         logging.info(f"Processing in {chunk_count} chunks of up to {chunk_size} reads each")
         
-        # Create output file names - generate unique identifier for this encryption session
+        # Create output file names - generate unique identifier for this scrambling session
         out_file_name = util.random_alphanumeric_string(40)
         fastq_name = 'ReadMixer.' + out_file_name + ".fastq"
         gzfastq_name = 'ReadMixer.' + out_file_name + ".fastq.gz"

@@ -33,17 +33,17 @@ python readmixer.py --help
 
 ## First Time Using ReadMixer?
 
-Encrypt your first FASTQ files:
+Scramble your first FASTQ files:
 
 ```bash
 # Make sure environment is activated
 conda activate readmixer-env
 
-# Basic encryption
-python readmixer.py -e -p /path/to/your/fastq/files
+# Basic obfuscation
+python readmixer.py -s -p /path/to/your/fastq/files
 
 # With custom output directory
-python readmixer.py -e -p /path/to/input -o /path/to/output
+python readmixer.py -s -p /path/to/input -o /path/to/output
 
 # See all options
 python readmixer.py --help
@@ -121,7 +121,7 @@ To check if your environment is active, look for `(readmixer-env)` at the start 
 
 ✅ Use: `conda env create -f environment.yml`  
 ✅ Activate: `conda activate readmixer-env`  
-✅ Run: `python readmixer.py -e -p /path/to/data`
+✅ Run: `python readmixer.py -s -p /path/to/data`
 
-**You're all set!** Happy encrypting! 🎉
+**You're all set!** Happy scrambling!
 

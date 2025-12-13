@@ -1,6 +1,6 @@
-# ReadMixer - Dynamic FASTQ Encryption Tool
+# ReadMixer - Dynamic FASTQ Obfuscation Tool
 
-A high-performance tool for encrypting FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
+A high-performance tool for obfuscating FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
 
 ## Features
 
@@ -88,14 +88,14 @@ For users who prefer containerized deployment:
 ```bash
 cd readmixer
 docker build -t readmixer:latest .
-docker run -v /path/to/data:/data readmixer:latest -e -p /data
+docker run -v /path/to/data:/data readmixer:latest -s -p /data
 ```
 
 **Docker with Conda (works on any system):**
 ```bash
 cd readmixer
 docker build -f Dockerfile.conda -t readmixer-conda:latest .
-docker run -v /path/to/data:/data readmixer-conda:latest -e -p /data
+docker run -v /path/to/data:/data readmixer-conda:latest -s -p /data
 ```
 
 ### Additional Resources
@@ -104,9 +104,9 @@ For detailed installation instructions, troubleshooting, and environment-specifi
 
 ## Usage
 
-### Basic Encryption
+### Basic Obfuscation
 ```bash
-python readmixer.py -e -p /path/to/fastq/files
+python readmixer.py -s -p /path/to/fastq/files
 ```
 
 ### Advanced Usage with Resource Control
@@ -114,30 +114,30 @@ python readmixer.py -e -p /path/to/fastq/files
 #### Manual RAM Limit
 ```bash
 # Limit to 8GB RAM
-python readmixer.py -e -p /path/to/fastq/files -m 8
+python readmixer.py -s -p /path/to/fastq/files -m 8
 
 # Use 32GB RAM for large datasets
-python readmixer.py -e -p /path/to/fastq/files -m 32
+python readmixer.py -s -p /path/to/fastq/files -m 32
 ```
 
 #### Manual Worker and Chunk Size Control
 ```bash
 # Use 16 workers with 2M read chunks
-python readmixer.py -e -p /path/to/fastq/files -w 16 -c 2000000
+python readmixer.py -s -p /path/to/fastq/files -w 16 -c 2000000
 
 # Let system auto-optimize (recommended)
-python readmixer.py -e -p /path/to/fastq/files
+python readmixer.py -s -p /path/to/fastq/files
 ```
 
 #### Full Example with All Options
 ```bash
-python readmixer.py -e -p /path/to/fastq/files -o /output/directory -z -m 16 -w 8 -c 1000000 -l info
+python readmixer.py -s -p /path/to/fastq/files -o /output/directory -z -m 16 -w 8 -c 1000000 -l info
 ```
 
 ## Command Line Arguments
 
 ### Core Operations
-- `-e, --encrypt`: Encrypt files in specified location
+- `-s, --scramble`: Scramble/obfuscate files in specified location
 - `-p, --pathname`: Input directory path (default: current directory)
 - `-o, --output`: Output directory path
 
@@ -251,25 +251,25 @@ Based on scaling analysis and resource constraints:
 #### For Maximum Throughput
 ```bash
 # Let system auto-optimize (recommended)
-python readmixer.py -e -p /path/to/data -l info
+python readmixer.py -s -p /path/to/data -l info
 
 # For high-memory systems, increase RAM limit
-python readmixer.py -e -p /path/to/data -m 64 -l info
+python readmixer.py -s -p /path/to/data -m 64 -l info
 ```
 
 #### For Resource-Constrained Systems
 ```bash
 # Limit RAM usage
-python readmixer.py -e -p /path/to/data -m 4 -w 2 -c 500000
+python readmixer.py -s -p /path/to/data -m 4 -w 2 -c 500000
 
 # Enable compression to save disk space
-python readmixer.py -e -p /path/to/data -m 4 -w 2 -z
+python readmixer.py -s -p /path/to/data -m 4 -w 2 -z
 ```
 
 #### For Debugging Performance Issues
 ```bash
 # Detailed logging to analyze bottlenecks
-python readmixer.py -e -p /path/to/data -l debug
+python readmixer.py -s -p /path/to/data -l debug
 ```
 
 ## Performance Examples
@@ -281,7 +281,7 @@ python readmixer.py -e -p /path/to/data -l debug
 # - 6-8 worker processes
 # - 2MB I/O buffers
 # - Chunk sizes around 800K-1M reads
-python readmixer.py -e -p /data/fastq -l info
+python readmixer.py -s -p /data/fastq -l info
 ```
 
 ### Workstation Environment (32GB RAM, 16 cores)
@@ -291,7 +291,7 @@ python readmixer.py -e -p /data/fastq -l info
 # - 16-24 worker processes
 # - 4MB I/O buffers
 # - Chunk sizes around 4-6M reads
-python readmixer.py -e -p /data/fastq -l info
+python readmixer.py -s -p /data/fastq -l info
 ```
 
 ### Supercomputer Environment (512GB RAM, 64 cores)
@@ -301,7 +301,7 @@ python readmixer.py -e -p /data/fastq -l info
 # - 16-32 worker processes (limited by I/O)
 # - 8MB I/O buffers
 # - Chunk sizes around 50-100M reads
-python readmixer.py -e -p /data/fastq -l info
+python readmixer.py -s -p /data/fastq -l info
 ```
 
 ## Logging and Monitoring
@@ -309,7 +309,7 @@ python readmixer.py -e -p /data/fastq -l info
 Set logging level to `info` to see detailed resource usage and processing status:
 
 ```bash
-python readmixer.py -e -p /data/fastq -l info
+python readmixer.py -s -p /data/fastq -l info
 ```
 
 Example output:
@@ -433,10 +433,82 @@ If the version is less than 9.3, use the conda installation method.
 5. **For debugging**: Use `-l info` for processing status or `-l debug` for detailed information
 6. **Expected timing**: ~2-3 hours for 100M reads, ~30-60 minutes for 10M reads
 
+## Testing
+
+ReadMixer includes a comprehensive test suite to verify functionality. For detailed testing documentation, see [TESTING.md](TESTING.md).
+
+### Quick Start
+
+```bash
+cd readmixer
+python -m pytest tests/ -v
+```
+
+### Test Data
+
+A minimal test dataset (`tests/testing.fastq.gz`) is included with 10 sequencing reads for unit and integration testing.
+
+### Test Coverage
+
+The test suite includes 19 tests covering:
+
+| Category | Description |
+|----------|-------------|
+| FASTQ Reading | File parsing, format validation, read counting |
+| Cryptographic Functions | Random base generation, tag creation, alphanumeric strings |
+| Resource Management | System capability detection, buffer sizing |
+| Integration | End-to-end scrambling workflow |
+
+### Example Test Run
+
+```bash
+$ cd readmixer
+$ python -m pytest tests/ -v
+
+============================= test session starts ==============================
+collected 19 items
+
+tests/test_readmixer.py::TestFastqReading::test_gzip_line_count PASSED
+tests/test_readmixer.py::TestFastqReading::test_open_fastq_file_yields_reads PASSED
+tests/test_readmixer.py::TestRandomGeneration::test_random_bases_valid_characters PASSED
+tests/test_readmixer.py::TestResourceManager::test_system_capabilities_detection PASSED
+tests/test_readmixer.py::TestIntegration::test_scramble_minimal_dataset PASSED
+...
+============================== 19 passed =======================================
+```
+
+### Running with Test Data
+
+You can also manually test ReadMixer using the included test data:
+
+```bash
+cd readmixer
+python readmixer.py -s -p tests/ -o test_output/ -l info
+```
+
+This will scramble the test FASTQ file and produce:
+- `ReadMixer.<id>.part000.fastq` - Anonymized output with scrambled read order
+- `ReadMixerKeys.<id>.testing.fastq.gz.csv` - Key file mapping original to scrambled reads
+
 ## License
 
-[Include your license information here]
+Copyright 2025 GeneInfoSec, created by Sterling Sawaya and Joseph Parks
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+See the [LICENSE](LICENSE) file for full details.
 
 ## Support
 
 [Include support/contact information here]
+For support or questions, please contact: [joe@geneinfosec.com](mailto:joe@geneinfosec.com)

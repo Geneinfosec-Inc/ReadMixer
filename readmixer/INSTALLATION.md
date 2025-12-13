@@ -104,7 +104,7 @@ cd readmixer
 docker build -t readmixer:latest .
 
 # Run ReadMixer in a container
-docker run -v /path/to/data:/data readmixer:latest -e -p /data
+docker run -v /path/to/data:/data readmixer:latest -s -p /data
 ```
 
 **Note:** The standard Dockerfile uses pip and requires the base image to have GCC >= 9.3 (which python:3.11-slim-buster does).
@@ -122,7 +122,7 @@ cd readmixer
 docker build -f Dockerfile.conda -t readmixer-conda:latest .
 
 # Run ReadMixer in a container
-docker run -v /path/to/data:/data readmixer-conda:latest -e -p /data
+docker run -v /path/to/data:/data readmixer-conda:latest -s -p /data
 ```
 
 **Advantages:**
@@ -300,7 +300,7 @@ For support, please refer to the project's GitHub issues page or contact informa
 After successful installation:
 
 1. Review the README.md for usage instructions
-2. Try a basic encryption operation: `python readmixer.py -e -p /path/to/fastq/files`
+2. Try a basic obfuscation operation: `python readmixer.py -s -p /path/to/fastq/files`
 3. Explore the command-line options: `python readmixer.py --help`
 4. Check the performance benchmarks in the README for optimization tips
 
