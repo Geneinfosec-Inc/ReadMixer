@@ -1,8 +1,9 @@
 # ReadMixer - Dynamic FASTQ Obfuscation Tool
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18157104.svg)](https://doi.org/10.5281/zenodo.18157104)
+[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)](https://archive.softwareheritage.org/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)
+
 ![ReadMixer](/read-mixer-simple-cartoon.jpg)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.18157104)
-[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)](https://archive.softwareheritage.org/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)
 
 A high-performance tool for obfuscating FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
 
