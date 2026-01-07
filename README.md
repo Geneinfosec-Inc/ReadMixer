@@ -1,6 +1,9 @@
 # ReadMixer - Dynamic FASTQ Obfuscation Tool
 ![ReadMixer](/read-mixer-simple-cartoon.jpg)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.18157104)
+[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)](https://archive.softwareheritage.org/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)
+
 A high-performance tool for obfuscating FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
 
 ## Features
@@ -490,6 +493,44 @@ python readmixer.py -s -p tests/ -o test_output/ -l info
 This will scramble the test FASTQ file and produce:
 - `ReadMixer.<id>.part000.fastq` - Anonymized output with scrambled read order
 - `ReadMixerKeys.<id>.testing.fastq.gz.csv` - Key file mapping original to scrambled reads
+
+## Citation
+
+If you use ReadMixer in your research, please cite it! Proper citation helps us track the impact of our work and supports continued development.
+
+### How to Cite
+
+**Text Citation:**
+```
+Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool 
+(Version 1.0.0) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
+```
+
+**BibTeX:**
+```bibtex
+@software{sawaya_parks_2025_readmixer,
+  author       = {Sawaya, Sterling and Parks, Joseph},
+  title        = {ReadMixer - Dynamic FASTQ Obfuscation Tool},
+  year         = 2025,
+  publisher    = {GitHub},
+  url          = {https://github.com/Geneinfosec-Inc/ReadMixer},
+  version      = {1.0.0}
+}
+```
+
+### Citation File
+
+A `CITATION.cff` file is included in this repository with complete citation metadata. GitHub and other platforms can automatically generate citations from this file.
+
+### Archival and Preservation
+
+ReadMixer is committed to long-term preservation and accessibility:
+
+- **GitHub**: Primary development and version control
+- **Zenodo**: Long-term archival with DOI (Digital Object Identifier) for academic citations
+- **Software Heritage**: Universal source code archive for permanent preservation
+
+For detailed information about our archival strategy, preservation locations, and persistent identifiers, see [ARCHIVAL_STRATEGY.md](ARCHIVAL_STRATEGY.md).
 
 ## License
 

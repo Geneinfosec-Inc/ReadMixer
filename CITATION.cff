@@ -1,0 +1,60 @@
+cff-version: 1.2.0
+title: ReadMixer - Dynamic FASTQ Obfuscation Tool
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Sterling
+    family-names: Sawaya
+    affiliation: GeneInfoSec
+  - given-names: Joseph
+    family-names: Parks
+    email: joe@geneinfosec.com
+    affiliation: GeneInfoSec
+repository-code: 'https://github.com/Geneinfosec-Inc/ReadMixer'
+url: 'https://github.com/Geneinfosec-Inc/ReadMixer'
+abstract: >-
+  ReadMixer is a high-performance tool for obfuscating FASTQ files with
+  dynamic resource management capabilities. The tool automatically detects
+  system capabilities and optimizes resource usage for both laptop and
+  supercomputer environments. It provides memory-efficient processing through
+  streaming approaches with external sorting for large genomic datasets,
+  enabling secure data sharing while maintaining research utility.
+keywords:
+  - bioinformatics
+  - genomics
+  - FASTQ
+  - obfuscation
+  - data privacy
+  - sequencing data
+  - python
+  - high-performance computing
+license: Apache-2.0
+version: 1.0.0
+date-released: '2025-01-05'
+identifiers:
+  - type: url
+    value: 'https://github.com/Geneinfosec-Inc/ReadMixer'
+    description: GitHub repository
+  - type: doi
+    value: '10.5281/zenodo.18157104'
+    description: Zenodo DOI
+  - type: swh
+    value: 'swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115'
+    description: Software Heritage identifier
+preferred-citation:
+  type: software
+  title: ReadMixer - Dynamic FASTQ Obfuscation Tool
+  authors:
+    - given-names: Sterling
+      family-names: Sawaya
+      affiliation: GeneInfoSec
+    - given-names: Joseph
+      family-names: Parks
+      email: joe@geneinfosec.com
+      affiliation: GeneInfoSec
+  year: 2025
+  url: 'https://github.com/Geneinfosec-Inc/ReadMixer'
+  doi: '10.5281/zenodo.18157104'
+
