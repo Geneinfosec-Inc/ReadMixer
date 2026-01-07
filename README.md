@@ -1,4 +1,5 @@
 # ReadMixer - Dynamic FASTQ Obfuscation Tool
+![ReadMixer](/read-mixer-simple-cartoon.jpg)
 
 A high-performance tool for obfuscating FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
 
@@ -509,6 +510,4 @@ limitations under the License.
 See the [LICENSE](LICENSE) file for full details.
 
 ## Support
-
-[Include support/contact information here]
 For support or questions, please contact: [joe@geneinfosec.com](mailto:joe@geneinfosec.com)
