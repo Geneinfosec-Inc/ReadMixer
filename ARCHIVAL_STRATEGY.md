@@ -96,7 +96,7 @@ Users should cite ReadMixer using the information in the `CITATION.cff` file:
 
 ```
 Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool 
-(Version 1.0.0) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
+(Version 1.0.1) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
 ```
 
 #### Citing a Specific Version (With Zenodo DOI)
@@ -104,7 +104,7 @@ When a specific version is used in research, cite with the version-specific DOI:
 
 ```
 Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool 
-(Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.18157104
+(Version 1.0.1) [Computer software]. https://doi.org/10.5281/zenodo.18157104
 ```
 
 #### BibTeX Format
@@ -115,11 +115,11 @@ Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool
   year         = 2025,
   publisher    = {GitHub},
   url          = {https://github.com/Geneinfosec-Inc/ReadMixer},
-  version      = {1.0.0}
+  version      = {1.0.1}
 }
 ```
 
-After Zenodo DOI is available:
+Zenodo DOI:
 ```bibtex
 @software{sawaya_parks_2025_readmixer,
   author       = {Sawaya, Sterling and Parks, Joseph},
@@ -128,7 +128,7 @@ After Zenodo DOI is available:
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.18157104},
   url          = {https://github.com/Geneinfosec-Inc/ReadMixer},
-  version      = {1.0.0}
+  version      = {1.0.1}
 }
 ```
 

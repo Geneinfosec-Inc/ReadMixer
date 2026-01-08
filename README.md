@@ -504,7 +504,7 @@ If you use ReadMixer in your research, please cite it! Proper citation helps us 
 **Text Citation:**
 ```
 Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool 
-(Version 1.0.0) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
+(Version 1.0.1) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
 ```
 
 **BibTeX:**
@@ -515,7 +515,7 @@ Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool
   year         = 2025,
   publisher    = {GitHub},
   url          = {https://github.com/Geneinfosec-Inc/ReadMixer},
-  version      = {1.0.0}
+  version      = {1.0.1}
 }
 ```
 
