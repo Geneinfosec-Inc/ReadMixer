@@ -38,10 +38,10 @@ identifiers:
     value: 'https://github.com/Geneinfosec-Inc/ReadMixer'
     description: GitHub repository
   - type: doi
-    value: '10.5281/zenodo.18157104'
+    value: '10.5281/zenodo.18188647'
     description: Zenodo DOI
   - type: swh
-    value: 'swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115'
+    value: 'swh:1:dir:f49a93f67076731af7becfa3061b02d6b2fde061'
     description: Software Heritage identifier
 preferred-citation:
   type: software
@@ -56,5 +56,5 @@ preferred-citation:
       affiliation: GeneInfoSec
   year: 2025
   url: 'https://github.com/Geneinfosec-Inc/ReadMixer'
-  doi: '10.5281/zenodo.18157104'
+  doi: '10.5281/zenodo.18188647'
 

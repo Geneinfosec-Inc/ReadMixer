@@ -1,6 +1,6 @@
 # ReadMixer - Dynamic FASTQ Obfuscation Tool
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18157104.svg)](https://doi.org/10.5281/zenodo.18157104)
-[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)](https://archive.softwareheritage.org/swh:1:rev:25c616287f3ce7a56bc8e056eeca2f0b4fa24115/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18188647.svg)](https://doi.org/10.5281/zenodo.18188647)
+[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:dir:f49a93f67076731af7becfa3061b02d6b2fde061/)](https://archive.softwareheritage.org/swh:1:dir:f49a93f67076731af7becfa3061b02d6b2fde061/)
 
 ![ReadMixer](/read-mixer-simple-cartoon.jpg)
 
