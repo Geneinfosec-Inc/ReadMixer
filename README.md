@@ -3,7 +3,7 @@
 ![ReadMixer](read-mixer-simple-cartoon.jpg)
 
 ReadMixer mixes paired FASTQ samples into a shared pool, verifies the complete
-pool, and recovers selected samples in their original pair order. Both mates
+pool. Both mates
 stay together through one global permutation. Original headers, plus lines,
 sequences and qualities are preserved; line endings normalize to LF, including
 a final LF. Recovery does not reproduce the original gzip container bytes.
