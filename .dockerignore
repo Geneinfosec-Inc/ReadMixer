@@ -1,0 +1,26 @@
+# Local data and recovery material must never enter a development image.
+**/input
+**/output
+**/.venv
+**/venv
+**/env
+**/ENV
+v1.0
+.git
+.github
+.agents
+.codex
+.aws
+.env
+.env.*
+SECURITY.md
+**/__pycache__
+**/.pytest_cache
+**/*.py[cod]
+**/*.egg-info
+build
+dist
+.vscode
+.idea
+**/.DS_Store
+readmixer/anaconda.sh

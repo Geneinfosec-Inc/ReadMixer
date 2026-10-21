@@ -1,0 +1,54 @@
+{
+  "candidate_id": "sha256:0a88bf5087dc358c9df6a3a7af413a05a45a53437c79df355044f76008b2e0d7",
+  "declared_before_first_macos_attempt": true,
+  "macos-arm64": [
+    {
+      "nodeid": "tests/test_qualification_host.py::test_owned_child_nofile_without_parent_mutation",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "e16ec54e13d8c66ee92a9c775c92679d24d9b4b21822f39671e777c988f99f8b"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T03_unmounted_directory_cannot_qualify_as_dedicated_scratch",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T04_host_timeout_reaps_its_owned_process_and_keeps_parent_limits",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T04_scoped_launcher_preserves_namespace_context_and_exact_owned_unit_suffix",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T04_scoped_timeout_preserves_causal_failure_when_stop_and_reap_also_fail",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T03_launcher_separates_fixture_cache_headroom_from_application_and_explicit_limits[balanced-cpu1-external-8589934592]",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T03_launcher_separates_fixture_cache_headroom_from_application_and_explicit_limits[physical-default-cap-high-entropy-68719476736]",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    },
+    {
+      "nodeid": "tests/test_run_qualification.py::test_P16_T03_launcher_separates_fixture_cache_headroom_from_application_and_explicit_limits[constrained-below-minimum-134217728]",
+      "reason": "Frozen qualification_host is explicitly a Linux /proc, namespace, cgroup and affinity launcher. Its mechanism is not a macOS claim; portable nofile, cancellation and cleanup require separate external regressions and real resource-host evidence.",
+      "source_sha256": "d45da092aad72d9fc1092b072a97e9104bc63a54a4a2bc0e4b1396596340707c"
+    }
+  ],
+  "required_macos_replacement_evidence": [
+    "external portable nofile child/kernel-readback/parent-unchanged/private-exclusive-report regression",
+    "external portable process-group timeout/reaping regression",
+    "accepted real portable low-descriptors cell",
+    "accepted remaining macOS portable resource profiles and dependency-build calibration"
+  ],
+  "schema": "readmixer.release.applicability.v1",
+  "scope": "No deselection, no passing credit, and no arbitrary skip waiver. Every archived node must be collected; exact declared Linux-only mechanisms are not_applicable on macOS. All other skips fail."
+}

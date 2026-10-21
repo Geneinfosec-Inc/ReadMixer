@@ -1,0 +1,385 @@
+{
+  "active_runs": false,
+  "archives": {
+    "sdist": {
+      "bytes": 812375,
+      "name": "readmixer-py-2.0.0.dev10.tar.gz",
+      "sha256": "6ff7f6f635b200c12b8a5a271b0cae39b650baad375e38b89050d2a9e54b1043"
+    },
+    "wheel": {
+      "bytes": 207134,
+      "name": "readmixer_py-2.0.0.dev10-py3-none-any.whl",
+      "sha256": "4dbdab8d01c91488894e30ce0b842d426ee7a5f58a401c4786b22969d94c0691"
+    }
+  },
+  "bounded_linux314_supplements": {
+    "accepted_observations": 150,
+    "limitations": [
+      "Tiny three-pair fresh-process workflows measure startup/correctness only.",
+      "108 repeated independent six-artifact observations and 12 full-window compression-charge observations remain.",
+      "Historical 384-pair fresh workload was not reproduced.",
+      "Source/installed Python3.14 regression failures remain blocking."
+    ],
+    "native_build_supplements_complete": false,
+    "report": {
+      "bytes": 8395,
+      "path": "dist/plan17-dev10/supplements/linux-x86_64-py314-attempt-001/supplement-lane.json",
+      "sha256": "08907546f17c4dd4dc16fe922bd7be90d6674eb11234d2353fccf89ff30bb0a1"
+    },
+    "scope_addendum": {
+      "bytes": 4302,
+      "path": "dist/plan17-dev10/supplements/linux-x86_64-py314-attempt-001/scope-and-remaining.json",
+      "sha256": "daf917530b6c9797c11756d14e750d630b182a8ea47d7d4479cd4c75b93735cd"
+    }
+  },
+  "candidate_id": "sha256:426e563211c32b5bea806862d65bd0754419e397fb53ecaaa7239e11a00810ff",
+  "files": {
+    "assessment-003.json": {
+      "bytes": 3858,
+      "path": "dist/plan17-dev10/assessment-003.json",
+      "sha256": "7af746cf2d7c092fafd2c572f9f712cc574e75d8b52316c26ab45f5c7c51c8e8"
+    },
+    "candidate.json": {
+      "bytes": 56276,
+      "path": "dist/plan17-dev10/candidate/candidate.json",
+      "sha256": "c8bc2e8e1063e2e89731d8e125018f240fd00789393771f866233f7edc9a4bf6"
+    },
+    "candidate.zip": {
+      "bytes": 1076207,
+      "path": "dist/plan17-dev10/transport/candidate.zip",
+      "sha256": "8e3aaf8648d9c1ed09e1c2baa1d001eceab7725fe35398abb23921eecf83e5b6"
+    },
+    "closure-index-003.json": {
+      "bytes": 1169,
+      "path": "dist/plan17-dev10/closure-index-003.json",
+      "sha256": "6d22e8d976dd06b344046f47a6b9205548224cb1b8522ef31849c5ddc71ebc74"
+    },
+    "documentation-validation.json": {
+      "bytes": 1397,
+      "path": "dist/plan17-dev10/tooling/documentation-validation.json",
+      "sha256": "7b4484e6b3f9e72d72a00697713f6192d8d872e1184b2c769fce1d6de808a1bc"
+    },
+    "runtime-preservation-001.json": {
+      "bytes": 309,
+      "path": "dist/plan17-dev10/runtime-preservation-001.json",
+      "sha256": "7474d8a4ca6008e2b3a509a7ff6175f3063ea806ca8c457dcff0742dc46ce886"
+    },
+    "validation.json": {
+      "bytes": 4432,
+      "path": "dist/plan17-dev10/tooling/validation.json",
+      "sha256": "2086d63d240305d09dc78d0021d847bb9acbfb7775d99225d543bcf41898aab1"
+    }
+  },
+  "guide": "../../tools/release/README.md",
+  "historical_plan16_evidence_unchanged": true,
+  "invalidations": [
+    "Changed runtime/source/archive requires new candidate and affected lane reruns.",
+    "Changed native wheels/interpreter/build requires new environment identity and affected correctness/calibration/resource reruns.",
+    "Changed external harness requires new helper hashes, focused tests and affected orchestration validation; original records retain their snapshots."
+  ],
+  "local_full_supplied_data": {
+    "evidence": {
+      "bytes": 177048,
+      "path": "readmixer/python_update_plans/resource-qualification-evidence.json",
+      "sha256": "62dff12136d6f93ab5c65155b7ecbe5e102904902a1ba5ccf7b5f1794533cf6a"
+    },
+    "pairs": 30042389,
+    "status": "completed_previously_preserved"
+  },
+  "package_published": false,
+  "plan10_complete": false,
+  "plan17_complete": false,
+  "platform_attempts": [
+    {
+      "accepted": true,
+      "cell": "linux-x86_64-py311",
+      "completed": true,
+      "environment": {
+        "lock_sha256": "d56493723ee33aa881b5312c5672bdd08c7d7217a7a17df1c02a459a41129a6b",
+        "manifest_sha256": "0eb9620aaa5dcb8b38c89794f623f6095ab613553f3e94370ea0560223c65ab2"
+      },
+      "failed_nodes": {
+        "installed": [],
+        "source": []
+      },
+      "failure": null,
+      "packaging_content_equivalent": true,
+      "report": {
+        "bytes": 21007878,
+        "path": "dist/plan17-dev10/platform/linux-x86_64-py311-attempt-001/report.json",
+        "sha256": "921ef80c4ff65d1f1bb05ccdfc2f40954bda9d0f6de6503d993fca78e5aa42f5"
+      },
+      "suite_counts": {
+        "installed": {
+          "errors": 0,
+          "executed": 2703,
+          "failed": 0,
+          "passed": 2703,
+          "skipped": 0
+        },
+        "source": {
+          "errors": 0,
+          "executed": 2703,
+          "failed": 0,
+          "passed": 2703,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "accepted": false,
+      "cell": "linux-x86_64-py314",
+      "completed": false,
+      "environment": {
+        "lock_sha256": "fb73cff3b2ed6b5eba06716d4a4fe943cf74e8772b5d76a89c55d8ac63944e7b",
+        "manifest_sha256": "f21fc91bf1c482e488c7db06d50f9cab01fd6fdd2498643345eb51bd1308190e"
+      },
+      "failed_nodes": {},
+      "failure": {
+        "private_diagnostic": "private/failure.txt",
+        "sha256": "9d6fe213d5029435408ea450823e446a7e82c78a83cfba130a0c19231e27fc9f",
+        "stage": "native-facts",
+        "type": "RuntimeError"
+      },
+      "packaging_content_equivalent": null,
+      "report": {
+        "bytes": 6255,
+        "path": "dist/plan17-dev10/platform/linux-x86_64-py314-attempt-001/report.json",
+        "sha256": "afd8b4d2305a75dc68800eb9058516b4de8bb8680f7b23e310dec7646e413d1d"
+      },
+      "suite_counts": {}
+    },
+    {
+      "accepted": false,
+      "cell": "linux-x86_64-py314",
+      "completed": true,
+      "environment": {
+        "lock_sha256": "fb73cff3b2ed6b5eba06716d4a4fe943cf74e8772b5d76a89c55d8ac63944e7b",
+        "manifest_sha256": "a2ae726c49ad8c38434adc9af693c892620a55ca425d6dff83f20409d0c0cf4d"
+      },
+      "failed_nodes": {
+        "installed": [
+          "tests/test_pipeline.py::test_P06_004_oversized_singleton_rolls_back",
+          "tests/test_recovery_lifetimes.py::test_gathered_frames_have_no_production_owner_when_output_starts[indexed]",
+          "tests/test_recovery_lifetimes.py::test_gathered_frames_have_no_production_owner_when_output_starts[sequential]"
+        ],
+        "source": [
+          "tests/test_recovery_lifetimes.py::test_gathered_frames_have_no_production_owner_when_output_starts[indexed]",
+          "tests/test_recovery_lifetimes.py::test_gathered_frames_have_no_production_owner_when_output_starts[sequential]"
+        ]
+      },
+      "failure": null,
+      "packaging_content_equivalent": true,
+      "report": {
+        "bytes": 21649462,
+        "path": "dist/plan17-dev10/platform/linux-x86_64-py314-attempt-002/report.json",
+        "sha256": "81638795ce4cd4c3f62c98f7109cfe363fd50420d7bfe499f73b1149cfaab96b"
+      },
+      "suite_counts": {
+        "installed": {
+          "errors": 0,
+          "executed": 2703,
+          "failed": 3,
+          "passed": 2700,
+          "skipped": 0
+        },
+        "source": {
+          "errors": 0,
+          "executed": 2703,
+          "failed": 2,
+          "passed": 2701,
+          "skipped": 0
+        }
+      }
+    }
+  ],
+  "preparation_only_corrections": [
+    {
+      "applied_to_candidate": false,
+      "evidence": {
+        "bytes": 11278,
+        "path": "dist/plan17-dev10/preparation/refcount-fix-evidence.json",
+        "sha256": "87bcf714fa456ebffd82a3d9bc740736648688a5acdd3d9c12189d126f242871"
+      },
+      "expected_next_candidate_test_count_if_only_these_additions": 2704,
+      "focused_tests": {
+        "python311": 10,
+        "python314": 10
+      },
+      "patch": {
+        "bytes": 2128,
+        "path": "tools/release/preparation/recovery-lifetime-portability.patch",
+        "sha256": "7c92a6b1f648fd815734f3a6f12696cf6238c3cf032cada0b036f54134ea0f5c"
+      },
+      "scope": "Independent solely-owned control plus injected extra-owner detection; no archived failure waiver."
+    },
+    {
+      "applied_to_candidate": false,
+      "evidence": {
+        "bytes": 3074,
+        "path": "dist/plan17-dev10/preparation/singleton-boundary-admission/index.json",
+        "sha256": "ecccce7ab6d6568826a59b75047f93e201ecb08e3fbfba24f1737615ca8f2d49"
+      },
+      "isolated_controls": 32,
+      "patch": {
+        "bytes": 507,
+        "path": "tools/release/preparation/singleton-boundary-admission.patch",
+        "sha256": "91d2071d9f649e4535f4230deced50e486ff4ff455088efdc98b93def84018fd"
+      },
+      "scope": "Original and workers=1 cases each passed eight times on each Python. Installed full-suite early refusal was not reproduced in isolation; another interaction is not excluded."
+    }
+  ],
+  "remaining": [
+    "Review/apply prepared regression corrections in a new candidate preparation tree; record a new version/source manifest/archive identity, confirm expected collection, update candidate-specific applicability/checker binding and rerun affected full lanes.",
+    "Diagnose/retest the full-suite singleton early-admission interaction; isolated controls alone do not establish its closure.",
+    "Execute both macOS arm64 ordinary cells on native CPython3.11/3.14; retain exact locks, raw reports, HTSlib, filesystem and portable replacement evidence.",
+    "Complete actual per-native-build bounded/scale/resource lanes and full supplementary/calibration evidence; the 150 observed new-build probes do not replace the full matrix.",
+    "Review scoped reuse of completed original Linux3.11 Plan16 evidence against unchanged runtime/native/fixture controls; never relabel old reports for a new candidate.",
+    "Reconcile every parent scenario, AUD01..24, documentation, privacy, limitations and historical fingerprints; make the separate substantive Plan10/17 closure decision. Package publication remains separate."
+  ],
+  "remaining_code_work": [
+    "Apply and integrate prepared regression fixes in next candidate preparation, then full acceptance.",
+    "General source-freeze/build frontend for arbitrary new candidates is not provided by adoption-only candidate.py.",
+    "Extend exact-environment supplemental orchestration for the remaining108 oracle and12 compression observations (requirements and original protocol evidence retained).",
+    "Regenerate/retain candidate-specific applicability policy and recognized checker binding for any new candidate."
+  ],
+  "scenario_status": {
+    "P17-T01": "frozen candidate and safe packet implemented; Linux3.11 sdist content comparison passed",
+    "P17-T02": "Implemented exact native locking and execution; Linux3.11 accepted, Linux3.14 completed but failed, both macOS cells unexecuted.",
+    "P17-T03": "Linux3.11 accepted; Linux3.14 source2701pass/2fail installed2700pass/3fail; packaging/lazy checks passed but cannot qualify failed suites.",
+    "P17-T04": "Resource and bounded supplement runners implemented; 150 Linux3.14 bounded observations accepted with explicit remaining scope. Other new native-build hosts/full measurements unqualified.",
+    "P17-T05": "274 external tool regressions passed; encrypted transport and fail-closed raw-evidence assessment implemented. Attributed resource/final reviews remain open.",
+    "P17-T06": "operator handoff and status documents updated; substantive Plan10 reconciliation remains"
+  },
+  "scenario_traceability": {
+    "P17-T01": {
+      "audits": [
+        "AUD-19",
+        "AUD-20"
+      ],
+      "parents": [
+        "API-01",
+        "Plan10-6"
+      ]
+    },
+    "P17-T02": {
+      "audits": [
+        "AUD-12",
+        "AUD-19",
+        "AUD-20",
+        "AUD-22"
+      ],
+      "parents": [
+        "API-01",
+        "API-02",
+        "API-04",
+        "P09-T01",
+        "Plan10-6"
+      ]
+    },
+    "P17-T03": {
+      "audits": [
+        "AUD-03",
+        "AUD-06",
+        "AUD-12",
+        "AUD-13",
+        "AUD-16",
+        "AUD-18",
+        "AUD-19",
+        "AUD-20",
+        "AUD-24"
+      ],
+      "parents": [
+        "API-03..07",
+        "P06-003",
+        "P06-007",
+        "P06-009",
+        "P08-010"
+      ]
+    },
+    "P17-T04": {
+      "audits": [
+        "AUD-10",
+        "AUD-12",
+        "AUD-13",
+        "AUD-14",
+        "AUD-17",
+        "AUD-19",
+        "AUD-22",
+        "AUD-23"
+      ],
+      "parents": [
+        "P03-T06",
+        "P03-T07",
+        "P05-T04",
+        "P05-T06",
+        "P09-T01",
+        "P09-T05",
+        "P09-T07",
+        "Plan10-4..6"
+      ]
+    },
+    "P17-T05": {
+      "audits": [
+        "AUD-01",
+        "AUD-02",
+        "AUD-03",
+        "AUD-04",
+        "AUD-05",
+        "AUD-06",
+        "AUD-07",
+        "AUD-08",
+        "AUD-09",
+        "AUD-10",
+        "AUD-11",
+        "AUD-12",
+        "AUD-13",
+        "AUD-14",
+        "AUD-15",
+        "AUD-16",
+        "AUD-17",
+        "AUD-18",
+        "AUD-19",
+        "AUD-20",
+        "AUD-21",
+        "AUD-22",
+        "AUD-23",
+        "AUD-24"
+      ],
+      "parents": [
+        "Plan10-6",
+        "Plan10-7"
+      ]
+    },
+    "P17-T06": {
+      "audits": [
+        "AUD-12",
+        "AUD-18",
+        "AUD-19",
+        "AUD-20",
+        "AUD-24"
+      ],
+      "parents": [
+        "API-01",
+        "API-07",
+        "Plan10-8",
+        "P16-T06"
+      ]
+    }
+  },
+  "schema": "readmixer.release.progress.v1",
+  "scope": "External release tooling and later documentation; no runtime features, frozen tests or dev10 archive bytes changed. Prepared patches are not applied. Historical Plan16 results retain their original scope.",
+  "tooling_tests": {
+    "evidence": {
+      "bytes": 4432,
+      "path": "dist/plan17-dev10/tooling/validation.json",
+      "sha256": "2086d63d240305d09dc78d0021d847bb9acbfb7775d99225d543bcf41898aab1"
+    },
+    "failed": 0,
+    "passed": 274,
+    "scope": "Current external tool snapshot; separate from frozen candidate tests.",
+    "skipped": 0
+  },
+  "updated": "2026-09-30",
+  "version": "2.0.0.dev10"
+}

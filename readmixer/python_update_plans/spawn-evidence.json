@@ -1,0 +1,3932 @@
+{
+  "candidate": "2.0.0.dev5",
+  "collected_test_count": 1582,
+  "commands": {
+    "benchmark": "VENV_PYTHON scripts/benchmark_pipeline.py --counts 2,1,0 --sequence-bytes 8 --metadata-bytes 9 --profile low-compressibility-v2 --length-mode varied-v2 --startup --workers 1",
+    "build": "setuptools.build_meta.build_sdist(\"dist/dev5-local-validation\"); setuptools.build_meta.build_wheel(\"dist/dev5-local-validation\")",
+    "collection": "python -m pytest --collect-only -q",
+    "installed_tests": "outside checkout, after copying tests/scripts/forwarder without src: VENV_PYTHON -m pytest -q --junitxml=INSTALLED_RESULTS.xml tests",
+    "prefix": "VENV_PYTHON scripts/check_roundtrip_inputs.py --input SUPPLIED_INPUT_DIRECTORY --pairs-per-sample 128 --workers 4",
+    "source_tests": "python -m pytest -q --junitxml=SOURCE_RESULTS.xml"
+  },
+  "date_utc": "2026-09-25",
+  "documentation_validation": {
+    "audit_nodes_all_collected": true,
+    "current_follow_on_local_links_valid": true,
+    "git_diff_check_passed": true,
+    "historical_reference_scope": "Parent-plan source excerpts may refer to archived predecessor or external Rust checkout; these are provenance, not current Python implementation anchors.",
+    "json_syntax_valid": true,
+    "python_compileall_passed": true
+  },
+  "environment": {
+    "architecture": "x86_64",
+    "dependencies": {
+      "numpy": "1.26.4",
+      "psutil": "5.9.3",
+      "pycryptodome": "3.23.0",
+      "pysam": "0.23.3",
+      "pytest": "7.4.0",
+      "setuptools": "68.2.2",
+      "wheel": "0.41.2"
+    },
+    "dependency_lock_qualified": false,
+    "installed_virtual_environment_system_site_packages": true,
+    "os": "Linux",
+    "pointer_bits": 64,
+    "python": "3.11.7",
+    "python_implementation": "CPython",
+    "zlib_build": "1.2.13",
+    "zlib_runtime": "1.2.13"
+  },
+  "installed_wheel_tests": {
+    "elapsed_seconds": 59.149,
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "f5fc0da488a6e4863d60cce2b26d50b19659d16fff03aee77cd235b61ac01c46",
+    "passed": 1582,
+    "skipped": 0,
+    "tests": 1582
+  },
+  "limitations": [
+    "All acceptance results are local Linux x86-64 CPython 3.11.7. No macOS arm64, CPython 3.14, isolated hash-locked dependency matrix or constrained release host was executed.",
+    "The private worker stage is a bounded identity sort over memory batches. Production mix, verification and recovery do not construct the scheduler; no production process parallelism or speedup is claimed.",
+    "Derived-key segment capabilities, protected task ownership pages, disk-credit handoffs, external result authentication, MemoryRef/TransferReceipt APIs, worker-local subleases and encrypted auto-spill transfers remain missing.",
+    "READY growth that cannot fit currently stops/reaps the private scheduler. Rebuilding a lower-concurrency partition and retrying startup remains missing.",
+    "Child/helper baselines, row metadata, channel copies and job-workspace coefficients have local admission tests but no Plan 16 resource-envelope calibration.",
+    "The interpreter-owned POSIX resource-tracker helper is observed and reserved during invocation; it may persist afterward and is not a task worker terminated by the scheduler.",
+    "The launch lock serializes ReadMixer environment changes only; unrelated concurrent application os.environ mutation is not isolated. Concurrent ReadMixer launch acceptance and supported native-build matrices remain open.",
+    "Shutdown escalation cases use bounded shorter test deadlines while asserting production 10/5/5-second constants. These do not qualify real coordinator SIGINT/SIGTERM at all public workflow/publication stages.",
+    "The independent serial six-artifact oracle uses bounded 14-pair unrefined fixtures. Forced refinement/collisions have separate component oracles; process scheduling/platform equivalence remains open.",
+    "The supplied-data workflow consumes only 128 pairs per sample. The complete 30,042,389-pair private dataset has not been mixed, fully verified and recovered through both modes.",
+    "The tiny benchmark is correctness/startup/tooling evidence, not representative throughput, process-stage performance, full I/O/backpressure accounting or greater-than-four-times-admitted-RAM qualification.",
+    "Historical evidence and dev2/dev3/dev4 archive hashes remain attached to their original candidates."
+  ],
+  "new_local_test_case_count": 230,
+  "new_local_test_nodes": [
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_reference_primitives_have_independent_literal_goldens",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_complete_tiny_reference_has_frozen_order_tags_and_artifact_hashes",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[auto-0-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[auto-0-rollover]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[auto-6-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[auto-6-rollover]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[external-0-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[external-0-rollover]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[external-6-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[external-6-rollover]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[memory-0-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[memory-0-rollover]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[memory-6-tiny]",
+    "tests/test_serial_artifact_oracle.py::test_P15_T01_serial_six_artifacts_match_complete_independent_reference[memory-6-rollover]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[mix-1-100-0-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[recover-1-100-0-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[verify-1-100-0-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[mix-2-100-1-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[recover-3-100-1-1]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[mix-8-100-6-1]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[verify-8-100-7-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[recover-8-2-2-5]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[mix-8-0-0-7]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[verify-8-0-0-0]",
+    "tests/test_stage_admission.py::test_P13_T02_fixed_partition_and_two_complete_windows[mix-1000-1000-64-32]",
+    "tests/test_stage_admission.py::test_P13_T02_complete_ram_threshold_exact_and_one_below",
+    "tests/test_stage_admission.py::test_P13_T02_complete_metadata_threshold_exact_and_one_below",
+    "tests/test_stage_admission.py::test_P13_T02_control_metadata_failure_can_reduce_to_serial",
+    "tests/test_stage_admission.py::test_P13_T02_descriptor_capacity_reduces_before_start[24-2]",
+    "tests/test_stage_admission.py::test_P13_T02_descriptor_capacity_reduces_before_start[23-1]",
+    "tests/test_stage_admission.py::test_P13_T02_descriptor_capacity_reduces_before_start[12-1]",
+    "tests/test_stage_admission.py::test_P13_T02_descriptor_capacity_reduces_before_start[11-0]",
+    "tests/test_stage_admission.py::test_P13_T02_descriptor_capacity_reduces_before_start[0-0]",
+    "tests/test_stage_admission.py::test_P13_T02_ready_grows_baseline_once_without_charging_workspace_twice",
+    "tests/test_stage_admission.py::test_P13_T02_unready_or_multithreaded_child_cannot_enter_jobs",
+    "tests/test_stage_admission.py::test_P13_T02_oversized_ready_preserves_idle_child_reservations_until_close",
+    "tests/test_stage_admission.py::test_P13_T02_pressure_replaces_previous_excess_without_double_counting",
+    "tests/test_stage_admission.py::test_P13_T02_failed_pressure_growth_retains_previous_atomic_reservation",
+    "tests/test_stage_admission.py::test_P13_T02_child_rss_is_not_added_to_its_existing_baseline_and_jobs",
+    "tests/test_stage_admission.py::test_P13_T02_missing_registered_worker_preserves_prior_pressure",
+    "tests/test_stage_admission.py::test_P13_T02_mismatched_identity_and_extra_native_threads_reject_observation",
+    "tests/test_stage_admission.py::test_P13_T02_exact_pid_observation_has_no_descendant_discovery",
+    "tests/test_stage_admission.py::test_P13_T02_unavailable_process_is_not_reported_as_zero[missing]",
+    "tests/test_stage_admission.py::test_P13_T02_unavailable_process_is_not_reported_as_zero[reused]",
+    "tests/test_stage_admission.py::test_P13_T02_unavailable_process_is_not_reported_as_zero[zombie]",
+    "tests/test_stage_admission.py::test_P13_T02_unavailable_process_is_not_reported_as_zero[disappears]",
+    "tests/test_stage_admission.py::test_P13_T02_unavailable_process_is_not_reported_as_zero[denied]",
+    "tests/test_stage_admission.py::test_P13_T02_real_coordinator_observation_is_bounded_numeric_state",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs0]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs1]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs2]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs3]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs4]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs5]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs6]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs7]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs8]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs9]",
+    "tests/test_stage_admission.py::test_P13_T02_invalid_configuration_precedes_any_reservation[kwargs10]",
+    "tests/test_stage_admission.py::test_P13_T02_interrupted_construction_releases_partial_partition",
+    "tests/test_stage_admission.py::test_P13_T02_coordinator_thread_and_closed_owner_are_enforced",
+    "tests/test_stage_admission.py::test_P13_T02_process_identity_collection_is_bounded_and_unique[identities0]",
+    "tests/test_stage_admission.py::test_P13_T02_process_identity_collection_is_bounded_and_unique[identities1]",
+    "tests/test_stage_admission.py::test_P13_T02_process_identity_collection_is_bounded_and_unique[identities2]",
+    "tests/test_stage_admission.py::test_P13_T02_process_identity_collection_is_bounded_and_unique[identities3]",
+    "tests/test_stage_admission.py::test_P13_T02_helper_is_observed_but_remains_interpreter_owned",
+    "tests/test_stage_admission.py::test_P13_T02_helper_reservation_precedes_fixed_partition_selection",
+    "tests/test_stage_admission.py::test_P13_T02_missing_helper_preserves_prior_pressure",
+    "tests/test_stage_admission.py::test_P13_T02_helper_and_worker_cannot_share_a_pid",
+    "tests/test_stage_admission.py::test_P13_T02_sixty_four_workers_and_one_helper_fit_observation_bound",
+    "tests/test_stage_admission.py::test_P13_T02_ready_descriptor_failure_does_not_partially_grow_ram",
+    "tests/test_stage_admission.py::test_P13_T02_unadmittable_control_owner_releases_every_lease",
+    "tests/test_stage_admission.py::test_P13_T02_lease_registry_capacity_can_reduce_partition",
+    "tests/test_stage_review.py::test_P13_T01_channel_constructor_failure_closes_both_unregistered_sockets",
+    "tests/test_stage_review.py::test_P13_T05_interrupted_result_handoff_releases_unreturned_result_owner",
+    "tests/test_stage_review.py::test_P13_T07_secondary_interrupt_during_shutdown_still_reaps_live_child",
+    "tests/test_stage_review.py::test_P13_T05_one_sender_lease_cannot_back_two_live_jobs",
+    "tests/test_stage_review.py::test_P13_T07_production_shutdown_grace_bounds",
+    "tests/test_stage_review.py::test_P13_T07_real_uncooperative_child_is_escalated_and_reaped[terminate]",
+    "tests/test_stage_review.py::test_P13_T07_real_uncooperative_child_is_escalated_and_reaped[kill]",
+    "tests/test_stage_review.py::test_P13_T07_unreaped_child_retains_all_admission_until_successful_retry[kill]",
+    "tests/test_stage_review.py::test_P13_T07_unreaped_child_retains_all_admission_until_successful_retry[reap]",
+    "tests/test_stage_scheduler.py::test_P13_T01_T05_real_sort_jobs_and_caller_result_lifetime[1]",
+    "tests/test_stage_scheduler.py::test_P13_T01_T05_real_sort_jobs_and_caller_result_lifetime[2]",
+    "tests/test_stage_scheduler.py::test_P13_T01_T05_real_sort_jobs_and_caller_result_lifetime[4]",
+    "tests/test_stage_scheduler.py::test_P13_T05_multichunk_transfer_and_empty_job",
+    "tests/test_stage_scheduler.py::test_P13_T03_bad_frames_fail_privately_and_reap[PRIVATE READ BYTES]",
+    "tests/test_stage_scheduler.py::test_P13_T03_bad_frames_fail_privately_and_reap[^\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\n\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x07\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\n\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x07\\x00\\x00\\x00\\x03\\x00\\x00\\x00@private/1AAA+opaque!!!@private/2CCC+opaque###^\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\n\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x07\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\n\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x07\\x00\\x00\\x00\\x03\\x00\\x00\\x00@private/1AAA+opaque!!!@private/2CCC+opaque###]",
+    "tests/test_stage_scheduler.py::test_P13_T01_failed_start_restores_environment_and_releases",
+    "tests/test_stage_scheduler.py::test_P13_T01_cpu_one_never_launches",
+    "tests/test_stage_scheduler.py::test_P13_T02_fixed_mix_compression_partition",
+    "tests/test_stage_scheduler.py::test_P13_T07_unexpected_exit_never_becomes_success",
+    "tests/test_stage_scheduler.py::test_P13_T01_guarded_library_launch_in_fresh_interpreter",
+    "tests/test_stage_scheduler.py::test_P13_T03_transport_checks_header_before_body_and_limits_pending_frame",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[Ready-1-\\x00\\x00\\x00\\x00\\x01\\x02\\x03\\x04\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x08\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[WorkerJob-2-\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x01\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x13\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x14 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[Chunk-3-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04\\x00opaque\\xff\\r\\n]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[ChunkAck-4-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0e]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[InputDone-5-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[WorkerResult-6-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00d\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[ResultAck-7-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[Stop-8-]",
+    "tests/test_worker_protocol.py::test_P13_T03_exact_independent_wire_vectors[WorkerFailure-9-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x01]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message0-1-\\x00\\x00\\x00\\x00\\x01\\x02\\x03\\x04\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x08\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message1-2-\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x01\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x13\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x14 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message2-3-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04\\x00opaque\\xff\\r\\n]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message3-4-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0e]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message4-5-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message5-6-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00d\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message6-7-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message7-8-]",
+    "tests/test_worker_protocol.py::test_P13_T03_truncation_trailing_and_concatenation_are_never_messages[message8-9-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x01]",
+    "tests/test_worker_protocol.py::test_P13_T03_all_job_prefix_truncations_are_checked_before_unpack",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[0-1-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[2-1-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[255-1-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[1-0-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[1-10-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[1-255-RMPYWRK1]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[1-1-RMPYWRK2]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_prefix_values_fail_in_header_only_inspection[1-1-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[1]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[2]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[4]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[5]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[6]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[7]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[8]",
+    "tests/test_worker_protocol.py::test_P13_T03_control_lengths_reject_before_body_allocation[9]",
+    "tests/test_worker_protocol.py::test_P13_T05_raw_chunk_header_rejects_empty_and_excess_length[0]",
+    "tests/test_worker_protocol.py::test_P13_T05_raw_chunk_header_rejects_empty_and_excess_length[23]",
+    "tests/test_worker_protocol.py::test_P13_T05_raw_chunk_header_rejects_empty_and_excess_length[24]",
+    "tests/test_worker_protocol.py::test_P13_T05_raw_chunk_header_rejects_empty_and_excess_length[1048601]",
+    "tests/test_worker_protocol.py::test_P13_T05_raw_chunk_header_rejects_empty_and_excess_length[4294967295]",
+    "tests/test_worker_protocol.py::test_P13_T05_exact_raw_chunk_limit_is_separate_from_control_envelope",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message0-rss_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message1-descriptors]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message2-threads]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message3-task_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message4-grant_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message5-input_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message6-workspace_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message7-offset]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message8-end]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message9-output_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[True-message10-records]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message0-rss_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message1-descriptors]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message2-threads]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message3-task_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message4-grant_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message5-input_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message6-workspace_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message7-offset]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message8-end]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message9-output_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[-1-message10-records]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message0-rss_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message1-descriptors]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message2-threads]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message3-task_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message4-grant_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message5-input_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message6-workspace_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message7-offset]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message8-end]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message9-output_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[18446744073709551616-message10-records]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message0-rss_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message1-descriptors]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message2-threads]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message3-task_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message4-grant_id]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message5-input_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message6-workspace_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message7-offset]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message8-end]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message9-output_bytes]",
+    "tests/test_worker_protocol.py::test_P13_T03_counters_have_strict_unsigned_types_and_widths[1.5-message10-records]",
+    "tests/test_worker_protocol.py::test_P13_T03_unsigned_maxima_and_chunk_end_boundary",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message0-2-\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x01\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x13\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x14 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message1-3-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04\\x00opaque\\xff\\r\\n]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message2-4-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0e]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message3-5-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message4-6-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00d\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04 !\"#$%&'()*+,-./0123456789:;<=>?]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message5-7-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message6-8-]",
+    "tests/test_worker_protocol.py::test_P13_T03_every_task_bound_message_requires_positive_grant[message7-9-\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x01]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[run_id-xxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[run_id-xxxxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[run_id-value2]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[input_sha256-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[input_sha256-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_job_byte_fields_are_exact_immutable_widths[input_sha256-value5]",
+    "tests/test_worker_protocol.py::test_P13_T03_result_digest_is_exact_immutable_width[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_result_digest_is_exact_immutable_width[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+    "tests/test_worker_protocol.py::test_P13_T03_result_digest_is_exact_immutable_width[value2]",
+    "tests/test_worker_protocol.py::test_P13_T03_result_digest_is_exact_immutable_width[value3]",
+    "tests/test_worker_protocol.py::test_P13_T03_result_digest_is_exact_immutable_width[private]",
+    "tests/test_worker_protocol.py::test_P13_T03_stage_and_failure_enums_do_not_accept_coercions[10]",
+    "tests/test_worker_protocol.py::test_P13_T03_stage_and_failure_enums_do_not_accept_coercions[True]",
+    "tests/test_worker_protocol.py::test_P13_T03_stage_and_failure_enums_do_not_accept_coercions[SORT_IDENTITY]",
+    "tests/test_worker_protocol.py::test_P13_T03_stage_and_failure_enums_do_not_accept_coercions[11]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_stage_values_are_not_jobs[0]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_stage_values_are_not_jobs[2]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_stage_values_are_not_jobs[255]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_failure_values_are_not_diagnostics[0]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_failure_values_are_not_diagnostics[5]",
+    "tests/test_worker_protocol.py::test_P13_T03_unknown_failure_values_are_not_diagnostics[255]",
+    "tests/test_worker_protocol.py::test_P13_T03_all_fixed_failure_codes_have_exact_binary_values[1]",
+    "tests/test_worker_protocol.py::test_P13_T03_all_fixed_failure_codes_have_exact_binary_values[2]",
+    "tests/test_worker_protocol.py::test_P13_T03_all_fixed_failure_codes_have_exact_binary_values[3]",
+    "tests/test_worker_protocol.py::test_P13_T03_all_fixed_failure_codes_have_exact_binary_values[4]",
+    "tests/test_worker_protocol.py::test_P13_T03_decoder_and_header_reject_nonimmutable_types[value0]",
+    "tests/test_worker_protocol.py::test_P13_T03_decoder_and_header_reject_nonimmutable_types[value1]",
+    "tests/test_worker_protocol.py::test_P13_T03_decoder_and_header_reject_nonimmutable_types[private diagnostics]",
+    "tests/test_worker_protocol.py::test_P13_T03_decoder_and_header_reject_nonimmutable_types[None]",
+    "tests/test_worker_protocol.py::test_P13_T03_decoder_and_header_reject_nonimmutable_types[14]",
+    "tests/test_worker_protocol.py::test_P13_T03_closed_objects_never_invoke_pickle_or_accept_arbitrary_fields",
+    "tests/test_worker_protocol.py::test_P13_T03_printable_messages_never_include_payload_run_or_digest_bytes",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[unknown_task-worker message refers to an unknown task or grant-WorkerResult-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[unknown_grant-worker message refers to an unknown task or grant-WorkerResult-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[early_result-worker result exceeds its admitted job-WorkerResult-False]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[wrong_ack-worker input acknowledgment is out of order-ChunkAck-False]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[replayed_ack-worker input acknowledgment is out of order-ChunkAck-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[oversized_result-worker result exceeds its admitted job-WorkerResult-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[oversized_count-worker result exceeds its admitted job-WorkerResult-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[wrong_offset-worker result chunk is outside its admitted window-Chunk-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[oversized_chunk-worker result chunk is outside its admitted window-Chunk-True]",
+    "tests/test_worker_state.py::test_P13_T03_T05_forged_worker_state_rejects_privately_and_reaps[wrong_digest-worker result digest did not authenticate-Chunk-True]"
+  ],
+  "new_test_counts_by_file": {
+    "test_serial_artifact_oracle.py": 14,
+    "test_stage_admission.py": 59,
+    "test_stage_review.py": 9,
+    "test_stage_scheduler.py": 12,
+    "test_worker_protocol.py": 126,
+    "test_worker_state.py": 10
+  },
+  "packaging": {
+    "archive_input_data_excluded": true,
+    "archives": {
+      "readmixer-py-2.0.0.dev5.tar.gz": {
+        "bytes": 467308,
+        "sha256": "850684cd05edc15ae4351f540df4f6dfd2b09de5fd295994cbc3366dfab2ef16"
+      },
+      "readmixer_py-2.0.0.dev5-py3-none-any.whl": {
+        "bytes": 157800,
+        "sha256": "5614945c9943f8dd7e308e35547b9def81187e27806ea59364da9a8d7891be3f"
+      }
+    },
+    "build_frontend": "declared setuptools backend called directly; optional build frontend unavailable",
+    "build_isolation": false,
+    "documentation_finalization": "Two stale parent-plan status paragraphs were corrected before finalizing the sdist. The exact tested wheel and all runtime/tooling/test bytes remained unchanged; final archived fingerprinted members match this source manifest. This local development build is not the Plan 17A freeze.",
+    "import_within_installed_venv_asserted": true,
+    "outside_checkout_import_asserted": true,
+    "rebuilt_sdist_wheel_sources_equal_candidate": true,
+    "sdist_sources_equal_checkout": true,
+    "wheel_sources_equal_checkout": true
+  },
+  "plan_status": {
+    "10": "sole release completion gate remains open",
+    "11": "implemented locally in dev3; worker metadata now uses shared accounting",
+    "12": "implemented locally in dev4; platform and scale qualification open",
+    "13": "partial: private memory worker admission, binary transport, spawn bootstrap and lifecycle; protected external capabilities/storage handoffs and production use absent",
+    "14": "planned; production process parallelism absent",
+    "15": "partial: P15-T01 bounded independent serial oracle plus historical P15-T02/T03/T04 coverage; remaining boundary/mutation/workflow/process matrix open",
+    "16": "partial tooling from dev4; no qualified scale/performance or complete supplied-data workflow",
+    "17": "planned; local package checks are not isolated locked release matrix"
+  },
+  "preserved_historical_sha256": {
+    "dist/dev2-local-validation/readmixer-py-2.0.0.dev2.tar.gz": "0d13f17a9adc0407874a9db368e8a4dc533cc183efac9e1a1a781542c44496c0",
+    "dist/dev2-local-validation/readmixer_py-2.0.0.dev2-py3-none-any.whl": "241aea7fd56dbcbb492df478956406bba86b35dc0506a2515abf9f886f88cae1",
+    "dist/dev3-local-validation/readmixer-py-2.0.0.dev3.tar.gz": "63934b4787d8f10ceeb11c93a7aa9a72a85ce41103bcd690fee55f89ec64ec5f",
+    "dist/dev3-local-validation/readmixer_py-2.0.0.dev3-py3-none-any.whl": "66f37d555bde5a2f70e06d96401c9a1d05c7ff2b3bf2ebd2535501f421f4dfbb",
+    "dist/dev4-local-validation/readmixer-py-2.0.0.dev4.tar.gz": "1169944652f86696496ef14ddc0202bdffb9250d15fe786298814135b9dc40ca",
+    "dist/dev4-local-validation/readmixer_py-2.0.0.dev4-py3-none-any.whl": "e12100490a1b2b260cfbcb2be856e8d7c77d3e9d4057e7bfe4739d3cdbda8951",
+    "readmixer/python_update_plans/foundation-evidence.json": "7edfdf2d7d19e57f59e3a288d004e58d20e4ed42fa9215a310556bd80a71ef07",
+    "readmixer/python_update_plans/metadata-evidence.json": "0a67c8e25719a597f7e83b9b9c06bb890f17abb582f2194eb6cae780ddec5b6e",
+    "readmixer/python_update_plans/ownership-evidence.json": "bf6b928fe3b5343577e3921326795b8a60654d408f51974bf94248ed8177b95a",
+    "readmixer/python_update_plans/pipeline-evidence.json": "bf0d687dbf1068d4ae57f6ba0408264b63d0b1cd4d262248ac5bffd185176680",
+    "readmixer/python_update_plans/source-snapshot.json": "dc6de6cae0700a4f5b2ffcc3cb1f51f62b03a993d3492b43110bbc44c3c3e4bc",
+    "readmixer/python_update_plans/storage-evidence.json": "6cfd479ad32928d6f83cc20103dcc95993f6287bc0c631e5ce49bb82ea47d95d"
+  },
+  "release_qualified": false,
+  "schema": "readmixer-python-local-spawn-evidence",
+  "schema_version": 1,
+  "scope": "Partial Plan 13 private memory identity-sort worker infrastructure and partial Plan 15 independent serial six-artifact oracle; public processing remains serial with compression threads; not release qualification",
+  "source_files": {
+    ".github/workflows/python.yml": {
+      "bytes": 2262,
+      "sha256": "38d5448de961bf147d8dd8872f68336451d519904f0b4cdffff1b7ff9cac5470"
+    },
+    "CHANGES.md": {
+      "bytes": 12128,
+      "sha256": "04be2e8ee010eb9c10153fdc59955c4b7272fc2123712ff7f2399b687ebebf8a"
+    },
+    "MANIFEST.in": {
+      "bytes": 835,
+      "sha256": "bee02a3ab85ecb812b56d224692bb0476a78ffba127c0925eaba0fd9fd0775fd"
+    },
+    "README.md": {
+      "bytes": 9531,
+      "sha256": "c11203eb5de02d681fcf1f4a4db8c0945d5d8cc4043c33e5de9164333597ea43"
+    },
+    "TESTING.md": {
+      "bytes": 10885,
+      "sha256": "d22c7de1cebd57d7627146f2b040b95386d8965f8758dc482876bcc58d3a9f82"
+    },
+    "pyproject.toml": {
+      "bytes": 865,
+      "sha256": "99edaa6b9e233d278786a938b1c4a62079a21d92c0c05a071d28568e46d149dc"
+    },
+    "readmixer/INSTALLATION.md": {
+      "bytes": 1305,
+      "sha256": "d7ac2cdf5d98e7e465ad7f6b1e836068bd12b807a91bd0ae4d3f019018b17069"
+    },
+    "readmixer/process/__init__.py": {
+      "bytes": 284,
+      "sha256": "1b68187cb6c721055888393048adf54f99e73140174eb54b240a5909ace83c4b"
+    },
+    "readmixer/python_update_plans/00-audit-and-transfer-decisions.md": {
+      "bytes": 19465,
+      "sha256": "118152677487bec51f275bd1ac5d1bcfbbb49a5664ee6ed0d52ed67a9ee74e95"
+    },
+    "readmixer/python_update_plans/01-packaging-interfaces-and-compatibility.md": {
+      "bytes": 15062,
+      "sha256": "777d8d708eae0994809b5675b67ff1df91bb068a0796b73898b46e47e2441e6a"
+    },
+    "readmixer/python_update_plans/02-paired-input-and-lossless-parsing.md": {
+      "bytes": 16568,
+      "sha256": "ad418d3bb8de2e5f7cabe196dcc5520648a952ec0ccc08a96ecbe3db47840f30"
+    },
+    "readmixer/python_update_plans/03-resource-admission-and-storage.md": {
+      "bytes": 15546,
+      "sha256": "4fc2a04196337039abacbb814f7f666027ae591a7dae3bc4cd20d28c733c034e"
+    },
+    "readmixer/python_update_plans/04-global-pair-randomization-and-sharding.md": {
+      "bytes": 17614,
+      "sha256": "a03ff0bfe79717791aa05ed1e0d0d76dbc4a6ec02a494c4be2c429b717e9949f"
+    },
+    "readmixer/python_update_plans/05-encrypted-scratch-and-safe-publication.md": {
+      "bytes": 17530,
+      "sha256": "b42cee336413f1d81efec8bafb4cbf0c75d2e9bcfa2a59c8e334008640392198"
+    },
+    "readmixer/python_update_plans/06-bundles-keys-indexes-and-manifests.md": {
+      "bytes": 21542,
+      "sha256": "68757b2d81c357df15a275afe08d1c141eca01bdf3f9bab10ed4ac7edab84171"
+    },
+    "readmixer/python_update_plans/07-complete-verification.md": {
+      "bytes": 17611,
+      "sha256": "9241c2d5516b3e74441c00feb46bcba2325cbec616aee51c76088590147cb125"
+    },
+    "readmixer/python_update_plans/08-multi-sample-recovery.md": {
+      "bytes": 21718,
+      "sha256": "35e35ea3986bd4dd4a03876216e1a98a2394246e96c6d3044791cc08b5e60a5e"
+    },
+    "readmixer/python_update_plans/09-parallel-execution-and-performance.md": {
+      "bytes": 15146,
+      "sha256": "e621530405778fb49e495b0e1fb40177e29f8ca590932bf368cbde4c6f1727c1"
+    },
+    "readmixer/python_update_plans/10-acceptance-documentation-and-release.md": {
+      "bytes": 17534,
+      "sha256": "bd31b13b611006b86ab99cc5906af8338b0083d25e47f942f53253837dfb7f3c"
+    },
+    "readmixer/python_update_plans/11-shared-metadata-budget-and-lifetimes.md": {
+      "bytes": 13877,
+      "sha256": "13375131581d0ed76306d6c9a03a86c609ffb79be68c85ff4549051cbdbf6429"
+    },
+    "readmixer/python_update_plans/12-paged-output-ownership-and-publication.md": {
+      "bytes": 15392,
+      "sha256": "bf848b70fc287c07dcb3346ca709ffac6486f90bd956b8ef30dfbbf1274c2793"
+    },
+    "readmixer/python_update_plans/13-spawn-workers-and-bounded-storage-handoffs.md": {
+      "bytes": 25402,
+      "sha256": "963d94752aaeb044b9a8a2d6b21dcdbc7168e0fd49fa259ff86cb230f33d5fa6"
+    },
+    "readmixer/python_update_plans/14-deterministic-parallel-pipeline.md": {
+      "bytes": 15702,
+      "sha256": "1b4454e1a831755f97dd42e96bad679f15be2bf650132180390d807f73d253db"
+    },
+    "readmixer/python_update_plans/15-workflow-boundaries-and-failure-acceptance.md": {
+      "bytes": 23748,
+      "sha256": "4468e3e75745190662b3909f4e6782af2ecafa484d2ee9b9f116435af3c70f8d"
+    },
+    "readmixer/python_update_plans/16-resource-scale-and-performance-qualification.md": {
+      "bytes": 20190,
+      "sha256": "3a9649fbad663d8b3640f2f77204de4d22b6d89f821adc1c22faab12199e973b"
+    },
+    "readmixer/python_update_plans/17-platform-packaging-and-release-closure.md": {
+      "bytes": 15534,
+      "sha256": "1a3e4113a6897ad99dd0dd4021f96edf59e0c437c4820e421fc13d3ccc16ef3f"
+    },
+    "readmixer/python_update_plans/IMPLEMENTATION.md": {
+      "bytes": 32838,
+      "sha256": "88c1739196773990bfe2dfa17b335d0d78755d2ddf17c7a9e41ebeb906f6c30e"
+    },
+    "readmixer/python_update_plans/README.md": {
+      "bytes": 16818,
+      "sha256": "3c06f510a4315fd134187fd3ee77eb3ae41f8f8bf3d70efbafd309351fd6343e"
+    },
+    "readmixer/python_update_plans/regression-coverage.json": {
+      "bytes": 249518,
+      "sha256": "bc52150e360925cb613f13dab61024ed1616c856be37f1a241a5d25793ce5c55"
+    },
+    "readmixer/readmixer.py": {
+      "bytes": 487,
+      "sha256": "d83828cf691c5e5a93aa1f6ac0b73a062415d406051b1dcb6c8596b842ed5c09"
+    },
+    "requirements-foundations.lock": {
+      "bytes": 303,
+      "sha256": "a0276dde65864a19e91b4f58e6c6caa61f130a3f66eb612bbfb303d0db061a41"
+    },
+    "scripts/benchmark_pipeline.py": {
+      "bytes": 31396,
+      "sha256": "0b31e1d766f864fb1cdd1a4b74d6620d7320f1fa4c73142f7dba1d78e800b7df"
+    },
+    "scripts/check_roundtrip_inputs.py": {
+      "bytes": 10746,
+      "sha256": "a5a5b05ee514ab62e0c85467348f21eb5a25b960b5debc0747cc6eba86cf9f7e"
+    },
+    "scripts/check_storage_inputs.py": {
+      "bytes": 10812,
+      "sha256": "31a37ff62aba3a57746bf4320b99d24dab87b20242d78dcd8bc9fbf298914799"
+    },
+    "scripts/generate_fixtures.py": {
+      "bytes": 14335,
+      "sha256": "a1388fe7b370128289e14b0882e09cf14342ffe2ca0b40433f755aa739c7e1f1"
+    },
+    "src/readmixer_py/__init__.py": {
+      "bytes": 1914,
+      "sha256": "f3d2eb65daf399705c5647c3d8b4e1d07fe8492891e1bc179c4434760afdceda"
+    },
+    "src/readmixer_py/__main__.py": {
+      "bytes": 79,
+      "sha256": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7"
+    },
+    "src/readmixer_py/artifacts/__init__.py": {
+      "bytes": 73,
+      "sha256": "ee72f791a07c24ad8783297d4295cd46afdd644b322fca651cbd4423e33eb2a0"
+    },
+    "src/readmixer_py/artifacts/bgzf.py": {
+      "bytes": 28271,
+      "sha256": "48a541671e038455db22f514e9e37e4c719cdda724d8e5d3986778fb04e52034"
+    },
+    "src/readmixer_py/artifacts/bundles.py": {
+      "bytes": 11481,
+      "sha256": "696a66269738c20e9cf64bc1b49e03e18ada48f41165a480a90ce4366321022b"
+    },
+    "src/readmixer_py/artifacts/index.py": {
+      "bytes": 6668,
+      "sha256": "3d5bed98e4959733fc3d700cd018988d554a16abe8dc43a09f79cfbb885f342a"
+    },
+    "src/readmixer_py/artifacts/key.py": {
+      "bytes": 7102,
+      "sha256": "de203bd7bc5d416df97eaab1cb2f173671dd7c6224f8c5b0ddf86a4dfa404328"
+    },
+    "src/readmixer_py/artifacts/manifest.py": {
+      "bytes": 20242,
+      "sha256": "26f80594007cd509574ee79e4226d20d7f818c67f364fbe0d7436133c90af767"
+    },
+    "src/readmixer_py/catalog.py": {
+      "bytes": 28765,
+      "sha256": "81ef81e891bd7bb33d0cf33ed969a7a41ea88fec8377c816e2ecfd7be1aec6bf"
+    },
+    "src/readmixer_py/cli.py": {
+      "bytes": 8438,
+      "sha256": "532482e051e6aedaf8840b79c8245fdae56c317355a804b84c36e740831fd59f"
+    },
+    "src/readmixer_py/config.py": {
+      "bytes": 6150,
+      "sha256": "2ec4ae3e1effbf2dca3228e48f063b2868679bc30e144fd66c335338e67692c6"
+    },
+    "src/readmixer_py/crypto.py": {
+      "bytes": 10732,
+      "sha256": "55c273d828a7c9a0a1f8f1e631e74b0a8b485e5c1fb9dc57aa3283e95f8278da"
+    },
+    "src/readmixer_py/disk.py": {
+      "bytes": 11836,
+      "sha256": "41e7c6c12fc434cd7ed8bcbc7c537d88b013b10a21057c35061dd35a66f136a6"
+    },
+    "src/readmixer_py/errors.py": {
+      "bytes": 1154,
+      "sha256": "72bfb4d82dd982390a78bfdffa8f444669bc98a6716feb164d101b2c406fa50a"
+    },
+    "src/readmixer_py/execution.py": {
+      "bytes": 22352,
+      "sha256": "802c5cf400fac56b2238661f52b231561863ad8ef74fed03ba3caebee04f3529"
+    },
+    "src/readmixer_py/fastq.py": {
+      "bytes": 19893,
+      "sha256": "4ef3c136c047c5633e36e630b5c13f2a2bf862247eca91affeae5fe34f0f16a5"
+    },
+    "src/readmixer_py/inspection.py": {
+      "bytes": 7593,
+      "sha256": "6d3196802134dd8ffe02207e3558cd40d7b5096d8c88bda58e7a4fd8c2dad12c"
+    },
+    "src/readmixer_py/ledger.py": {
+      "bytes": 27969,
+      "sha256": "96f331ff3addad7c3c79bed7e4e00c41f26120778839503d6a6fb3a88dcea5d4"
+    },
+    "src/readmixer_py/metadata.py": {
+      "bytes": 2015,
+      "sha256": "6757dbdf428c48a3d1398d3dde663a045b6184f61aaa69e082ea0f0c284a0651"
+    },
+    "src/readmixer_py/mixing.py": {
+      "bytes": 10985,
+      "sha256": "8b7ba8be6ba2d48542bd5b83e7f2adf1d5d5511b17a2745687e44b9bababecc6"
+    },
+    "src/readmixer_py/ownership.py": {
+      "bytes": 12760,
+      "sha256": "e28c3fc42422e971de9a6ec89a418c69231033082cb81547dda18db5a252656f"
+    },
+    "src/readmixer_py/paircodec.py": {
+      "bytes": 7588,
+      "sha256": "858fc3fa00decbc406330438dbefbc6d3fbd253a5257c89cc05081405e4be74c"
+    },
+    "src/readmixer_py/paths.py": {
+      "bytes": 7462,
+      "sha256": "68062ee0a155c7b10173265b2ae522ea27449cf01130c22325e250eec3e9d729"
+    },
+    "src/readmixer_py/pool.py": {
+      "bytes": 8964,
+      "sha256": "15ddb5390ff7f2deba7876297fc25f2068f9e768741b91acb4276c3822842661"
+    },
+    "src/readmixer_py/recovery.py": {
+      "bytes": 19655,
+      "sha256": "ee6e949f1b9374917819a0dc53ce26a6112ef209d01ef14ad27f9693bfa72af3"
+    },
+    "src/readmixer_py/resources.py": {
+      "bytes": 29381,
+      "sha256": "b87d21d87e3603b37385346c49eae425c13009e6d452ceb9674597181e40784f"
+    },
+    "src/readmixer_py/runtime.py": {
+      "bytes": 2313,
+      "sha256": "4e75a4ccdb63fd05c9b50f55ff0e0231dfa5f497e77505fdeab9b3ba8e284ca5"
+    },
+    "src/readmixer_py/scan.py": {
+      "bytes": 12350,
+      "sha256": "962e11e45bd1235e9f69941bba4fb2363458a8d80eb91eeef689d1dc64e491b8"
+    },
+    "src/readmixer_py/shuffle.py": {
+      "bytes": 24548,
+      "sha256": "7f0091012b658995be8e8ac67a2a7adc50d969abca0cb3f917332b5de44ad853"
+    },
+    "src/readmixer_py/sorting.py": {
+      "bytes": 24380,
+      "sha256": "f8a3ab8d30eb1141633a1459121e64abce19a1e36091f26393e64b8cbbdbd91b"
+    },
+    "src/readmixer_py/stage_admission.py": {
+      "bytes": 19530,
+      "sha256": "87e66df0c41f9a38b95cfc7bdb9d072b6163d079562486012d0480565ed4744d"
+    },
+    "src/readmixer_py/stage_scheduler.py": {
+      "bytes": 21941,
+      "sha256": "c71a436007e7656f387bc0ecfd9c4a477781104ee239e2fdaefd4c56b61c831c"
+    },
+    "src/readmixer_py/storage.py": {
+      "bytes": 46938,
+      "sha256": "0388036bdbe4e13d8845c9a260bfb59b9e601f65a88e61cdb578b4ec96df3488"
+    },
+    "src/readmixer_py/transaction.py": {
+      "bytes": 37004,
+      "sha256": "aabeca366524c94f0f5fbc6bb58a52ca8d6fa3061fd53c5af417520579b6823f"
+    },
+    "src/readmixer_py/verification.py": {
+      "bytes": 8971,
+      "sha256": "0618294aba727901737251c513599cdcb201400305e58289ec260f5915d19e02"
+    },
+    "src/readmixer_py/worker_bootstrap.py": {
+      "bytes": 6493,
+      "sha256": "0d2dca54be75f513901f4a26eed2599eedbbcd04c83a705307f95bfddd9cc416"
+    },
+    "src/readmixer_py/worker_protocol.py": {
+      "bytes": 9585,
+      "sha256": "0dfc4f76620c759c878798c4bf260327c9640919ca8f4f3723fa0c5e3dfd27b4"
+    },
+    "src/readmixer_py/worker_transport.py": {
+      "bytes": 3688,
+      "sha256": "b1da9a6c1e80cc5468bd58f61414b8e87d1889b5be6baab10e1e258641dca887"
+    },
+    "tests/test_api.py": {
+      "bytes": 9864,
+      "sha256": "f614143d6b6e6acb1ce212e26589295674e9c29953c86354fbf026320d00281a"
+    },
+    "tests/test_artifact_metadata.py": {
+      "bytes": 12943,
+      "sha256": "5f5c16d5a6b1450df8fbccb1875a83a12ad0858b2196757f98ed1365d84ad997"
+    },
+    "tests/test_benchmark_profiles.py": {
+      "bytes": 12253,
+      "sha256": "67487c74c64ad4f3eab502bb3c3b895d9e6b83ebf097daf01fb38c2615b4308c"
+    },
+    "tests/test_bgzf.py": {
+      "bytes": 20166,
+      "sha256": "d79a5272a65fce21522a08fd32900a37810b021b616e441d6f1c1e4cbf3951ef"
+    },
+    "tests/test_catalog.py": {
+      "bytes": 15516,
+      "sha256": "f245af9cfe103097cb79e45015a46250567d344e592e7762c191031b1e37d2ea"
+    },
+    "tests/test_catalog_metadata.py": {
+      "bytes": 9245,
+      "sha256": "3bce65e303e4e3e7a8516ebba82fd434f9c46afdad9d743d130f22e1e7f6bbfa"
+    },
+    "tests/test_check_roundtrip_inputs.py": {
+      "bytes": 3032,
+      "sha256": "40a66992f436304ee5d6fb36d4de354652b6728bbf7619250aaa66e42dc62649"
+    },
+    "tests/test_check_storage_inputs.py": {
+      "bytes": 3353,
+      "sha256": "7be96ab1b94229e8df520c9373ab615cb5b3fa2fcecb723ce9d57dc87a31e51f"
+    },
+    "tests/test_cli_workflow.py": {
+      "bytes": 4886,
+      "sha256": "10233c28c7d9d5e0973e00be7d51aac8786c6e1c67d6e4c27ad5ac4e389796e4"
+    },
+    "tests/test_crypto.py": {
+      "bytes": 8875,
+      "sha256": "e7c50a706749a3a282754b3b1d3198d82ae5d6b4244aa55edbb0fb22c5b4618e"
+    },
+    "tests/test_disk_paths.py": {
+      "bytes": 4975,
+      "sha256": "e428a5bf62335427ba691831c25b4d5bc476415b15c6ef80e6d1e049a7816877"
+    },
+    "tests/test_execution.py": {
+      "bytes": 13352,
+      "sha256": "1ac2379c7a20babbcd2c7d443583c0631fc398afe4778c16ac5abf8ecab90343"
+    },
+    "tests/test_fastq.py": {
+      "bytes": 19298,
+      "sha256": "30f39d349fb4f250a163ab7446c5d1da355c85c3589295240047445fd4b52918"
+    },
+    "tests/test_indexed_union_io.py": {
+      "bytes": 24370,
+      "sha256": "92301beba859f1794ea96bcb4cbaeee0078fff8586ffa87e13ac75301e0c8955"
+    },
+    "tests/test_ingress_workflow.py": {
+      "bytes": 9251,
+      "sha256": "6cf48248f05f0fef0c9e080dff879d8d2becb2bcf7a6ac977792127f352d524b"
+    },
+    "tests/test_large_records.py": {
+      "bytes": 9721,
+      "sha256": "0f0aa01697dcbd8bd81bc2acf7ea80075cb703018f7653246281317dc3e9f845"
+    },
+    "tests/test_ledger.py": {
+      "bytes": 5575,
+      "sha256": "e53da7e2e956f2c07a79c05f727a6e6a5f55c58e48814954876d595b28ec3472"
+    },
+    "tests/test_ledger_faults.py": {
+      "bytes": 9875,
+      "sha256": "63b693051104afd3e95cdafdeae19ee4bfb31fa623c13595c0118aaa0d264c24"
+    },
+    "tests/test_metadata_workflows.py": {
+      "bytes": 10101,
+      "sha256": "2bab690553f9784968c21f823c2b789d3153c4cd343829c8afe5cc6c8fc17dc0"
+    },
+    "tests/test_ownership.py": {
+      "bytes": 18545,
+      "sha256": "e184715d69ba6eb124da53f937b13e1238d86dc25817aeed14c2e3e8a90ca9e5"
+    },
+    "tests/test_ownership_review.py": {
+      "bytes": 6600,
+      "sha256": "872dfdcd789aa1b6d24a1afbf02d010d908f30d7f21ace23a513e4b9e65b7f9f"
+    },
+    "tests/test_paged_transaction.py": {
+      "bytes": 9215,
+      "sha256": "ea2cfcb398c26c60140a7b76d49936beaae42ad68250ae1d704bc590c5d40950"
+    },
+    "tests/test_paircodec.py": {
+      "bytes": 7164,
+      "sha256": "dd2ec7031e85a92c0b097daa45fe92738f44c62c458ac872d06febe56519f642"
+    },
+    "tests/test_parallel_pipeline.py": {
+      "bytes": 2041,
+      "sha256": "1290412997d0ef0de5da7ccb7d511eee98c8409d6c9816cbf074745c114f908d"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 9024,
+      "sha256": "56cff5a83647712fe7b94229caf462c75fc0598154ec93bc881699ad78483c0a"
+    },
+    "tests/test_pool_scan.py": {
+      "bytes": 10414,
+      "sha256": "d1c34c2c774fb675a3b158332ead8570e12ad2605972bb12d5b260d4789ae37f"
+    },
+    "tests/test_recovery.py": {
+      "bytes": 18199,
+      "sha256": "983f5739505df1c91a7a17589b80fceebd96411a6b5270f7ae5fd78fafaa411b"
+    },
+    "tests/test_recovery_lifetimes.py": {
+      "bytes": 6792,
+      "sha256": "493c4771cf91f16b51df5263a2fefc13c208b8646d57a1790767ec57fb2957c6"
+    },
+    "tests/test_resources.py": {
+      "bytes": 23123,
+      "sha256": "dae3452c9405c725b654247165119d2c0417f462c62cf806ce44a0f893eb22eb"
+    },
+    "tests/test_rollover_boundaries.py": {
+      "bytes": 10714,
+      "sha256": "2d672bc44c68e7f68631d843c3702db4568066852268001def46734ad1cb7865"
+    },
+    "tests/test_secured_field_mutations.py": {
+      "bytes": 6081,
+      "sha256": "4e6f30d3275ada9be97c4d368efa5b9da17f9de7cf4b673d6f58c3d368dd59e6"
+    },
+    "tests/test_serial_artifact_oracle.py": {
+      "bytes": 25061,
+      "sha256": "c7cdc1a7908797d2e7b7673e10b9e8b86f681cfd5f1d05efb391e89fc591e497"
+    },
+    "tests/test_shuffle.py": {
+      "bytes": 21220,
+      "sha256": "4f8f7a630582145bedf7e1f4c5fadc6d7cc2305b70023dace8592043388788a6"
+    },
+    "tests/test_shuffle_oracle.py": {
+      "bytes": 7344,
+      "sha256": "7fe9d81d03bc453075bcfcf235e2cbb5f4d43b6c146596cdef75ad53a2ac1bd8"
+    },
+    "tests/test_sorting.py": {
+      "bytes": 16318,
+      "sha256": "ac6a9efe90c5ac23aac3dab471e7dd3791a7ac2855595e9dcb497809c2931932"
+    },
+    "tests/test_stage_admission.py": {
+      "bytes": 20015,
+      "sha256": "f2bf0309bff5c8476fecf391efd44d4968dec971b1d03875bedb1740b52faa06"
+    },
+    "tests/test_stage_review.py": {
+      "bytes": 11062,
+      "sha256": "26de5ff58a3824824306a2ae090eaebc21f187ae5183a2b210678aaadc0ab6a1"
+    },
+    "tests/test_stage_scheduler.py": {
+      "bytes": 8582,
+      "sha256": "0e9ce4294349a47910f4596d290fb37aadfdc423f2b39f680c96a18b2651a06d"
+    },
+    "tests/test_storage.py": {
+      "bytes": 25614,
+      "sha256": "2a3f33ff35b75cafd8924bac1be69ec2937c1fe904cde8cd9889600d074915cb"
+    },
+    "tests/test_storage_integration.py": {
+      "bytes": 11683,
+      "sha256": "10b2340ab1a740ffd07f22741a9ab18c05543fe54c44e0cd49030c509144992d"
+    },
+    "tests/test_storage_metadata.py": {
+      "bytes": 14573,
+      "sha256": "f2b7bc21c245eda89b660112dbea743df19cc43555b56a933f8924cbcd26783f"
+    },
+    "tests/test_synthetic_tooling.py": {
+      "bytes": 11667,
+      "sha256": "0cea1bbf3d3b3262d986a8819891ad236904a51e0171b1cebd7eb51c30d22fcd"
+    },
+    "tests/test_transaction.py": {
+      "bytes": 29666,
+      "sha256": "8a74deab321141d77ceea9d9cf04e89081292aa64ee57a5047864bb8ed32116e"
+    },
+    "tests/test_transaction_review.py": {
+      "bytes": 8748,
+      "sha256": "bf63fee2359ec8eade53d4c73a9ba498e6ff9545b17c42ef6f321b22bc7066ac"
+    },
+    "tests/test_verification_faults.py": {
+      "bytes": 5515,
+      "sha256": "da61aea69ddc2c9330f64f6358252bfb161e8f36055d57196abbed58aa8e5314"
+    },
+    "tests/test_worker_protocol.py": {
+      "bytes": 10625,
+      "sha256": "d933ca37a17ef537ae2fa087a002bc1619d5437af9a927f673181902da233384"
+    },
+    "tests/test_worker_state.py": {
+      "bytes": 8354,
+      "sha256": "6337d66861d1c3fd2f67af5fd16d7597d9d1ad5c7fa650a0a340bc79c242634a"
+    }
+  },
+  "source_manifest_encoding": "UTF-8 JSON, sorted keys, compact separators, no final newline",
+  "source_manifest_sha256": "40a0630056ccef2791df38af835c3e8b7d57fd40d3de3940900ca2f54765ac5d",
+  "source_tests": {
+    "elapsed_seconds": 58.383,
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "80943462858a772433560981f11f9b9ac5ca0d0065e9a0eeea001beaebea27e2",
+    "passed": 1582,
+    "skipped": 0,
+    "tests": 1582
+  },
+  "supplied_data_prefix": {
+    "completed": true,
+    "external_storage": true,
+    "full_input_validation": false,
+    "independent_gzip_hashes_and_counts_equal": true,
+    "indexed_recovery_equal": true,
+    "mix_compression_slots": 3,
+    "nonempty_prefixes": 48,
+    "normalized_bytes": 2154240,
+    "pairs": 6144,
+    "pairs_per_sample_limit": 128,
+    "pool_artifacts": 13,
+    "pool_bundles": 2,
+    "prefix_pool_fully_verified": true,
+    "private_temp_cleanup_complete": true,
+    "reads": 12288,
+    "recovery_artifacts_total": 386,
+    "recovery_parts_total": 96,
+    "samples": 48,
+    "scope": "bounded_prefix_mix_verify_recovery_check",
+    "sequential_recovery_equal": true,
+    "source_files_modified": false,
+    "workers_requested": 4
+  },
+  "tiny_installed_tooling_benchmark": {
+    "artifacts_retained": false,
+    "benchmark_version": 2,
+    "cache_policy": "one warm-up; OS caches were not cleared; measured runs reuse the same input files",
+    "completed": true,
+    "configuration": {
+      "compression_level": 6,
+      "max_artifact_bytes": 1048576,
+      "max_ram": 536870912,
+      "selected_pair_fraction": 1.0,
+      "selected_pairs": 3,
+      "selected_sample_indices": [
+        0,
+        1,
+        2
+      ],
+      "startup_requested": true,
+      "storage": "auto",
+      "workers_requested": 1
+    },
+    "cpu_time_scope": "coordinator including threads plus getrusage waited-child CPU; live sampled descendants are reported separately, never double-added",
+    "fixture": {
+      "biological_reference_used": false,
+      "completed": true,
+      "compressibility_scope": "observed physical/decoded ratio; no incompressibility guarantee",
+      "configuration": {
+        "compression": "gzip",
+        "counts": [
+          2,
+          1,
+          0
+        ],
+        "gzip_level": 6,
+        "length_mode": "varied-v2",
+        "metadata_bytes": 9,
+        "newline": "lf",
+        "payload": "varied",
+        "profile": "low-compressibility-v2",
+        "sequence_bytes": 8
+      },
+      "decoded_bytes": 542,
+      "fixture_version": 2,
+      "generator_label": "readmixer-python/fixtures/v2",
+      "max_record_bytes": 109,
+      "normalized_bytes": 542,
+      "observed_lengths": {
+        "metadata_bytes": {
+          "maximum": 9,
+          "minimum": 0,
+          "total": 20
+        },
+        "record_bytes": {
+          "maximum": 107,
+          "minimum": 77,
+          "total": 542
+        },
+        "sequence_bytes": {
+          "maximum": 8,
+          "minimum": 0,
+          "total": 26
+        }
+      },
+      "pairs": 3,
+      "physical_bytes": 411,
+      "physical_to_decoded_ratio": 0.7583025830258303,
+      "profile": "low-compressibility-v2",
+      "public_artificial_test_material": true,
+      "public_generator_key_sha256": "0ca839cc55e08fac30a70089db7562bd371987095787ecd9bfd8b5aa3f4af01e",
+      "reads": 6,
+      "samples": [
+        {
+          "pairs": 2,
+          "r1": {
+            "decoded_bytes": 194,
+            "gzip": true,
+            "name": "sample000000_R1.fastq.gz",
+            "normalized_bytes": 194,
+            "normalized_sha256": "ee1fa56d66684a08b8425a89a84860a6e8ef60c00784c70960c01f9872a02346",
+            "physical_bytes": 121,
+            "physical_to_decoded_ratio": 0.6237113402061856
+          },
+          "r2": {
+            "decoded_bytes": 168,
+            "gzip": true,
+            "name": "sample000000_R2.fastq.gz",
+            "normalized_bytes": 168,
+            "normalized_sha256": "ce419a3f90a0ee539b5437390010cff2e9168ce29adbb6d418879c2f25a1acbb",
+            "physical_bytes": 93,
+            "physical_to_decoded_ratio": 0.5535714285714286
+          },
+          "sample_id": "sample000000",
+          "sample_index": 0
+        },
+        {
+          "pairs": 1,
+          "r1": {
+            "decoded_bytes": 89,
+            "gzip": true,
+            "name": "sample000001_R1.fastq.gz",
+            "normalized_bytes": 89,
+            "normalized_sha256": "f9cf15c34a28d27a9cb729e0fa40755e24e1dae5584eab2ad543a07299503985",
+            "physical_bytes": 78,
+            "physical_to_decoded_ratio": 0.8764044943820225
+          },
+          "r2": {
+            "decoded_bytes": 91,
+            "gzip": true,
+            "name": "sample000001_R2.fastq.gz",
+            "normalized_bytes": 91,
+            "normalized_sha256": "5903a9aecbcbed80d1fc69d2f6bb10a045cae4185e8664e7a8acb50faa766420",
+            "physical_bytes": 79,
+            "physical_to_decoded_ratio": 0.8681318681318682
+          },
+          "sample_id": "sample000001",
+          "sample_index": 1
+        },
+        {
+          "pairs": 0,
+          "r1": {
+            "decoded_bytes": 0,
+            "gzip": true,
+            "name": "sample000002_R1.fastq.gz",
+            "normalized_bytes": 0,
+            "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "physical_bytes": 20,
+            "physical_to_decoded_ratio": null
+          },
+          "r2": {
+            "decoded_bytes": 0,
+            "gzip": true,
+            "name": "sample000002_R2.fastq.gz",
+            "normalized_bytes": 0,
+            "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "physical_bytes": 20,
+            "physical_to_decoded_ratio": null
+          },
+          "sample_id": "sample000002",
+          "sample_index": 2
+        }
+      ]
+    },
+    "limitations": [
+      "not a release or performance acceptance matrix",
+      "no cold-cache measurements or speedup comparison",
+      "sampled peaks do not qualify the resource envelope",
+      "internal microstages, per-artifact-class I/O and backpressure are not instrumented",
+      "startup lanes measure interpreter/API import/CLI inspection; full workflows remain in-process"
+    ],
+    "measured_runs": [
+      {
+        "aggregate_accounted_cpu_seconds": 0.08148580699999997,
+        "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+        "correctness": {
+          "exact_identity_coverage_checked_by_pipeline": true,
+          "full_pool_verified": true,
+          "independent_bytes_and_counts_equal": true,
+          "indexed_recovery_equal": true,
+          "sequential_recovery_equal": true
+        },
+        "independent_recovery_check_seconds": 0.00028022698825225234,
+        "phases": {
+          "mix": {
+            "aggregate_accounted_cpu_seconds": 0.02094199200000002,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": null,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 4907,
+            "process_cpu_seconds": 0.02094199200000002,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03971447500225622,
+            "resources": {
+              "available_headroom": 93634912256,
+              "coordinator_rss": 50126848,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50130944,
+              "process_tree_peak_descriptors": 9,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50135040,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.01999999999999999,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03976658300962299,
+            "workers_effective": 1
+          },
+          "recover_indexed": {
+            "aggregate_accounted_cpu_seconds": 0.018555641999999928,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4823,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5151,
+            "process_cpu_seconds": 0.018555641999999928,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03911729199171532,
+            "resources": {
+              "available_headroom": 93634940928,
+              "coordinator_rss": 50139136,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50171904,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50171904,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.009999999999999981,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 897,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03917443899263162,
+            "workers_effective": 1
+          },
+          "recover_sequential": {
+            "aggregate_accounted_cpu_seconds": 0.01733905800000013,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4723,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5171,
+            "process_cpu_seconds": 0.01733905800000013,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.040263218004838564,
+            "resources": {
+              "available_headroom": 93634990080,
+              "coordinator_rss": 50176000,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50184192,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50188288,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 897,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.04032007500063628,
+            "workers_effective": 1
+          },
+          "verify": {
+            "aggregate_accounted_cpu_seconds": 0.0055674779999996815,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4907,
+            "cpu_budget": null,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": null,
+            "process_cpu_seconds": 0.0055674779999996815,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.00860739299969282,
+            "resources": {
+              "available_headroom": 93634940928,
+              "coordinator_rss": 50135040,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50135040,
+              "process_tree_peak_descriptors": 4,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50135040,
+              "process_tree_peak_threads": 32,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.0086408159986604,
+            "workers_effective": 1
+          }
+        },
+        "process_cpu_seconds": 0.08148580699999997,
+        "reaped_child_cpu_seconds": 0.0,
+        "wall_seconds": 0.14690257000620477
+      },
+      {
+        "aggregate_accounted_cpu_seconds": 0.081862761,
+        "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+        "correctness": {
+          "exact_identity_coverage_checked_by_pipeline": true,
+          "full_pool_verified": true,
+          "independent_bytes_and_counts_equal": true,
+          "indexed_recovery_equal": true,
+          "sequential_recovery_equal": true
+        },
+        "independent_recovery_check_seconds": 0.00027344499540049583,
+        "phases": {
+          "mix": {
+            "aggregate_accounted_cpu_seconds": 0.020986492000000023,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": null,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 4912,
+            "process_cpu_seconds": 0.020986492000000023,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.0390220529952785,
+            "resources": {
+              "available_headroom": 93635166208,
+              "coordinator_rss": 50188288,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50192384,
+              "process_tree_peak_descriptors": 9,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50196480,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03907112499291543,
+            "workers_effective": 1
+          },
+          "recover_indexed": {
+            "aggregate_accounted_cpu_seconds": 0.018203639999999854,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4828,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5151,
+            "process_cpu_seconds": 0.018203639999999854,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.0393155450001359,
+            "resources": {
+              "available_headroom": 93635194880,
+              "coordinator_rss": 50200576,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50233344,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50233344,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 897,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03937026800122112,
+            "workers_effective": 1
+          },
+          "recover_sequential": {
+            "aggregate_accounted_cpu_seconds": 0.01793875800000011,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4728,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5171,
+            "process_cpu_seconds": 0.01793875800000011,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.04013852401112672,
+            "resources": {
+              "available_headroom": 93635244032,
+              "coordinator_rss": 50237440,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50237440,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50241536,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.019999999999999962,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.04019052100193221,
+            "workers_effective": 1
+          },
+          "verify": {
+            "aggregate_accounted_cpu_seconds": 0.005534926000000162,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4912,
+            "cpu_budget": null,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": null,
+            "process_cpu_seconds": 0.005534926000000162,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.009168459000648,
+            "resources": {
+              "available_headroom": 93635194880,
+              "coordinator_rss": 50196480,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50196480,
+              "process_tree_peak_descriptors": 4,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50196480,
+              "process_tree_peak_threads": 32,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.00920056999893859,
+            "workers_effective": 1
+          }
+        },
+        "process_cpu_seconds": 0.081862761,
+        "reaped_child_cpu_seconds": 0.0,
+        "wall_seconds": 0.14697506700758822
+      },
+      {
+        "aggregate_accounted_cpu_seconds": 0.08298809100000026,
+        "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+        "correctness": {
+          "exact_identity_coverage_checked_by_pipeline": true,
+          "full_pool_verified": true,
+          "independent_bytes_and_counts_equal": true,
+          "indexed_recovery_equal": true,
+          "sequential_recovery_equal": true
+        },
+        "independent_recovery_check_seconds": 0.0002766210091067478,
+        "phases": {
+          "mix": {
+            "aggregate_accounted_cpu_seconds": 0.020465338999999805,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": null,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 4905,
+            "process_cpu_seconds": 0.020465338999999805,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03753634799795691,
+            "resources": {
+              "available_headroom": 93635301376,
+              "coordinator_rss": 50241536,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50302976,
+              "process_tree_peak_descriptors": 9,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50307072,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.037588365987176076,
+            "workers_effective": 1
+          },
+          "recover_indexed": {
+            "aggregate_accounted_cpu_seconds": 0.01844264299999976,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4821,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5151,
+            "process_cpu_seconds": 0.01844264299999976,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.04086260600888636,
+            "resources": {
+              "available_headroom": 93635338240,
+              "coordinator_rss": 50311168,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50331648,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50331648,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.04091649800830055,
+            "workers_effective": 1
+          },
+          "recover_sequential": {
+            "aggregate_accounted_cpu_seconds": 0.019263794,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4721,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5171,
+            "process_cpu_seconds": 0.019263794,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.040971219990751706,
+            "resources": {
+              "available_headroom": 93635387392,
+              "coordinator_rss": 50335744,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50352128,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50352128,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.019999999999999962,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 899,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.04103635200590361,
+            "workers_effective": 1
+          },
+          "verify": {
+            "aggregate_accounted_cpu_seconds": 0.005533282999999667,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4905,
+            "cpu_budget": null,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": null,
+            "process_cpu_seconds": 0.005533282999999667,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.008661974992719479,
+            "resources": {
+              "available_headroom": 93635338240,
+              "coordinator_rss": 50307072,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50307072,
+              "process_tree_peak_descriptors": 4,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50307072,
+              "process_tree_peak_threads": 32,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.0,
+              "sampled_peak_active_os_threads": 0,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.008692814008099958,
+            "workers_effective": 1
+          }
+        },
+        "process_cpu_seconds": 0.08298809100000026,
+        "reaped_child_cpu_seconds": 0.0,
+        "wall_seconds": 0.14743142599763814
+      },
+      {
+        "aggregate_accounted_cpu_seconds": 0.08396995499999971,
+        "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+        "correctness": {
+          "exact_identity_coverage_checked_by_pipeline": true,
+          "full_pool_verified": true,
+          "independent_bytes_and_counts_equal": true,
+          "indexed_recovery_equal": true,
+          "sequential_recovery_equal": true
+        },
+        "independent_recovery_check_seconds": 0.000270728996838443,
+        "phases": {
+          "mix": {
+            "aggregate_accounted_cpu_seconds": 0.0222228069999999,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": null,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 4907,
+            "process_cpu_seconds": 0.0222228069999999,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03965871100081131,
+            "resources": {
+              "available_headroom": 93635100672,
+              "coordinator_rss": 50356224,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50360320,
+              "process_tree_peak_descriptors": 9,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50364416,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03970789299637545,
+            "workers_effective": 1
+          },
+          "recover_indexed": {
+            "aggregate_accounted_cpu_seconds": 0.019069055000000112,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4823,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5151,
+            "process_cpu_seconds": 0.019069055000000112,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.041599411008064635,
+            "resources": {
+              "available_headroom": 93635072000,
+              "coordinator_rss": 50364416,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50401280,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50401280,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.041654024011222646,
+            "workers_effective": 1
+          },
+          "recover_sequential": {
+            "aggregate_accounted_cpu_seconds": 0.0179317779999999,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4723,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5171,
+            "process_cpu_seconds": 0.0179317779999999,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03846854099538177,
+            "resources": {
+              "available_headroom": 93635117056,
+              "coordinator_rss": 50409472,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50413568,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50413568,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.038524165996932425,
+            "workers_effective": 1
+          },
+          "verify": {
+            "aggregate_accounted_cpu_seconds": 0.00560079999999985,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4907,
+            "cpu_budget": null,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": null,
+            "process_cpu_seconds": 0.00560079999999985,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.008744710998144,
+            "resources": {
+              "available_headroom": 93635072000,
+              "coordinator_rss": 50364416,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50360320,
+              "process_tree_peak_descriptors": 4,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50360320,
+              "process_tree_peak_threads": 32,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.008777964001637883,
+            "workers_effective": 1
+          }
+        },
+        "process_cpu_seconds": 0.08396995499999971,
+        "reaped_child_cpu_seconds": 0.0,
+        "wall_seconds": 0.14772803300002124
+      },
+      {
+        "aggregate_accounted_cpu_seconds": 0.08238670699999995,
+        "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+        "correctness": {
+          "exact_identity_coverage_checked_by_pipeline": true,
+          "full_pool_verified": true,
+          "independent_bytes_and_counts_equal": true,
+          "indexed_recovery_equal": true,
+          "sequential_recovery_equal": true
+        },
+        "independent_recovery_check_seconds": 0.0002712900168262422,
+        "phases": {
+          "mix": {
+            "aggregate_accounted_cpu_seconds": 0.020922247999999755,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": null,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 4909,
+            "process_cpu_seconds": 0.020922247999999755,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.039688536009634845,
+            "resources": {
+              "available_headroom": 93635186688,
+              "coordinator_rss": 50417664,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50413568,
+              "process_tree_peak_descriptors": 9,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50417664,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.03973883100843523,
+            "workers_effective": 1
+          },
+          "recover_indexed": {
+            "aggregate_accounted_cpu_seconds": 0.01779025100000009,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4825,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5151,
+            "process_cpu_seconds": 0.01779025100000009,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.03963872299937066,
+            "resources": {
+              "available_headroom": 93635215360,
+              "coordinator_rss": 50417664,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50417664,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50421760,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.039689328012173064,
+            "workers_effective": 1
+          },
+          "recover_sequential": {
+            "aggregate_accounted_cpu_seconds": 0.01865671800000035,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4725,
+            "cpu_budget": 1,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": 5171,
+            "process_cpu_seconds": 0.01865671800000035,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.04016122600296512,
+            "resources": {
+              "available_headroom": 93635239936,
+              "coordinator_rss": 50421760,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 3,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50442240,
+              "process_tree_peak_descriptors": 10,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50446336,
+              "process_tree_peak_threads": 33,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.020000000000000018,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 898,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.040219835995230824,
+            "workers_effective": 1
+          },
+          "verify": {
+            "aggregate_accounted_cpu_seconds": 0.00542662000000016,
+            "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+            "cleanup_complete": true,
+            "compression_slots": 0,
+            "consumed_artifact_bytes": 4909,
+            "cpu_budget": null,
+            "normalized_bytes": 542,
+            "pairs": 3,
+            "physical_bytes": null,
+            "process_cpu_seconds": 0.00542662000000016,
+            "reads": 6,
+            "reaped_child_cpu_seconds": 0.0,
+            "reported_elapsed_seconds": 0.00855697799124755,
+            "resources": {
+              "available_headroom": 93635215360,
+              "coordinator_rss": 50417664,
+              "descriptor_allowance": 1024,
+              "detection_sources": [
+                "psutil:available",
+                "psutil:coordinator-rss",
+                "cgroup-v2:unlimited",
+                "descriptors:soft-limit",
+                "descriptors:measured"
+              ],
+              "effective_max_ram": 536870912,
+              "envelope_qualified": false,
+              "envelope_version": 2,
+              "metadata_bytes": 33554432,
+              "request_clamped": false,
+              "requested_max_ram": 536870912,
+              "requested_workers": 1,
+              "reserved_headroom": 2147483648,
+              "terminal_bytes": 134217728,
+              "worker_limit": 1
+            },
+            "sampled": {
+              "observation_errors": 0,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 50413568,
+              "process_tree_peak_descriptors": 4,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 50413568,
+              "process_tree_peak_threads": 32,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "samples": 3,
+            "wall_seconds": 0.008589089004090056,
+            "workers_effective": 1
+          }
+        },
+        "process_cpu_seconds": 0.08238670699999995,
+        "reaped_child_cpu_seconds": 0.0,
+        "wall_seconds": 0.14776717800123151
+      }
+    ],
+    "monitor_overhead": "one sampling thread; periodic observations overlap operation timings; entry/final observations and join are excluded from individual phases but included in workflow totals",
+    "sampling_scope": "current process tree RSS sum; shared pages can be counted more than once; peaks between observations can be missed",
+    "scope": "synthetic_complete_pipeline",
+    "startup": {
+      "cache_policy": "one warm-up per lane; inputs and OS caches reused; no cache clearing",
+      "cli_scope": "python module entry point performs deep inspect; not a complete fresh-process mix workflow",
+      "completed": true,
+      "cpu_scope": "getrusage waited-child CPU, including exited descendants accounted by their parent; observer CPU separate",
+      "import_scope": "fresh child import interval excludes earlier stdlib/psutil observer imports",
+      "lanes": {
+        "api_import": {
+          "completed": true,
+          "measured_runs": [
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 16441344
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14368768
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": null,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005769505005446263,
+                "operation": null
+              },
+              "child_cpu_seconds": 0.027505,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.005891172000000111,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16449536,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16449536,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 451,
+              "timed_out": false,
+              "wall_seconds": 0.027752921989304014
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 16449536
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14376960
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": null,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005608852006844245,
+                "operation": null
+              },
+              "child_cpu_seconds": 0.027832999999999997,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.005565612999999914,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16457728,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16457728,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 451,
+              "timed_out": false,
+              "wall_seconds": 0.02805433899629861
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 16396288
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14323712
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": null,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.0064106409990927204,
+                "operation": null
+              },
+              "child_cpu_seconds": 0.028378999999999988,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.006006521000000209,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16396288,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16396288,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 452,
+              "timed_out": false,
+              "wall_seconds": 0.028627457009861246
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 16486400
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14413824
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": null,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005627165999612771,
+                "operation": null
+              },
+              "child_cpu_seconds": 0.02796499999999999,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.005871619000000106,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16494592,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16494592,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 451,
+              "timed_out": false,
+              "wall_seconds": 0.028192187994136475
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 16461824
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14389248
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": null,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005733457001042552,
+                "operation": null
+              },
+              "child_cpu_seconds": 0.02925300000000003,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.006318349999999917,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16461824,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16461824,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.01,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 451,
+              "timed_out": false,
+              "wall_seconds": 0.029460835008649155
+            }
+          ],
+          "summary": {
+            "child_cpu_seconds": {
+              "maximum": 0.02925300000000003,
+              "median": 0.02796499999999999,
+              "minimum": 0.027505,
+              "observations": [
+                0.027505,
+                0.027832999999999997,
+                0.028378999999999988,
+                0.02796499999999999,
+                0.02925300000000003
+              ],
+              "range": 0.0017480000000000273
+            },
+            "wall_seconds": {
+              "maximum": 0.029460835008649155,
+              "median": 0.028192187994136475,
+              "minimum": 0.027752921989304014,
+              "observations": [
+                0.027752921989304014,
+                0.02805433899629861,
+                0.028627457009861246,
+                0.028192187994136475,
+                0.029460835008649155
+              ],
+              "range": 0.001707913019345142
+            }
+          },
+          "warmup": {
+            "child": {
+              "after_operation": {
+                "descriptors": 4,
+                "lifetime_peak_rss_bytes": 48697344,
+                "os_threads": 1,
+                "process_cpu_seconds": 0.01,
+                "rss_bytes": 16470016
+              },
+              "before_readmixer_import": {
+                "descriptors": 4,
+                "lifetime_peak_rss_bytes": 48697344,
+                "os_threads": 1,
+                "process_cpu_seconds": 0.01,
+                "rss_bytes": 14397440
+              },
+              "candidate_matches": true,
+              "cli_operation_seconds": null,
+              "completed": true,
+              "exit_code": 0,
+              "import_seconds": 0.005914116001804359,
+              "operation": null
+            },
+            "child_cpu_seconds": 0.027761999999999995,
+            "completed": true,
+            "error": null,
+            "exit_code": 0,
+            "parent_monitor_cpu_seconds": 0.005149974000000057,
+            "sampled": {
+              "observation_errors": 1,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 16470016,
+              "process_tree_peak_descriptors": 3,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 16470016,
+              "process_tree_peak_threads": 1,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.01,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "stderr_bytes": 0,
+            "stdout_bytes": 451,
+            "timed_out": false,
+            "wall_seconds": 0.028013943010591902
+          }
+        },
+        "cli_inspect": {
+          "completed": true,
+          "measured_runs": [
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 22384640
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14307328
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": 0.011382364013115875,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005733016005251557,
+                "operation": {
+                  "completed": true,
+                  "decoded_bytes": 542,
+                  "deep": true,
+                  "elapsed_seconds": 0.0026946400030283257,
+                  "empty_samples": 1,
+                  "mix_eligible": true,
+                  "nonempty_samples": 2,
+                  "normalized_bytes": 542,
+                  "operation": "inspect",
+                  "pairs": 3,
+                  "physical_bytes": 411,
+                  "reads": 6,
+                  "report_version": 1,
+                  "resources": {
+                    "available_headroom": 93592485888,
+                    "coordinator_rss": 22351872,
+                    "descriptor_allowance": 1024,
+                    "detection_sources": [
+                      "psutil:available",
+                      "psutil:coordinator-rss",
+                      "cgroup-v2:unlimited",
+                      "descriptors:soft-limit",
+                      "descriptors:measured"
+                    ],
+                    "effective_max_ram": 536870912,
+                    "envelope_qualified": false,
+                    "envelope_version": 2,
+                    "metadata_bytes": 33554432,
+                    "request_clamped": false,
+                    "requested_max_ram": 536870912,
+                    "requested_workers": 1,
+                    "reserved_headroom": 2147483648,
+                    "terminal_bytes": 134217728,
+                    "worker_limit": 1
+                  },
+                  "samples": 3,
+                  "workers_effective": 1
+                }
+              },
+              "child_cpu_seconds": 0.04007500000000003,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.006346940999999884,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16723968,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16723968,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 1306,
+              "timed_out": false,
+              "wall_seconds": 0.0403939329989953
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 22384640
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14327808
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": 0.010968674992909655,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005573545000515878,
+                "operation": {
+                  "completed": true,
+                  "decoded_bytes": 542,
+                  "deep": true,
+                  "elapsed_seconds": 0.002566367998952046,
+                  "empty_samples": 1,
+                  "mix_eligible": true,
+                  "nonempty_samples": 2,
+                  "normalized_bytes": 542,
+                  "operation": "inspect",
+                  "pairs": 3,
+                  "physical_bytes": 411,
+                  "reads": 6,
+                  "report_version": 1,
+                  "resources": {
+                    "available_headroom": 93587832832,
+                    "coordinator_rss": 22364160,
+                    "descriptor_allowance": 1024,
+                    "detection_sources": [
+                      "psutil:available",
+                      "psutil:coordinator-rss",
+                      "cgroup-v2:unlimited",
+                      "descriptors:soft-limit",
+                      "descriptors:measured"
+                    ],
+                    "effective_max_ram": 536870912,
+                    "envelope_qualified": false,
+                    "envelope_version": 2,
+                    "metadata_bytes": 33554432,
+                    "request_clamped": false,
+                    "requested_max_ram": 536870912,
+                    "requested_workers": 1,
+                    "reserved_headroom": 2147483648,
+                    "terminal_bytes": 134217728,
+                    "worker_limit": 1
+                  },
+                  "samples": 3,
+                  "workers_effective": 1
+                }
+              },
+              "child_cpu_seconds": 0.03936599999999996,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.005589136999999855,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16732160,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16732160,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 1305,
+              "timed_out": false,
+              "wall_seconds": 0.039660705006099306
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.03,
+                  "rss_bytes": 22433792
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14368768
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": 0.011184150993358344,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005791105009848252,
+                "operation": {
+                  "completed": true,
+                  "decoded_bytes": 542,
+                  "deep": true,
+                  "elapsed_seconds": 0.0024946429912233725,
+                  "empty_samples": 1,
+                  "mix_eligible": true,
+                  "nonempty_samples": 2,
+                  "normalized_bytes": 542,
+                  "operation": "inspect",
+                  "pairs": 3,
+                  "physical_bytes": 411,
+                  "reads": 6,
+                  "report_version": 1,
+                  "resources": {
+                    "available_headroom": 93591703552,
+                    "coordinator_rss": 22413312,
+                    "descriptor_allowance": 1024,
+                    "detection_sources": [
+                      "psutil:available",
+                      "psutil:coordinator-rss",
+                      "cgroup-v2:unlimited",
+                      "descriptors:soft-limit",
+                      "descriptors:measured"
+                    ],
+                    "effective_max_ram": 536870912,
+                    "envelope_qualified": false,
+                    "envelope_version": 2,
+                    "metadata_bytes": 33554432,
+                    "request_clamped": false,
+                    "requested_max_ram": 536870912,
+                    "requested_workers": 1,
+                    "reserved_headroom": 2147483648,
+                    "terminal_bytes": 134217728,
+                    "worker_limit": 1
+                  },
+                  "samples": 3,
+                  "workers_effective": 1
+                }
+              },
+              "child_cpu_seconds": 0.03983300000000001,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0065721109999996585,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16809984,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16809984,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 1306,
+              "timed_out": false,
+              "wall_seconds": 0.04015546500158962
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.02,
+                  "rss_bytes": 22450176
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14385152
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": 0.011028408000129275,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005569858010858297,
+                "operation": {
+                  "completed": true,
+                  "decoded_bytes": 542,
+                  "deep": true,
+                  "elapsed_seconds": 0.002606934998766519,
+                  "empty_samples": 1,
+                  "mix_eligible": true,
+                  "nonempty_samples": 2,
+                  "normalized_bytes": 542,
+                  "operation": "inspect",
+                  "pairs": 3,
+                  "physical_bytes": 411,
+                  "reads": 6,
+                  "report_version": 1,
+                  "resources": {
+                    "available_headroom": 93595619328,
+                    "coordinator_rss": 22429696,
+                    "descriptor_allowance": 1024,
+                    "detection_sources": [
+                      "psutil:available",
+                      "psutil:coordinator-rss",
+                      "cgroup-v2:unlimited",
+                      "descriptors:soft-limit",
+                      "descriptors:measured"
+                    ],
+                    "effective_max_ram": 536870912,
+                    "envelope_qualified": false,
+                    "envelope_version": 2,
+                    "metadata_bytes": 33554432,
+                    "request_clamped": false,
+                    "requested_max_ram": 536870912,
+                    "requested_workers": 1,
+                    "reserved_headroom": 2147483648,
+                    "terminal_bytes": 134217728,
+                    "worker_limit": 1
+                  },
+                  "samples": 3,
+                  "workers_effective": 1
+                }
+              },
+              "child_cpu_seconds": 0.03983800000000004,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.005983128000000004,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16781312,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16781312,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 1305,
+              "timed_out": false,
+              "wall_seconds": 0.040136008989065886
+            },
+            {
+              "child": {
+                "after_operation": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.03,
+                  "rss_bytes": 22503424
+                },
+                "before_readmixer_import": {
+                  "descriptors": 4,
+                  "lifetime_peak_rss_bytes": 48697344,
+                  "os_threads": 1,
+                  "process_cpu_seconds": 0.01,
+                  "rss_bytes": 14397440
+                },
+                "candidate_matches": true,
+                "cli_operation_seconds": 0.011306821994367056,
+                "completed": true,
+                "exit_code": 0,
+                "import_seconds": 0.005781716987257823,
+                "operation": {
+                  "completed": true,
+                  "decoded_bytes": 542,
+                  "deep": true,
+                  "elapsed_seconds": 0.0026396960020065308,
+                  "empty_samples": 1,
+                  "mix_eligible": true,
+                  "nonempty_samples": 2,
+                  "normalized_bytes": 542,
+                  "operation": "inspect",
+                  "pairs": 3,
+                  "physical_bytes": 411,
+                  "reads": 6,
+                  "report_version": 1,
+                  "resources": {
+                    "available_headroom": 93591748608,
+                    "coordinator_rss": 22482944,
+                    "descriptor_allowance": 1024,
+                    "detection_sources": [
+                      "psutil:available",
+                      "psutil:coordinator-rss",
+                      "cgroup-v2:unlimited",
+                      "descriptors:soft-limit",
+                      "descriptors:measured"
+                    ],
+                    "effective_max_ram": 536870912,
+                    "envelope_qualified": false,
+                    "envelope_version": 2,
+                    "metadata_bytes": 33554432,
+                    "request_clamped": false,
+                    "requested_max_ram": 536870912,
+                    "requested_workers": 1,
+                    "reserved_headroom": 2147483648,
+                    "terminal_bytes": 134217728,
+                    "worker_limit": 1
+                  },
+                  "samples": 3,
+                  "workers_effective": 1
+                }
+              },
+              "child_cpu_seconds": 0.03992600000000002,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.006717414000000144,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 2,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 16904192,
+                "process_tree_peak_descriptors": 4,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 16904192,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.02,
+                "sampled_peak_active_os_threads": 1,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 1306,
+              "timed_out": false,
+              "wall_seconds": 0.040236015993286856
+            }
+          ],
+          "summary": {
+            "child_cpu_seconds": {
+              "maximum": 0.04007500000000003,
+              "median": 0.03983800000000004,
+              "minimum": 0.03936599999999996,
+              "observations": [
+                0.04007500000000003,
+                0.03936599999999996,
+                0.03983300000000001,
+                0.03983800000000004,
+                0.03992600000000002
+              ],
+              "range": 0.0007090000000000707
+            },
+            "wall_seconds": {
+              "maximum": 0.0403939329989953,
+              "median": 0.04015546500158962,
+              "minimum": 0.039660705006099306,
+              "observations": [
+                0.0403939329989953,
+                0.039660705006099306,
+                0.04015546500158962,
+                0.040136008989065886,
+                0.040236015993286856
+              ],
+              "range": 0.0007332279928959906
+            }
+          },
+          "warmup": {
+            "child": {
+              "after_operation": {
+                "descriptors": 4,
+                "lifetime_peak_rss_bytes": 48697344,
+                "os_threads": 1,
+                "process_cpu_seconds": 0.02,
+                "rss_bytes": 22429696
+              },
+              "before_readmixer_import": {
+                "descriptors": 4,
+                "lifetime_peak_rss_bytes": 48697344,
+                "os_threads": 1,
+                "process_cpu_seconds": 0.01,
+                "rss_bytes": 14344192
+              },
+              "candidate_matches": true,
+              "cli_operation_seconds": 0.011108938997494988,
+              "completed": true,
+              "exit_code": 0,
+              "import_seconds": 0.005662552997819148,
+              "operation": {
+                "completed": true,
+                "decoded_bytes": 542,
+                "deep": true,
+                "elapsed_seconds": 0.002621462001116015,
+                "empty_samples": 1,
+                "mix_eligible": true,
+                "nonempty_samples": 2,
+                "normalized_bytes": 542,
+                "operation": "inspect",
+                "pairs": 3,
+                "physical_bytes": 411,
+                "reads": 6,
+                "report_version": 1,
+                "resources": {
+                  "available_headroom": 93600227328,
+                  "coordinator_rss": 22409216,
+                  "descriptor_allowance": 1024,
+                  "detection_sources": [
+                    "psutil:available",
+                    "psutil:coordinator-rss",
+                    "cgroup-v2:unlimited",
+                    "descriptors:soft-limit",
+                    "descriptors:measured"
+                  ],
+                  "effective_max_ram": 536870912,
+                  "envelope_qualified": false,
+                  "envelope_version": 2,
+                  "metadata_bytes": 33554432,
+                  "request_clamped": false,
+                  "requested_max_ram": 536870912,
+                  "requested_workers": 1,
+                  "reserved_headroom": 2147483648,
+                  "terminal_bytes": 134217728,
+                  "worker_limit": 1
+                },
+                "samples": 3,
+                "workers_effective": 1
+              }
+            },
+            "child_cpu_seconds": 0.03879799999999997,
+            "completed": true,
+            "error": null,
+            "exit_code": 0,
+            "parent_monitor_cpu_seconds": 0.0060065589999998,
+            "sampled": {
+              "observation_errors": 1,
+              "observations": 2,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 16990208,
+              "process_tree_peak_descriptors": 3,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 16990208,
+              "process_tree_peak_threads": 1,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.01,
+              "sampled_peak_active_os_threads": 1,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "stderr_bytes": 0,
+            "stdout_bytes": 1305,
+            "timed_out": false,
+            "wall_seconds": 0.03912366399890743
+          }
+        },
+        "interpreter": {
+          "completed": true,
+          "measured_runs": [
+            {
+              "child": null,
+              "child_cpu_seconds": 0.0073620000000000005,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0022416949999999325,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 1,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 6426624,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 6426624,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.0,
+                "sampled_peak_active_os_threads": 0,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 0,
+              "timed_out": false,
+              "wall_seconds": 0.007481544991605915
+            },
+            {
+              "child": null,
+              "child_cpu_seconds": 0.007550999999999999,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0022434180000003856,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 1,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 6615040,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 6615040,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.0,
+                "sampled_peak_active_os_threads": 0,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 0,
+              "timed_out": false,
+              "wall_seconds": 0.007691060003708117
+            },
+            {
+              "child": null,
+              "child_cpu_seconds": 0.006855,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0022305239999997895,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 1,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 6930432,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 6930432,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.0,
+                "sampled_peak_active_os_threads": 0,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 0,
+              "timed_out": false,
+              "wall_seconds": 0.006963570995139889
+            },
+            {
+              "child": null,
+              "child_cpu_seconds": 0.006827,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0022356249999999633,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 1,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 6918144,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 6918144,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.0,
+                "sampled_peak_active_os_threads": 0,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 0,
+              "timed_out": false,
+              "wall_seconds": 0.006965034001041204
+            },
+            {
+              "child": null,
+              "child_cpu_seconds": 0.006829000000000002,
+              "completed": true,
+              "error": null,
+              "exit_code": 0,
+              "parent_monitor_cpu_seconds": 0.0022095349999999847,
+              "sampled": {
+                "observation_errors": 1,
+                "observations": 1,
+                "process_tree_last_descendants": 0,
+                "process_tree_last_processes": 1,
+                "process_tree_last_rss_bytes": 6938624,
+                "process_tree_peak_descriptors": 3,
+                "process_tree_peak_processes": 1,
+                "process_tree_peak_rss_bytes": 6938624,
+                "process_tree_peak_threads": 1,
+                "sample_interval_seconds": 0.02,
+                "sampled_live_descendant_cpu_seconds": 0.0,
+                "sampled_os_thread_cpu_delta_seconds": 0.0,
+                "sampled_peak_active_os_threads": 0,
+                "scratch_peak_physical_bytes": 0,
+                "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+              },
+              "stderr_bytes": 0,
+              "stdout_bytes": 0,
+              "timed_out": false,
+              "wall_seconds": 0.006939334998605773
+            }
+          ],
+          "summary": {
+            "child_cpu_seconds": {
+              "maximum": 0.007550999999999999,
+              "median": 0.006855,
+              "minimum": 0.006827,
+              "observations": [
+                0.0073620000000000005,
+                0.007550999999999999,
+                0.006855,
+                0.006827,
+                0.006829000000000002
+              ],
+              "range": 0.000723999999999999
+            },
+            "wall_seconds": {
+              "maximum": 0.007691060003708117,
+              "median": 0.006965034001041204,
+              "minimum": 0.006939334998605773,
+              "observations": [
+                0.007481544991605915,
+                0.007691060003708117,
+                0.006963570995139889,
+                0.006965034001041204,
+                0.006939334998605773
+              ],
+              "range": 0.0007517250051023439
+            }
+          },
+          "warmup": {
+            "child": null,
+            "child_cpu_seconds": 0.007968,
+            "completed": true,
+            "error": null,
+            "exit_code": 0,
+            "parent_monitor_cpu_seconds": 0.002418927999999987,
+            "sampled": {
+              "observation_errors": 1,
+              "observations": 1,
+              "process_tree_last_descendants": 0,
+              "process_tree_last_processes": 1,
+              "process_tree_last_rss_bytes": 6279168,
+              "process_tree_peak_descriptors": 3,
+              "process_tree_peak_processes": 1,
+              "process_tree_peak_rss_bytes": 6279168,
+              "process_tree_peak_threads": 1,
+              "sample_interval_seconds": 0.02,
+              "sampled_live_descendant_cpu_seconds": 0.0,
+              "sampled_os_thread_cpu_delta_seconds": 0.0,
+              "sampled_peak_active_os_threads": 0,
+              "scratch_peak_physical_bytes": 0,
+              "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+            },
+            "stderr_bytes": 0,
+            "stdout_bytes": 0,
+            "timed_out": false,
+            "wall_seconds": 0.008173837995855138
+          }
+        }
+      },
+      "launch_scope": "parent monotonic interval includes process creation, execution, monitoring and wait",
+      "limitations": [
+        "observer imports affect fresh-child RSS and measured launch time",
+        "short process/thread/RSS peaks can fall between observations",
+        "API import is lazy and does not represent all operation native imports",
+        "no release performance or native-workspace qualification"
+      ],
+      "native_scope": "before ReadMixer import and after operation OS-thread counts plus sampled thread deltas; no library attribution",
+      "startup_version": 1,
+      "versions": {
+        "architecture": "x86_64",
+        "dependencies": {
+          "numpy": "1.26.4",
+          "psutil": "5.9.3",
+          "pycryptodome": "3.23.0"
+        },
+        "fingerprinted_python_files": 38,
+        "measured_candidate": "installed-package",
+        "platform": "Linux",
+        "platform_release": "7.0.0-34-generic",
+        "python": "3.11.7",
+        "python_implementation": "CPython",
+        "readmixer_py": "2.0.0.dev5",
+        "source_python_sha256": "fe1484111dfc56d996c1c4125a13db818ae5a9872ec18da844c1fae0d84585ba",
+        "tooling_sha256": {
+          "benchmark_pipeline.py": "0b31e1d766f864fb1cdd1a4b74d6620d7320f1fa4c73142f7dba1d78e800b7df",
+          "generate_fixtures.py": "a1388fe7b370128289e14b0882e09cf14342ffe2ca0b40433f755aa739c7e1f1"
+        },
+        "zlib_build": "1.2.13",
+        "zlib_runtime": "1.2.13"
+      }
+    },
+    "summary": {
+      "aggregate_accounted_cpu_seconds": {
+        "maximum": 0.08396995499999971,
+        "median": 0.08238670699999995,
+        "minimum": 0.08148580699999997,
+        "observations": [
+          0.08148580699999997,
+          0.081862761,
+          0.08298809100000026,
+          0.08396995499999971,
+          0.08238670699999995
+        ],
+        "range": 0.002484147999999742
+      },
+      "phases": {
+        "mix": {
+          "aggregate_accounted_cpu_seconds": {
+            "maximum": 0.0222228069999999,
+            "median": 0.02094199200000002,
+            "minimum": 0.020465338999999805,
+            "observations": [
+              0.02094199200000002,
+              0.020986492000000023,
+              0.020465338999999805,
+              0.0222228069999999,
+              0.020922247999999755
+            ],
+            "range": 0.0017574680000000953
+          },
+          "process_cpu_seconds": {
+            "maximum": 0.0222228069999999,
+            "median": 0.02094199200000002,
+            "minimum": 0.020465338999999805,
+            "observations": [
+              0.02094199200000002,
+              0.020986492000000023,
+              0.020465338999999805,
+              0.0222228069999999,
+              0.020922247999999755
+            ],
+            "range": 0.0017574680000000953
+          },
+          "reaped_child_cpu_seconds": {
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "observations": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "range": 0.0
+          },
+          "wall_seconds": {
+            "maximum": 0.03976658300962299,
+            "median": 0.03970789299637545,
+            "minimum": 0.037588365987176076,
+            "observations": [
+              0.03976658300962299,
+              0.03907112499291543,
+              0.037588365987176076,
+              0.03970789299637545,
+              0.03973883100843523
+            ],
+            "range": 0.0021782170224469155
+          }
+        },
+        "recover_indexed": {
+          "aggregate_accounted_cpu_seconds": {
+            "maximum": 0.019069055000000112,
+            "median": 0.01844264299999976,
+            "minimum": 0.01779025100000009,
+            "observations": [
+              0.018555641999999928,
+              0.018203639999999854,
+              0.01844264299999976,
+              0.019069055000000112,
+              0.01779025100000009
+            ],
+            "range": 0.0012788040000000223
+          },
+          "process_cpu_seconds": {
+            "maximum": 0.019069055000000112,
+            "median": 0.01844264299999976,
+            "minimum": 0.01779025100000009,
+            "observations": [
+              0.018555641999999928,
+              0.018203639999999854,
+              0.01844264299999976,
+              0.019069055000000112,
+              0.01779025100000009
+            ],
+            "range": 0.0012788040000000223
+          },
+          "reaped_child_cpu_seconds": {
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "observations": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "range": 0.0
+          },
+          "wall_seconds": {
+            "maximum": 0.041654024011222646,
+            "median": 0.039689328012173064,
+            "minimum": 0.03917443899263162,
+            "observations": [
+              0.03917443899263162,
+              0.03937026800122112,
+              0.04091649800830055,
+              0.041654024011222646,
+              0.039689328012173064
+            ],
+            "range": 0.002479585018591024
+          }
+        },
+        "recover_sequential": {
+          "aggregate_accounted_cpu_seconds": {
+            "maximum": 0.019263794,
+            "median": 0.01793875800000011,
+            "minimum": 0.01733905800000013,
+            "observations": [
+              0.01733905800000013,
+              0.01793875800000011,
+              0.019263794,
+              0.0179317779999999,
+              0.01865671800000035
+            ],
+            "range": 0.0019247359999998714
+          },
+          "process_cpu_seconds": {
+            "maximum": 0.019263794,
+            "median": 0.01793875800000011,
+            "minimum": 0.01733905800000013,
+            "observations": [
+              0.01733905800000013,
+              0.01793875800000011,
+              0.019263794,
+              0.0179317779999999,
+              0.01865671800000035
+            ],
+            "range": 0.0019247359999998714
+          },
+          "reaped_child_cpu_seconds": {
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "observations": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "range": 0.0
+          },
+          "wall_seconds": {
+            "maximum": 0.04103635200590361,
+            "median": 0.040219835995230824,
+            "minimum": 0.038524165996932425,
+            "observations": [
+              0.04032007500063628,
+              0.04019052100193221,
+              0.04103635200590361,
+              0.038524165996932425,
+              0.040219835995230824
+            ],
+            "range": 0.0025121860089711845
+          }
+        },
+        "verify": {
+          "aggregate_accounted_cpu_seconds": {
+            "maximum": 0.00560079999999985,
+            "median": 0.005534926000000162,
+            "minimum": 0.00542662000000016,
+            "observations": [
+              0.0055674779999996815,
+              0.005534926000000162,
+              0.005533282999999667,
+              0.00560079999999985,
+              0.00542662000000016
+            ],
+            "range": 0.0001741799999996907
+          },
+          "process_cpu_seconds": {
+            "maximum": 0.00560079999999985,
+            "median": 0.005534926000000162,
+            "minimum": 0.00542662000000016,
+            "observations": [
+              0.0055674779999996815,
+              0.005534926000000162,
+              0.005533282999999667,
+              0.00560079999999985,
+              0.00542662000000016
+            ],
+            "range": 0.0001741799999996907
+          },
+          "reaped_child_cpu_seconds": {
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "observations": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "range": 0.0
+          },
+          "wall_seconds": {
+            "maximum": 0.00920056999893859,
+            "median": 0.008692814008099958,
+            "minimum": 0.008589089004090056,
+            "observations": [
+              0.0086408159986604,
+              0.00920056999893859,
+              0.008692814008099958,
+              0.008777964001637883,
+              0.008589089004090056
+            ],
+            "range": 0.0006114809948485345
+          }
+        }
+      },
+      "process_cpu_seconds": {
+        "maximum": 0.08396995499999971,
+        "median": 0.08238670699999995,
+        "minimum": 0.08148580699999997,
+        "observations": [
+          0.08148580699999997,
+          0.081862761,
+          0.08298809100000026,
+          0.08396995499999971,
+          0.08238670699999995
+        ],
+        "range": 0.002484147999999742
+      },
+      "reaped_child_cpu_seconds": {
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "observations": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "range": 0.0
+      },
+      "wall_seconds": {
+        "maximum": 0.14776717800123151,
+        "median": 0.14743142599763814,
+        "minimum": 0.14690257000620477,
+        "observations": [
+          0.14690257000620477,
+          0.14697506700758822,
+          0.14743142599763814,
+          0.14772803300002124,
+          0.14776717800123151
+        ],
+        "range": 0.0008646079950267449
+      }
+    },
+    "temporary_workspace_removed": true,
+    "timing_scope": "in-process operations after harness/API imports; lazy operation imports may occur;  fixture generation excluded; independent recovery checks included in total",
+    "versions": {
+      "architecture": "x86_64",
+      "dependencies": {
+        "numpy": "1.26.4",
+        "psutil": "5.9.3",
+        "pycryptodome": "3.23.0"
+      },
+      "fingerprinted_python_files": 38,
+      "measured_candidate": "installed-package",
+      "platform": "Linux",
+      "platform_release": "7.0.0-34-generic",
+      "python": "3.11.7",
+      "python_implementation": "CPython",
+      "readmixer_py": "2.0.0.dev5",
+      "source_python_sha256": "fe1484111dfc56d996c1c4125a13db818ae5a9872ec18da844c1fae0d84585ba",
+      "tooling_sha256": {
+        "benchmark_pipeline.py": "0b31e1d766f864fb1cdd1a4b74d6620d7320f1fa4c73142f7dba1d78e800b7df",
+        "generate_fixtures.py": "a1388fe7b370128289e14b0882e09cf14342ffe2ca0b40433f755aa739c7e1f1"
+      },
+      "zlib_build": "1.2.13",
+      "zlib_runtime": "1.2.13"
+    },
+    "warmup": {
+      "aggregate_accounted_cpu_seconds": 2.10386344,
+      "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+      "correctness": {
+        "exact_identity_coverage_checked_by_pipeline": true,
+        "full_pool_verified": true,
+        "independent_bytes_and_counts_equal": true,
+        "indexed_recovery_equal": true,
+        "sequential_recovery_equal": true
+      },
+      "independent_recovery_check_seconds": 0.00034504001087043434,
+      "phases": {
+        "mix": {
+          "aggregate_accounted_cpu_seconds": 2.037520203,
+          "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+          "cleanup_complete": true,
+          "compression_slots": 0,
+          "consumed_artifact_bytes": null,
+          "cpu_budget": 1,
+          "normalized_bytes": 542,
+          "pairs": 3,
+          "physical_bytes": 4912,
+          "process_cpu_seconds": 2.037520203,
+          "reads": 6,
+          "reaped_child_cpu_seconds": 0.0,
+          "reported_elapsed_seconds": 0.0841277919971617,
+          "resources": {
+            "available_headroom": 93638066176,
+            "coordinator_rss": 48414720,
+            "descriptor_allowance": 1024,
+            "detection_sources": [
+              "psutil:available",
+              "psutil:coordinator-rss",
+              "cgroup-v2:unlimited",
+              "descriptors:soft-limit",
+              "descriptors:measured"
+            ],
+            "effective_max_ram": 536870912,
+            "envelope_qualified": false,
+            "envelope_version": 2,
+            "metadata_bytes": 33554432,
+            "request_clamped": false,
+            "requested_max_ram": 536870912,
+            "requested_workers": 1,
+            "reserved_headroom": 2147483648,
+            "terminal_bytes": 134217728,
+            "worker_limit": 1
+          },
+          "sampled": {
+            "observation_errors": 0,
+            "observations": 7,
+            "process_tree_last_descendants": 0,
+            "process_tree_last_processes": 1,
+            "process_tree_last_rss_bytes": 49012736,
+            "process_tree_peak_descriptors": 9,
+            "process_tree_peak_processes": 1,
+            "process_tree_peak_rss_bytes": 49012736,
+            "process_tree_peak_threads": 33,
+            "sample_interval_seconds": 0.02,
+            "sampled_live_descendant_cpu_seconds": 0.0,
+            "sampled_os_thread_cpu_delta_seconds": 1.940000000000001,
+            "sampled_peak_active_os_threads": 32,
+            "scratch_peak_physical_bytes": 3339,
+            "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+          },
+          "samples": 3,
+          "wall_seconds": 0.14969040600408334,
+          "workers_effective": 1
+        },
+        "recover_indexed": {
+          "aggregate_accounted_cpu_seconds": 0.019904937999999817,
+          "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+          "cleanup_complete": true,
+          "compression_slots": 0,
+          "consumed_artifact_bytes": 4828,
+          "cpu_budget": 1,
+          "normalized_bytes": 542,
+          "pairs": 3,
+          "physical_bytes": 5151,
+          "process_cpu_seconds": 0.019904937999999817,
+          "reads": 6,
+          "reaped_child_cpu_seconds": 0.0,
+          "reported_elapsed_seconds": 0.04082098699291237,
+          "resources": {
+            "available_headroom": 93635035136,
+            "coordinator_rss": 49897472,
+            "descriptor_allowance": 1024,
+            "detection_sources": [
+              "psutil:available",
+              "psutil:coordinator-rss",
+              "cgroup-v2:unlimited",
+              "descriptors:soft-limit",
+              "descriptors:measured"
+            ],
+            "effective_max_ram": 536870912,
+            "envelope_qualified": false,
+            "envelope_version": 2,
+            "metadata_bytes": 33554432,
+            "request_clamped": false,
+            "requested_max_ram": 536870912,
+            "requested_workers": 1,
+            "reserved_headroom": 2147483648,
+            "terminal_bytes": 134217728,
+            "worker_limit": 1
+          },
+          "sampled": {
+            "observation_errors": 0,
+            "observations": 3,
+            "process_tree_last_descendants": 0,
+            "process_tree_last_processes": 1,
+            "process_tree_last_rss_bytes": 50032640,
+            "process_tree_peak_descriptors": 10,
+            "process_tree_peak_processes": 1,
+            "process_tree_peak_rss_bytes": 50032640,
+            "process_tree_peak_threads": 33,
+            "sample_interval_seconds": 0.02,
+            "sampled_live_descendant_cpu_seconds": 0.0,
+            "sampled_os_thread_cpu_delta_seconds": 0.03,
+            "sampled_peak_active_os_threads": 1,
+            "scratch_peak_physical_bytes": 898,
+            "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+          },
+          "samples": 3,
+          "wall_seconds": 0.0415908959985245,
+          "workers_effective": 1
+        },
+        "recover_sequential": {
+          "aggregate_accounted_cpu_seconds": 0.018386648999999977,
+          "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+          "cleanup_complete": true,
+          "compression_slots": 0,
+          "consumed_artifact_bytes": 4728,
+          "cpu_budget": 1,
+          "normalized_bytes": 542,
+          "pairs": 3,
+          "physical_bytes": 5171,
+          "process_cpu_seconds": 0.018386648999999977,
+          "reads": 6,
+          "reaped_child_cpu_seconds": 0.0,
+          "reported_elapsed_seconds": 0.03902998799458146,
+          "resources": {
+            "available_headroom": 93634854912,
+            "coordinator_rss": 50036736,
+            "descriptor_allowance": 1024,
+            "detection_sources": [
+              "psutil:available",
+              "psutil:coordinator-rss",
+              "cgroup-v2:unlimited",
+              "descriptors:soft-limit",
+              "descriptors:measured"
+            ],
+            "effective_max_ram": 536870912,
+            "envelope_qualified": false,
+            "envelope_version": 2,
+            "metadata_bytes": 33554432,
+            "request_clamped": false,
+            "requested_max_ram": 536870912,
+            "requested_workers": 1,
+            "reserved_headroom": 2147483648,
+            "terminal_bytes": 134217728,
+            "worker_limit": 1
+          },
+          "sampled": {
+            "observation_errors": 0,
+            "observations": 3,
+            "process_tree_last_descendants": 0,
+            "process_tree_last_processes": 1,
+            "process_tree_last_rss_bytes": 50110464,
+            "process_tree_peak_descriptors": 10,
+            "process_tree_peak_processes": 1,
+            "process_tree_peak_rss_bytes": 50114560,
+            "process_tree_peak_threads": 33,
+            "sample_interval_seconds": 0.02,
+            "sampled_live_descendant_cpu_seconds": 0.0,
+            "sampled_os_thread_cpu_delta_seconds": 0.010000000000000009,
+            "sampled_peak_active_os_threads": 1,
+            "scratch_peak_physical_bytes": 898,
+            "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+          },
+          "samples": 3,
+          "wall_seconds": 0.039090230988222174,
+          "workers_effective": 1
+        },
+        "verify": {
+          "aggregate_accounted_cpu_seconds": 0.007113707999999885,
+          "child_cpu_accounting": "waited child/descendant usage; unjoined children are excluded",
+          "cleanup_complete": true,
+          "compression_slots": 0,
+          "consumed_artifact_bytes": 4912,
+          "cpu_budget": null,
+          "normalized_bytes": 542,
+          "pairs": 3,
+          "physical_bytes": null,
+          "process_cpu_seconds": 0.007113707999999885,
+          "reads": 6,
+          "reaped_child_cpu_seconds": 0.0,
+          "reported_elapsed_seconds": 0.009068941988516599,
+          "resources": {
+            "available_headroom": 93635039232,
+            "coordinator_rss": 49053696,
+            "descriptor_allowance": 1024,
+            "detection_sources": [
+              "psutil:available",
+              "psutil:coordinator-rss",
+              "cgroup-v2:unlimited",
+              "descriptors:soft-limit",
+              "descriptors:measured"
+            ],
+            "effective_max_ram": 536870912,
+            "envelope_qualified": false,
+            "envelope_version": 2,
+            "metadata_bytes": 33554432,
+            "request_clamped": false,
+            "requested_max_ram": 536870912,
+            "requested_workers": 1,
+            "reserved_headroom": 2147483648,
+            "terminal_bytes": 134217728,
+            "worker_limit": 1
+          },
+          "sampled": {
+            "observation_errors": 0,
+            "observations": 2,
+            "process_tree_last_descendants": 0,
+            "process_tree_last_processes": 1,
+            "process_tree_last_rss_bytes": 49848320,
+            "process_tree_peak_descriptors": 4,
+            "process_tree_peak_processes": 1,
+            "process_tree_peak_rss_bytes": 49848320,
+            "process_tree_peak_threads": 32,
+            "sample_interval_seconds": 0.02,
+            "sampled_live_descendant_cpu_seconds": 0.0,
+            "sampled_os_thread_cpu_delta_seconds": 0.009999999999999995,
+            "sampled_peak_active_os_threads": 1,
+            "scratch_peak_physical_bytes": 0,
+            "thread_scope": "OS thread CPU deltas between samples, including Python and monitor threads; not library attribution"
+          },
+          "samples": 3,
+          "wall_seconds": 0.010301720991265029,
+          "workers_effective": 1
+        }
+      },
+      "process_cpu_seconds": 2.10386344,
+      "reaped_child_cpu_seconds": 0.0,
+      "wall_seconds": 0.26151530400966294
+    }
+  }
+}

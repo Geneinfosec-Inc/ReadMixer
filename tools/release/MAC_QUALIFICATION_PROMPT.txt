@@ -1,0 +1,162 @@
+You are working in my transferred ReadMixer repository on a MacBook Pro. Execute this task, including the tests and evidence export; do not stop after proposing a plan. Discover the repository's actual path. Use the current files and actual observations as authoritative evidence. Keep me informed, preserve unrelated changes and historical results, and do not commit, push, tag, publish a package, or mark the global release gates closed.
+
+OBJECTIVE
+
+Prepare and qualify one identifiable ReadMixer candidate on native macOS arm64 with both 64-bit CPython 3.11 and CPython 3.14. Save complete, verifiable evidence that I can transfer to my Linux ReadMixer workspace for independent reconciliation. Provide convenient TXT/CSV summaries AND the underlying JSON/XML/logs, candidate archives, dependency wheels and fingerprints required by the existing gates. Report every failed, skipped, incomplete and unavailable requirement honestly. Successful Mac runs alone do not close the complete four-cell release matrix.
+
+1. READ THE PROJECT AND ESTABLISH THE CURRENT STATE
+
+Read applicable AGENTS.md instructions and at least:
+- readmixer/python_update_plans/README.md
+- readmixer/python_update_plans/IMPLEMENTATION.md
+- readmixer/python_update_plans/10-acceptance-documentation-and-release.md
+- readmixer/python_update_plans/15-workflow-boundaries-and-failure-acceptance.md
+- readmixer/python_update_plans/16-resource-scale-and-performance-qualification.md
+- readmixer/python_update_plans/17-platform-packaging-and-release-closure.md
+- readmixer/python_update_plans/release-evidence.json
+- readmixer/python_update_plans/resource-qualification-evidence.json
+- tools/release/README.md and tools/release/preparation/README.md
+- tools/release/{candidate,packet,lock_environment,platform_lane,platform_probe,resource_lane,supplement_lane,gates,private_evidence}.py
+- tools/release/platform-applicability.json and the external tools' tests.
+
+Inspect the source, build configuration, existing candidate bundles, preparation patches and recorded failures as needed. Distinguish plans, implemented tools, previous results and newly executed evidence. Check that the transfer included dist/, tools/release/, scripts/, tests/, .github/workflows/, and the relevant historical evidence. dist/ is Git-ignored: a fresh clone may not contain it. Missing prior artifacts must be reported, never reconstructed under their old identities. Avoid printing private sample names or input paths in public summaries.
+
+At the time this prompt was written, the frozen candidate was 2.0.0.dev10:
+- candidate ID: sha256:426e563211c32b5bea806862d65bd0754419e397fb53ecaaa7239e11a00810ff
+- wheel SHA-256: 4dbdab8d01c91488894e30ce0b842d426ee7a5f58a401c4786b22969d94c0691
+- sdist SHA-256: 6ff7f6f635b200c12b8a5a271b0cae39b650baad375e38b89050d2a9e54b1043
+- bundle: dist/plan17-dev10/candidate/
+
+Verify these if using dev10. If the transferred repository contains a documented newer candidate, verify its actual provenance and blockers instead of blindly reverting it to dev10.
+
+2. RESOLVE THE KNOWN CANDIDATE BLOCKERS BEFORE EXPENSIVE QUALIFICATION
+
+The recorded dev10 Linux Python 3.14 run is NOT qualified: source has 2,701 passes and 2 failures; installed has 2,700 passes and 3 failures. Two failures are exact-reference-count assumptions in test_recovery_lifetimes.py. The extra installed failure is test_pipeline.py::test_P06_004_oversized_singleton_rolls_back, which encountered resource refusal before its intended boundary. Its isolated controls did not reproduce the full-suite failure.
+
+If these remain unresolved, I authorize you to prepare their correction in a NEW isolated candidate preparation tree:
+- Review and apply tools/release/preparation/recovery-lifetime-portability.patch and singleton-boundary-admission.patch if still applicable; do not apply either twice.
+- Preserve the independent extra-owner negative control and require the boundary test to reach the intended oversized-pair failure. Do not weaken assertions, remove tests or waive Python 3.14 failures to obtain a pass.
+- Investigate any remaining full-suite interaction. Make necessary, scoped corrections with meaningful regression coverage. Preserve every failed attempt and the exact changes.
+- Validate preparation on both Python versions before the long resource runs.
+
+Do not mutate the old candidate archives, historical reports, or extracted tests in an active qualification run. If a fixed candidate is needed, use the next unused development version, a complete selected source manifest, recorded build inputs, and a NEW candidate identity. Update shipped documentation accurately; keep evidence containing the candidate's own archive hashes outside those archives. Exclude private data, generated outputs, credentials, caches and virtual environments from the source distribution.
+
+Build the wheel and sdist ONCE in a controlled, locked build environment. Test those exact same archive bytes on both Mac Python versions. Use candidate.py to verify/adopt the provenance; it does not currently provide a general freeze/build frontend, so implement and test any missing preparation helper if needed. A separate sdist rebuild for content comparison is a check, never a replacement candidate.
+
+Confirm actual test collection. Applying only the two prepared patches adds one test, suggesting 2,704 tests; do not assume that count if other changes are made. Create and retain a candidate-bound version of the narrowly defined macOS applicability policy. Update the checker's recognized policy binding deliberately, preserving historical policies and their identities; do not disable candidate/hash checks. Return the new exact archives, selected source/provenance and changes to Linux so Linux can retest THE SAME candidate. Old Linux passes do not automatically qualify the replacement.
+
+If a blocker cannot be resolved, continue independent useful preparation or diagnostic checks and export the failed/blocked evidence. Do not claim that diagnostic execution qualifies the candidate.
+
+3. PREFLIGHT THE ACTUAL MAC AND BOTH INTERPRETERS
+
+Record macOS version/build, hardware architecture, CPU availability, RAM, free disk, filesystem/device information, descriptor limits, power/thermal conditions relevant to measurements, exact Python patch/build/ABI/executable fingerprints, and native libraries. Record private absolute paths only in private evidence.
+
+Both required cells must actually be Darwin/arm64, 64-bit CPython:
+- macos-arm64-py311
+- macos-arm64-py314
+
+Check the running interpreter architecture and Rosetta translation, not merely the computer's model name. An Intel Mac or x86 interpreter does not satisfy arm64; report the affected cells blocked rather than renaming them. Do not substitute Linux emulation, containers or another Python minor version.
+
+Locate or install native Python 3.11 and 3.14 and necessary host tools without replacing system Python. Prefer existing native tools and isolated environments. Check required modules including ssl, ctypes, zlib, bz2, lzma, sqlite3, multiprocessing and venv. Install/locate native HTSlib bgzip and a compatible locked pysam; both independent interoperability oracles are required. Record actual versions and hashes.
+
+Use new user-owned workspaces outside the checkout/candidate/environment trees. Verify sufficient capacity before long runs; run the two Python/resource configurations sequentially to avoid competing workloads. At least four actually admitted CPUs are needed for CPU-four profiles. Keep the machine awake during owned runs when possible and record interruptions. Do not lower required CPU counts, repetitions or normalized-data-to-budget ratios to make a profile pass.
+
+The distinct-output/scratch-device test requires an actual distinct filesystem device, verified at runtime. Two directories on one device are not equivalent. Use an available suitable separate volume. If hardware, space or permissions are missing, mark exactly those lanes NOT_RUN/BLOCKED with the remedy, continue unaffected work, and ask only for information/access that is genuinely necessary. Do not format disks or alter system-wide resource/security settings.
+
+4. PREPARE A SEPARATE REPLAYABLE DEPENDENCY ENVIRONMENT FOR EACH PYTHON
+
+Follow tools/release/README.md and lock_environment.py. Resolve compatible native wheels once during preparation, including full transitive runtime, test, build and interoperability dependencies. Use the documented builder versions initially; if incompatible, preserve the failure, record the deliberate replacement and verify resulting content equivalence.
+
+Save the complete selected wheels/, requirements.lock and environment.json for EACH Python/native build. Capture the lock before qualification. Use fresh fully isolated virtual environments, no system-site-packages, and offline --no-index/--require-hashes installs for qualification. A pip freeze file alone is insufficient. Clear checkout import overrides and record native thread controls before imports/spawn. Keep preparation dependency downloads distinct from controlled qualification installs.
+
+5. EXECUTE THE ORDINARY PLATFORM LANES
+
+Use the existing platform runner, with resolved absolute paths and a fresh report/workspace per attempt:
+
+BOOTSTRAP_PYTHON -I tools/release/platform_lane.py \
+  --candidate CANDIDATE_BUNDLE \
+  --environment THIS_PYTHON_ENVIRONMENT \
+  --workspace NEW_OUTSIDE_CHECKOUT_WORKSPACE \
+  --report NEW_REPORT_DIRECTORY \
+  --expected-cell macos-arm64-py311
+
+Repeat for macos-arm64-py314 using its native interpreter and separate locked environment. Use the SAME candidate bundle for both.
+
+Require complete SOURCE and outside-checkout INSTALLED suites, actual import/payload verification, independent bgzip/pysam BGZF/index interoperability, six dependency-free console/module/forwarder help/version checks, filesystem/permission/publication checks, and frozen-sdist rebuild/content comparison. Preserve collected and executed node IDs, phase outcomes, JUnit, exact commands, start/end times, exit codes, stdout/stderr, native facts, locks and the exact executed harness files. Do not replace complete suites with selected passing tests.
+
+The predeclared macOS applicability policy currently covers ONLY eight exact source-hashed Linux-only qualification-launcher nodes. They must remain collected and appear as NOT_APPLICABLE, with eight raw JUnit skips and NO pass credit. Every other unexpected skip, xfail, failure, error or missing node blocks acceptance. Derive the expected applicable count from the candidate manifest and verified policy (dev10: 2,703 collected/2,695 applicable; patched-only successor would be 2,704/2,696). Never expand the policy merely because another test fails.
+
+Run the complete external tools/release/tests suite on each native Python, retaining JUnit, logs, exit codes and helper hashes. In particular require actual Mac execution of portable nofile/kernel-readback/unchanged-parent/private-output and process-group timeout/reaping regressions. Keep these counts separate from the frozen candidate suite counts.
+
+6. EXECUTE RESOURCE, SCALE AND SUPPLEMENTAL QUALIFICATION
+
+Once the candidate passes ordinary correctness on the relevant interpreter, use its retained PLATFORM_WORKSPACE/venv/bin/python and PLATFORM_WORKSPACE/installed-work/scripts with the same verified candidate/environment:
+
+BOOTSTRAP_PYTHON -I tools/release/resource_lane.py \
+  --candidate CANDIDATE_BUNDLE \
+  --environment THIS_PYTHON_ENVIRONMENT \
+  --installed-python PLATFORM_WORKSPACE/venv/bin/python \
+  --archived-scripts PLATFORM_WORKSPACE/installed-work/scripts \
+  --workspace NEW_RESOURCE_WORKSPACE \
+  --report NEW_RESOURCE_REPORT_DIRECTORY \
+  --scratch-parent ACTUAL_DISTINCT_SCRATCH_VOLUME \
+  --profile bounded
+
+Run the scale profile with new destinations as well. It must exercise external storage, forced auto spill and clean strict-memory refusal with normalized input strictly greater than four times ACTUAL admitted RAM. Do not count an OS kill as successful admission. Measure process-tree CPU/RSS, threads, descriptors, scratch peaks, I/O, backpressure and actual cleanup. Preserve real signal/crash/publication outcomes and filesystem provenance. Linux enforcement mechanisms are not macOS claims; portable replacements remain mandatory.
+
+Run supplement_lane.py with the same candidate/environment/installed-python/archived-scripts flags and new workspace/report paths. Its current five jobs provide 150 bounded observations, not complete native-build qualification. Finish the missing orchestration where feasible, with tests and exact build bindings:
+- 108 observations: the 18 independent six-artifact oracle nodes listed by supplement_lane.py:remaining_supplements(), each one warm-up plus five measured repetitions.
+- 12 observations: full retained compression windows at CPU budgets two/four, one warm-up plus five measured repetitions each. Inspect the preserved protocol in dist/dev10-resource-qualification/evidence/supplements/drivers/dev10_compression_supplement.py and adapt it portably; do not execute old Linux paths/control claims blindly.
+- The larger fresh-workflow comparison uses counts 256,128,0; the current three-pair startup probes do not reproduce its throughput measurements.
+
+Retain every observation and failed attempt, cache treatment, actual controls and limitations. Evaluate measured charges against this native build. A deficient charge requires a real preparation correction/new candidate and affected reruns, not editing a result to passed.
+
+Review Plan 16/17 requirements for the physical-cap release-host lane and execute it if required and feasible on this host. Record explicit pending evidence or justified, attributed reuse review where applicable; do not silently omit it or launch it without capacity checks. Never infer a universal RSS ceiling or speedup from sampled/tiny measurements.
+
+The supplied input/ or readmixer/input/ files must remain unchanged. Their presence does not require repeating the historical 30,042,389-pair local validation to obtain native synthetic-platform evidence. Preserve that historical result under its original candidate. Do not use private inputs as public CI fixtures or include originals, generated pools/recoveries, sample mappings or input fingerprints in the return/public bundle. Any separately needed real-data validation must be explicitly scoped and reported independently; a prefix smoke test cannot be labeled full validation.
+
+7. SAVE THE EVIDENCE IN AN IMPORTABLE RETURN DIRECTORY
+
+Create a unique, private export root, for example:
+  dist/mac-gate-return-<candidate-version>-<UTC-timestamp>/
+
+It must include readable reports:
+- SUMMARY.txt: candidate identity; actual host/Python builds; source, installed and external-tool counts per cell; exact N/A counts; interoperability/resource results; failures and what remains.
+- NEXT_STEPS.txt: every blocked/failed/unexecuted requirement, its reason, commands/hardware/code needed, and which Linux reruns/reviews remain.
+- IMPORT_ON_LINUX.txt: exact transfer, checksum, restoration and gate-assessment instructions with relative paths; distinguish Mac lane acceptance from global release closure.
+- TEST_RESULTS.csv: candidate_id, cell, suite, nodeid, phase, outcome, applicability_reason, duration_seconds, source_report and source_report_sha256. Export actual recorded results, not fabricated pytest node names for plan IDs.
+- OBSERVATIONS.csv: candidate_id, cell, profile/case, warmup_or_measured, repetition, actual_budget, normalized_bytes, requested/admitted_CPU, elapsed time and available process-tree/resource metrics, outcome, source_report and hash. Missing measurements stay empty with a stated limitation, never zero-filled as measurements.
+- GATE_STATUS.csv: scenario/parent/AUD references, cell, candidate/environment identities, status, evidence references and blocker. Keep PASS, FAIL, NOT_APPLICABLE, NOT_RUN and BLOCKED distinct.
+- COMMANDS.csv: command identifier, sanitized command, timestamps, exit status, and reference/hash to the exact private command/log record.
+- FILES.csv: relative_path, bytes, SHA-256, classification (public/private), candidate/cell and role for every payload file. Avoid self-referential manifest hashing; checksum the inventory separately.
+
+TXT/CSV are summaries. ALSO RETURN the indispensable original evidence:
+- candidate.json, exact original wheel/sdist, packet/checksums and complete selected source/build provenance for a new candidate;
+- all exact native dependency wheelhouses, requirements.lock and environment.json;
+- complete platform report directories, including private/, collection/execution JSON, JUnit XML, logs, native facts, copied harness, policy, locks and rebuilt comparison wheels;
+- all resource/supplement reports, declarations, observation journals, controls and raw measurements;
+- external-tool test results and executed harness/test/workflow snapshots;
+- fixes as patches plus an explicit changed-file/source manifest sufficient to reproduce the new candidate, including intended untracked files; git diff alone may omit them;
+- failed/superseded attempts and their identities, not just the final successful run;
+- candidate-bound closure index and assessment, with missing Linux/global evidence still missing and resource reviews clearly attributed rather than fabricated.
+
+Do not export virtual environments or massive scratch/output trees as proof. Preserve necessary workspaces until evidence is captured and checked. Export only an allowlisted set; exclude .aws, credentials, tokens, private inputs, original sample details, .git internals and unrelated files. Keep raw diagnostic paths private. Use UTF-8 and correctly quoted CSV.
+
+Package the return directory, with an external SHA-256 checksum and total byte size. If needed, make separate per-cell archives plus shared candidate material; provide a reconstruction manifest. For direct trusted local transfer retain private modes (directories0700/files0600) and mark the bundle PRIVATE, not for GitHub. If uploading through a public/shared service, encrypt private diagnostics with the supported authenticated transport; its current tool handles a bounded flat private directory, not arbitrary whole-tree archives. Keep keys outside the archive and chat, provide local restoration instructions, and never silently discard raw evidence. Verify archive extraction/file hashes before declaring the export ready.
+
+8. RECONCILE HONESTLY AND FINISH
+
+Use gates.py init/review-template/assess as appropriate with relative, fingerprinted references and the correct candidate-specific policy. Keep absent Linux cells and unsupported reviews open. Inspect actual review criteria before attesting them. Neither a Mac pass nor ready_for_plan10_review means Plan 10/17 is automatically complete, and nothing here authorizes publication.
+
+At completion report:
+1. Exact candidate version/ID/archive hashes and whether it differs from the Linux-tested candidate.
+2. Native architecture and exact Python builds.
+3. Source/installed/tool counts, skipped/N/A details and failures for each cell.
+4. Completed resource/supplement observations versus remaining obligations.
+5. Exact return archive path(s), sizes/checksums, privacy status and restoration prerequisites.
+6. Exact remaining work, including Linux testing of the SAME corrected candidate and final audit/documentation review.
+
+Save a short handoff message I can paste into the Linux chat:
+"The Mac evidence is at <local imported directory>. Verify transfer hashes and raw evidence, reconcile the exact candidate and native builds, rerun affected Linux cells using the returned identical archives, review remaining resource/calibration/audit obligations, and determine whether Plan 10 and Plan 17 can close. Do not publish or push yet."
+
+If anything fails or cannot run, still produce the complete available export and a precise blocker list. Never claim all gates are satisfied because a subset passed.

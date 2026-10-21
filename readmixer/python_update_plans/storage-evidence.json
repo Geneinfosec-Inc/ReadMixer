@@ -1,0 +1,514 @@
+{
+  "evidence_version": 1,
+  "date": "2026-09-23",
+  "candidate_version": "2.0.0.dev1",
+  "scope": "input/storage/framing/sorting/publication primitives; not Plan 10 acceptance or a complete mix/verify/recover workflow",
+  "release_qualified": false,
+  "baseline_head": "6454d21b4566d34e7dbcfadedb6a6f3e412f5beb",
+  "source_manifest_sha256": "92743a0da93652bbc3de0a8d2cbfdebce23981e9c2f02ba6303aff50183cdee7",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 385,
+      "sha256": "5ef721e0d5219bb66d88ea8956e05c9337d44cc3a98e333f846603fa9e037540"
+    },
+    {
+      "path": "CHANGES.md",
+      "bytes": 7967,
+      "sha256": "a82f5dda7a9b3186ad75375645cb109a4cb57e1a20566a3e43187bafafbac0a3"
+    },
+    {
+      "path": "MANIFEST.in",
+      "bytes": 454,
+      "sha256": "388c6e303515d8b71260e1af0e311db97f973e4863bd2cb5951a8061df049d28"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5389,
+      "sha256": "0bb430da5284fd98ed4f77febc61b10b4b332b44e59e45c95bacc245b7b95cd1"
+    },
+    {
+      "path": "TESTING.md",
+      "bytes": 3139,
+      "sha256": "365083b53a8b4f281124d2e8c4d4645f8cc6ce6ca88ec5d436d009c6962932d8"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 871,
+      "sha256": "50c29c107b9b10b532d81cff9e25b755cd23021b5ebdecc18e4df1fd593f2eb0"
+    },
+    {
+      "path": "readmixer/Dockerfile",
+      "bytes": 242,
+      "sha256": "492763f3865ec3ad22c0411af95bd3fb17ca9085f89766597c67c3917c490ac4"
+    },
+    {
+      "path": "readmixer/Dockerfile.conda",
+      "bytes": 395,
+      "sha256": "e30ebb0fefd385759cd6f3fec2e5c9e1c428d18aea69a6e102cb6e111307abbf"
+    },
+    {
+      "path": "readmixer/INSTALLATION.md",
+      "bytes": 1157,
+      "sha256": "979e0c154999b3488e73ec2f4a804ed17be212cbbf458282bf0b8928b969edb4"
+    },
+    {
+      "path": "readmixer/QUICKSTART_OLD_GCC.md",
+      "bytes": 346,
+      "sha256": "34b65a74fdfe3077c9a1a5fe3876554a7987ce001919259442fad7de4a7ee868"
+    },
+    {
+      "path": "readmixer/environment.yml",
+      "bytes": 235,
+      "sha256": "d9f6aa5c604654e1ea5091ac073e3400fe8acb1e7f34338741ac2068fcc13491"
+    },
+    {
+      "path": "readmixer/process/__init__.py",
+      "bytes": 284,
+      "sha256": "1b68187cb6c721055888393048adf54f99e73140174eb54b240a5909ace83c4b"
+    },
+    {
+      "path": "readmixer/python_update_plans/00-audit-and-transfer-decisions.md",
+      "bytes": 19465,
+      "sha256": "118152677487bec51f275bd1ac5d1bcfbbb49a5664ee6ed0d52ed67a9ee74e95"
+    },
+    {
+      "path": "readmixer/python_update_plans/01-packaging-interfaces-and-compatibility.md",
+      "bytes": 15062,
+      "sha256": "777d8d708eae0994809b5675b67ff1df91bb068a0796b73898b46e47e2441e6a"
+    },
+    {
+      "path": "readmixer/python_update_plans/02-paired-input-and-lossless-parsing.md",
+      "bytes": 16568,
+      "sha256": "ad418d3bb8de2e5f7cabe196dcc5520648a952ec0ccc08a96ecbe3db47840f30"
+    },
+    {
+      "path": "readmixer/python_update_plans/03-resource-admission-and-storage.md",
+      "bytes": 14943,
+      "sha256": "12abeece900b0507fcb6ec221c9ef236aaf02f276559c0db581b84057f3e0183"
+    },
+    {
+      "path": "readmixer/python_update_plans/04-global-pair-randomization-and-sharding.md",
+      "bytes": 17614,
+      "sha256": "a03ff0bfe79717791aa05ed1e0d0d76dbc4a6ec02a494c4be2c429b717e9949f"
+    },
+    {
+      "path": "readmixer/python_update_plans/05-encrypted-scratch-and-safe-publication.md",
+      "bytes": 16483,
+      "sha256": "909d1965f87b3ceb3300e3aa1b24be91c0441c58a568c3c2353a6853cf20d2b3"
+    },
+    {
+      "path": "readmixer/python_update_plans/06-bundles-keys-indexes-and-manifests.md",
+      "bytes": 21287,
+      "sha256": "35eb256552a39aa3eb46e1fecd5688140cc1bd4ba46b83bf0a91ddb3c94dd022"
+    },
+    {
+      "path": "readmixer/python_update_plans/07-complete-verification.md",
+      "bytes": 17611,
+      "sha256": "9241c2d5516b3e74441c00feb46bcba2325cbec616aee51c76088590147cb125"
+    },
+    {
+      "path": "readmixer/python_update_plans/08-multi-sample-recovery.md",
+      "bytes": 21718,
+      "sha256": "35e35ea3986bd4dd4a03876216e1a98a2394246e96c6d3044791cc08b5e60a5e"
+    },
+    {
+      "path": "readmixer/python_update_plans/09-parallel-execution-and-performance.md",
+      "bytes": 14585,
+      "sha256": "893f33ff5d4482e4a03f589276dfb2bd4245b8514d43db4651cb8a6fdd513c82"
+    },
+    {
+      "path": "readmixer/python_update_plans/10-acceptance-documentation-and-release.md",
+      "bytes": 17247,
+      "sha256": "325d06a657e64b08260aea3e351d6f4b4ca5bfda407d9845667f8227721e42ae"
+    },
+    {
+      "path": "readmixer/python_update_plans/IMPLEMENTATION.md",
+      "bytes": 7718,
+      "sha256": "f9734fb04feda5ee5c6a3d6fe770a2f90cb5881f6f8f6753797d3d86f902dcbe"
+    },
+    {
+      "path": "readmixer/python_update_plans/README.md",
+      "bytes": 9364,
+      "sha256": "2e74ca058b4b03ac0209d067f7c2b74aa6ddc21cde22df5e40304673b0489750"
+    },
+    {
+      "path": "readmixer/python_update_plans/regression-coverage.json",
+      "bytes": 54440,
+      "sha256": "40bb56e22636cd59150598c1c30220887226f1b6bdf1f81d25b076ce7ba12532"
+    },
+    {
+      "path": "readmixer/python_update_plans/source-snapshot.json",
+      "bytes": 26479,
+      "sha256": "dc6de6cae0700a4f5b2ffcc3cb1f51f62b03a993d3492b43110bbc44c3c3e4bc"
+    },
+    {
+      "path": "readmixer/readmixer.py",
+      "bytes": 487,
+      "sha256": "d83828cf691c5e5a93aa1f6ac0b73a062415d406051b1dcb6c8596b842ed5c09"
+    },
+    {
+      "path": "readmixer/requirements-pip.txt",
+      "bytes": 148,
+      "sha256": "9dd3bafac86640961996afa5160304abf2a6e94a2f7dceb348ea4cef48fcdc71"
+    },
+    {
+      "path": "readmixer/requirements.txt",
+      "bytes": 148,
+      "sha256": "9dd3bafac86640961996afa5160304abf2a6e94a2f7dceb348ea4cef48fcdc71"
+    },
+    {
+      "path": "readmixer/setup.sh",
+      "bytes": 312,
+      "sha256": "f7ecb177f24640d43d61371c5d8df22bf323d1a1d8d0882e62de8269e4edf0f1"
+    },
+    {
+      "path": "requirements-foundations.lock",
+      "bytes": 303,
+      "sha256": "a0276dde65864a19e91b4f58e6c6caa61f130a3f66eb612bbfb303d0db061a41"
+    },
+    {
+      "path": "scripts/check_storage_inputs.py",
+      "bytes": 10812,
+      "sha256": "31a37ff62aba3a57746bf4320b99d24dab87b20242d78dcd8bc9fbf298914799"
+    },
+    {
+      "path": "src/readmixer_py/__init__.py",
+      "bytes": 1946,
+      "sha256": "b82c90f7857719c85b75c524e74009f2ff72e7aded6c0a3d5a8d8556f9ac02de"
+    },
+    {
+      "path": "src/readmixer_py/__main__.py",
+      "bytes": 79,
+      "sha256": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7"
+    },
+    {
+      "path": "src/readmixer_py/catalog.py",
+      "bytes": 19677,
+      "sha256": "5af7dafed0967f16b46824ff7c149c3742fb2cdf20acebd7840361bfaf1b0cad"
+    },
+    {
+      "path": "src/readmixer_py/cli.py",
+      "bytes": 6446,
+      "sha256": "8addf910b48f156dceab247ccd859bfe8ce625e9daff2ff78b9cb4405fe9a8a9"
+    },
+    {
+      "path": "src/readmixer_py/config.py",
+      "bytes": 6150,
+      "sha256": "2ec4ae3e1effbf2dca3228e48f063b2868679bc30e144fd66c335338e67692c6"
+    },
+    {
+      "path": "src/readmixer_py/crypto.py",
+      "bytes": 10732,
+      "sha256": "55c273d828a7c9a0a1f8f1e631e74b0a8b485e5c1fb9dc57aa3283e95f8278da"
+    },
+    {
+      "path": "src/readmixer_py/disk.py",
+      "bytes": 6433,
+      "sha256": "26eaf502e01582fde307c3cf50e665e2cf8670ab88fed7ebfd89c16eb72ba660"
+    },
+    {
+      "path": "src/readmixer_py/errors.py",
+      "bytes": 1035,
+      "sha256": "3b4e2776ca12ee8ff98422201a4fe7c1fbe27a453b1fb4acba3caa7aa41ce114"
+    },
+    {
+      "path": "src/readmixer_py/fastq.py",
+      "bytes": 19893,
+      "sha256": "4ef3c136c047c5633e36e630b5c13f2a2bf862247eca91affeae5fe34f0f16a5"
+    },
+    {
+      "path": "src/readmixer_py/inspection.py",
+      "bytes": 6362,
+      "sha256": "a0e80c4e58650e7eb49d0ada2d428be6cdad1d37cc8bb3b12b73d7ceffee9e00"
+    },
+    {
+      "path": "src/readmixer_py/ledger.py",
+      "bytes": 14273,
+      "sha256": "cd9c1b0e244615b3c0c9e7a232c35907d5af6f28fe9d8f836a7c816599620ed9"
+    },
+    {
+      "path": "src/readmixer_py/paircodec.py",
+      "bytes": 7588,
+      "sha256": "858fc3fa00decbc406330438dbefbc6d3fbd253a5257c89cc05081405e4be74c"
+    },
+    {
+      "path": "src/readmixer_py/paths.py",
+      "bytes": 7462,
+      "sha256": "68062ee0a155c7b10173265b2ae522ea27449cf01130c22325e250eec3e9d729"
+    },
+    {
+      "path": "src/readmixer_py/resources.py",
+      "bytes": 21351,
+      "sha256": "a1558a356e27b74624ff7598628a738c3e151daa837bf607e895122d356f9814"
+    },
+    {
+      "path": "src/readmixer_py/sorting.py",
+      "bytes": 23534,
+      "sha256": "336ad3e9ab9049c762f320265ee2868de9a65e6f659815a6c950e1ed6d615500"
+    },
+    {
+      "path": "src/readmixer_py/storage.py",
+      "bytes": 39025,
+      "sha256": "ca883231cc2d27dc8053efcff77c0486f339a9c4a6ebffd6caf46b461702d569"
+    },
+    {
+      "path": "src/readmixer_py/transaction.py",
+      "bytes": 27617,
+      "sha256": "4cacebda970d78bcdf1d44b60ddc9a461fa4044ef0c404b827adbeeb0845ace7"
+    },
+    {
+      "path": "tests/test_api.py",
+      "bytes": 9846,
+      "sha256": "cffeb3dbdf874b28f15456b3011921695a1f634e35116c4bd783a0116d8718fd"
+    },
+    {
+      "path": "tests/test_catalog.py",
+      "bytes": 15459,
+      "sha256": "adae74f59c2701c2d1c91b74ddfb0a54f3a15bb138f7c85c3259ddd3a2463a08"
+    },
+    {
+      "path": "tests/test_check_storage_inputs.py",
+      "bytes": 3353,
+      "sha256": "7be96ab1b94229e8df520c9373ab615cb5b3fa2fcecb723ce9d57dc87a31e51f"
+    },
+    {
+      "path": "tests/test_crypto.py",
+      "bytes": 8875,
+      "sha256": "e7c50a706749a3a282754b3b1d3198d82ae5d6b4244aa55edbb0fb22c5b4618e"
+    },
+    {
+      "path": "tests/test_disk_paths.py",
+      "bytes": 4975,
+      "sha256": "e428a5bf62335427ba691831c25b4d5bc476415b15c6ef80e6d1e049a7816877"
+    },
+    {
+      "path": "tests/test_fastq.py",
+      "bytes": 19298,
+      "sha256": "30f39d349fb4f250a163ab7446c5d1da355c85c3589295240047445fd4b52918"
+    },
+    {
+      "path": "tests/test_ledger.py",
+      "bytes": 5575,
+      "sha256": "e53da7e2e956f2c07a79c05f727a6e6a5f55c58e48814954876d595b28ec3472"
+    },
+    {
+      "path": "tests/test_ledger_faults.py",
+      "bytes": 9739,
+      "sha256": "b39448c04b73e07c78263209836f17a9bc3bf63f1242b25d64f70fed53aee0b7"
+    },
+    {
+      "path": "tests/test_paircodec.py",
+      "bytes": 7164,
+      "sha256": "dd2ec7031e85a92c0b097daa45fe92738f44c62c458ac872d06febe56519f642"
+    },
+    {
+      "path": "tests/test_resources.py",
+      "bytes": 13356,
+      "sha256": "624cefe06c8adaecbfca19945ef23c17ff09062fe64951565986bec246d9ebbc"
+    },
+    {
+      "path": "tests/test_sorting.py",
+      "bytes": 16318,
+      "sha256": "ac6a9efe90c5ac23aac3dab471e7dd3791a7ac2855595e9dcb497809c2931932"
+    },
+    {
+      "path": "tests/test_storage.py",
+      "bytes": 24415,
+      "sha256": "9eaf79f9797c9ea637d2ded166ae184ca288b25ef1ae9a679cf6c3b2799b5689"
+    },
+    {
+      "path": "tests/test_storage_integration.py",
+      "bytes": 11683,
+      "sha256": "10b2340ab1a740ffd07f22741a9ab18c05543fe54c44e0cd49030c509144992d"
+    },
+    {
+      "path": "tests/test_transaction.py",
+      "bytes": 28765,
+      "sha256": "b8f611613080d4a872b41014464134fc91ae3a397370fe2c3721f12a79b7123d"
+    }
+  ],
+  "environment": {
+    "implementation": "cpython",
+    "python": "3.11.7",
+    "system": "Linux",
+    "machine": "x86_64",
+    "zlib_build": "1.2.13",
+    "zlib_runtime": "1.2.13",
+    "dependencies": {
+      "numpy": "1.26.4",
+      "pycryptodome": "3.23.0",
+      "psutil": "5.9.3",
+      "pytest": "7.4.0",
+      "setuptools": "68.2.2",
+      "wheel": "0.41.2",
+      "packaging": "23.1",
+      "pluggy": "1.0.0",
+      "iniconfig": "1.1.1"
+    }
+  },
+  "checks": [
+    {
+      "command": "python -m pytest -q",
+      "basis": "source tree",
+      "passed": 704,
+      "failed": 0,
+      "elapsed_seconds": 4.03
+    },
+    {
+      "command": "python -m pytest tests -q -o addopts=",
+      "basis": "installed wheel outside source tree; copied tests, forwarder, and development helper; no source PYTHONPATH",
+      "passed": 704,
+      "failed": 0,
+      "elapsed_seconds": 4.01
+    },
+    {
+      "check": "wheel and source distribution build without network dependency resolution",
+      "result": "passed"
+    },
+    {
+      "check": "wheel Python files match candidate source bytes; sdist includes tests, helper, forwarder, plans, and dependency lock; excludes private inputs and candidate evidence files",
+      "result": "passed"
+    },
+    {
+      "check": "installed wheel import location and dev1 version; console/module/old-location help and version",
+      "result": "passed"
+    },
+    {
+      "check": "dependency-free environment console/module/old-location help and version; no NumPy/psutil/Crypto eager imports",
+      "result": "passed"
+    },
+    {
+      "check": "all audit coverage references exist in pytest collection",
+      "obligations": 24,
+      "unique_referenced_test_nodes": 271,
+      "result": "passed"
+    },
+    {
+      "command": "python -m compileall -q src/readmixer_py readmixer/readmixer.py scripts",
+      "result": "passed"
+    },
+    {
+      "command": "bash -n readmixer/setup.sh",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "synthetic_test_counts": {
+    "tests/test_api.py": 41,
+    "tests/test_catalog.py": 55,
+    "tests/test_check_storage_inputs.py": 4,
+    "tests/test_crypto.py": 71,
+    "tests/test_disk_paths.py": 14,
+    "tests/test_fastq.py": 27,
+    "tests/test_ledger.py": 8,
+    "tests/test_ledger_faults.py": 11,
+    "tests/test_paircodec.py": 42,
+    "tests/test_resources.py": 37,
+    "tests/test_sorting.py": 71,
+    "tests/test_storage.py": 258,
+    "tests/test_storage_integration.py": 6,
+    "tests/test_transaction.py": 59
+  },
+  "provided_input_validation": {
+    "full_scan": {
+      "command": "PYTHONPATH=src python -m readmixer_py inspect --input readmixer/input --deep --max-ram 512MiB --json",
+      "basis": "read-only complete ingress validation; unchanged catalog/parser/inspection code in dev1",
+      "report": {
+        "report_version": 1,
+        "operation": "inspect",
+        "completed": true,
+        "deep": true,
+        "samples": 48,
+        "physical_bytes": 1691881688,
+        "pairs": 30042389,
+        "reads": 60084778,
+        "normalized_bytes": 10983150366,
+        "decoded_bytes": 10983150366,
+        "nonempty_samples": 48,
+        "empty_samples": 0,
+        "mix_eligible": true,
+        "resources": {
+          "requested_max_ram": 536870912,
+          "effective_max_ram": 536870912,
+          "terminal_bytes": 134217728,
+          "requested_workers": null,
+          "worker_limit": 32,
+          "descriptor_allowance": 1024,
+          "coordinator_rss": 21618688,
+          "available_headroom": 92464521216,
+          "reserved_headroom": 2147483648,
+          "metadata_bytes": 33554432,
+          "request_clamped": false,
+          "detection_sources": [
+            "psutil:available",
+            "psutil:coordinator-rss",
+            "cgroup-v2:unlimited",
+            "descriptors:soft-limit",
+            "descriptors:measured"
+          ],
+          "envelope_version": 1,
+          "envelope_qualified": false
+        },
+        "workers_effective": 1,
+        "elapsed_seconds": 255.23024628602434
+      }
+    },
+    "encrypted_prefix": {
+      "command": "python scripts/check_storage_inputs.py --input readmixer/input --pairs-per-sample 128",
+      "report": {
+        "all_segment_seals_verified": true,
+        "canonical_sha256_equal": true,
+        "completed": true,
+        "encrypted_external_storage": true,
+        "full_input_validation": false,
+        "mix_recovery_validation": false,
+        "nonempty_prefixes": 48,
+        "normalized_bytes": 2154240,
+        "numeric_identities_equal": true,
+        "pairs": 6144,
+        "pairs_per_sample_limit": 128,
+        "peak_scratch_bytes": 12402,
+        "samples": 48,
+        "scope": "bounded_prefix_storage_check",
+        "scratch_cleanup_complete": true,
+        "verified_pairs": 6144
+      }
+    },
+    "additional_cross_block_prefix_check": {
+      "pairs": 6144,
+      "normalized_bytes": 2154240,
+      "authenticated_data_blocks": 3,
+      "exact_normalized_identity_and_content": true,
+      "scratch_cleanup_complete": true,
+      "basis": "one external segment containing the same first up to128 pairs per sample; independent before/after digest comparison"
+    },
+    "privacy": "Only aggregate counts and equality flags are retained. No original input paths beyond the supplied directory, sample names, record contents, private hashes, secrets, or keys are recorded."
+  },
+  "artifacts": [
+    {
+      "name": "readmixer-py-2.0.0.dev1.tar.gz",
+      "bytes": 203504,
+      "sha256": "1ec51f5fa253e3d434e93dadb2f108cb75e00d9ffe7dbb62d590b0dc19a8cb75"
+    },
+    {
+      "name": "readmixer_py-2.0.0.dev1-py3-none-any.whl",
+      "bytes": 72316,
+      "sha256": "13dfb2d28922451c4f1673e14dcc1bd5ac8ace65d8279df0083dd958d7a040e5"
+    }
+  ],
+  "limitations": [
+    "All numbered plans remain Planned. Public mix, verify, and recover still explicitly fail as unsupported.",
+    "OutputTransaction currently admits a bounded RAM ownership inventory; paged final-output ownership is not integrated.",
+    "No canonical scatter/rank permutation, BGZF public bundles, complete pool verification, union recovery, or worker scheduler.",
+    "Admission coefficients, process-group RSS, greater-than-RAM complete workloads, macOS, alternate Python versions, Docker, and performance comparisons are unqualified.",
+    "Full supplied-data validation covers ingress only; encrypted-storage validation covers only the stated prefixes.",
+    "Successful synthetic vectors and fault cases do not constitute an independent cryptographic audit.",
+    "Fresh functional venv reused local runtime dependencies via system-site-packages; dependency-free help/version used a separate venv.",
+    "Local sdist build emitted an unrelated installed bdist_conda entrypoint warning and completed successfully.",
+    "Source digest covers listed candidate files; historical/current evidence and built archives are excluded to avoid self-referential hashes."
+  ]
+}

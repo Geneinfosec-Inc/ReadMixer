@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "readmixer-py"
+version = "2.0.0.dev10"
+description = "Paired FASTQ mixing, complete verification, and lossless sample recovery"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = ["numpy>=1.26.4,<3", "pycryptodome>=3.23,<4", "psutil>=5.9.3,<8"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python :: 3",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: MacOS",
+]
+
+[project.urls]
+Homepage = "https://github.com/Geneinfosec-Inc/ReadMixer"
+Repository = "https://github.com/Geneinfosec-Inc/ReadMixer"
+Issues = "https://github.com/Geneinfosec-Inc/ReadMixer/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4,<9", "build>=1,<2"]
+plots = ["matplotlib>=3.5,<4"]
+
+[project.scripts]
+readmixer-py = "readmixer_py.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"

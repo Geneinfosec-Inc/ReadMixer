@@ -1,23 +1,8 @@
+# Build from the repository root: docker build -f readmixer/Dockerfile.conda .
+# This development image is not release-qualified.
 FROM continuumio/miniconda3:latest
-
-# This Dockerfile uses conda for numpy and contourpy installation
-# This approach works on systems with any GCC version
-
-# Copy the ReadMixer application files to /app in the container
 COPY . /app
 WORKDIR /app
-
-# Create conda environment from environment.yml
-RUN conda env create -f environment.yml
-
-# Make RUN commands use the new environment
-SHELL ["conda", "run", "-n", "readmixer-env", "/bin/bash", "-c"]
-
-# Verify installation
-RUN python --version && \
-    python -c "import numpy; print(f'NumPy version: {numpy.__version__}')" && \
-    python -c "import matplotlib; print(f'Matplotlib version: {matplotlib.__version__}')"
-
-# Set the entrypoint to use the conda environment
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "readmixer-env", "python", "readmixer.py"]
-
+RUN conda env create -f readmixer/environment.yml
+RUN conda run -n readmixer-env python -m pip install --no-deps .
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "readmixer-env", "readmixer-py"]

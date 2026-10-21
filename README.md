@@ -1,555 +1,321 @@
-# ReadMixer - Dynamic FASTQ Obfuscation Tool
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18188647.svg)](https://doi.org/10.5281/zenodo.18188647)
-[![Software Heritage](https://archive.softwareheritage.org/badge/swh:1:dir:f49a93f67076731af7becfa3061b02d6b2fde061/)](https://archive.softwareheritage.org/swh:1:dir:f49a93f67076731af7becfa3061b02d6b2fde061/)
+# ReadMixer
 
-![ReadMixer](/read-mixer-simple-cartoon.jpg)
+![ReadMixer](read-mixer-simple-cartoon.jpg)
 
+ReadMixer mixes paired FASTQ samples into a shared pool, verifies the complete
+pool, and recovers selected samples in their original pair order. Both mates
+stay together through one global permutation. Original headers, plus lines,
+sequences and qualities are preserved; line endings normalize to LF, including
+a final LF. Recovery does not reproduce the original gzip container bytes.
 
-A high-performance tool for obfuscating FASTQ files with dynamic resource management capabilities. The tool automatically detects system capabilities and optimizes resource usage for both laptop and supercomputer environments.
+The current Python package is **`readmixer-py` 2.0.0.dev10**, a development
+version. Its interface is `inspect`, `mix`, `verify` and `recover`. The predecessor
+engine and its flags are retired. This checkout includes local Linux and macOS
+validation; supported-platform release qualification and package publication
+remain open. See [validation](#validation-and-development) for scope and evidence.
 
-## Features
+## Requirements
 
-- **Dynamic Resource Management**: Automatically detects available RAM, CPU cores, and disk space
-- **Memory-Efficient Processing**: Streaming approach with external sorting for large datasets
-- **Multi-platform Support**: Optimized for both limited-resource laptops and high-performance clusters
-- **Parallel Processing**: Configurable worker processes for optimal throughput
-- **Compression Support**: Optional gzip compression of output files (disabled by default)
-- **Robust Processing**: Improved error handling and cleanup with timeout protection
+- 64-bit CPython **3.11 or later** on Linux or macOS. Python 3.11 is the locally
+  exercised baseline; development CI also targets Python 3.14.
+- Enough disk space for the input, pool, selected recovery outputs and scratch.
+  Required space depends on record sizes, compression and storage mode.
+- NumPy, PyCryptodome and psutil, installed automatically by pip.
 
-## System Requirements
+Conda, Rust, HTSlib and plotting packages are not required for normal operation.
+Pip normally uses dependency wheels; a compiler may be needed if your platform
+requires building a dependency from source. The current runtime does not support
+Windows, single-end, interleaved or multilane input, legacy pools, or resuming
+incomplete runs.
 
-- Python 3.11 (recommended for best compatibility)
-- GCC >= 9.3 (for pip-only installation) OR Anaconda/Miniconda (recommended for older systems)
-- Minimum 1GB RAM (will auto-adjust for available resources)
-- Sufficient disk space (tool will check requirements automatically)
+## Install
 
-**Technology stack**: ReadMixer is written with Python 3 and tested with Python 3.6.9, Python 3.10.12, and Python 3.11. It was developed in Ubuntu using the Windows Subsystem for Linux.
-
-**Status**: ReadMixer is an open-source application created by GeneInfoSec.
-
-## Installation
-
-### Method 1: Using Conda with environment.yml (Recommended)
-
-This method is **strongly recommended** for cluster environments or systems with older GCC versions (< 9.3):
-
-```bash
-# Install Anaconda/Miniconda if not already installed
-# Navigate to the readmixer directory
-cd readmixer
-
-# Create environment from environment.yml file
-conda env create -f environment.yml
-
-# Activate the environment
-conda activate readmixer-env
-# OR on some systems:
-source $HOME/anaconda3/bin/activate readmixer-env
-```
-
-### Method 2: Using Conda with Manual Package Installation
-
-For systems with GCC < 9.3 (e.g., GCC 4.8.5 on older cluster systems):
+Run these commands in a terminal on Linux or macOS:
 
 ```bash
-# Create conda environment with numpy and contourpy pre-installed
-conda create -y -n readmixer-env python=3.11 numpy=2.3 contourpy=1.3
-
-# Activate the environment
-conda activate readmixer-env
-# OR on some systems:
-source $HOME/anaconda3/bin/activate readmixer-env
-
-# Install remaining dependencies with pip
-cd readmixer
-pip install -r requirements-pip.txt
+git clone https://github.com/Geneinfosec-Inc/ReadMixer.git
+cd ReadMixer
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install .
+readmixer-py --version
+readmixer-py --help
 ```
 
-**Why this method?** NumPy and contourpy require GCC >= 9.3 to build from source. Using conda pre-compiled binaries bypasses this requirement, making installation possible on older systems.
+Use your Python 3.11+ executable if it has a different name. For an existing
+checkout, start at `cd ReadMixer`. Keep the virtual environment activated for the
+commands below. `python -m readmixer_py` provides the same CLI. The compatibility
+script `python readmixer/readmixer.py` forwards to the installed package.
 
-### Method 3: Using pip (Requires GCC >= 9.3)
-
-Only use this method if you have GCC 9.3 or newer:
+For development, replace the regular install with an editable install:
 
 ```bash
-# Clone repository
-git clone <repository-url>
-cd ReadMixer/readmixer
-
-# Using virtual environment (recommended)
-python -m venv readmixer-env
-source readmixer-env/bin/activate  # On Windows: readmixer-env\Scripts\activate
-pip install -r requirements.txt
-
-# Using system Python (not recommended)
-pip install -r requirements.txt
+python -m pip install -e '.[dev]'
 ```
 
-### Method 4: Using Docker
+The `dev` extra installs pytest and the package builder. Optional historical
+plotting utilities use `python -m pip install -e '.[plots]'`.
+[Conda and setup-script instructions](readmixer/INSTALLATION.md) are also available.
 
-For users who prefer containerized deployment:
+## Build a wheel and source archive
 
-**Standard Docker (requires base image with GCC >= 9.3):**
-```bash
-cd readmixer
-docker build -t readmixer:latest .
-docker run -v /path/to/data:/data readmixer:latest -s -p /data
-```
-
-**Docker with Conda (works on any system):**
-```bash
-cd readmixer
-docker build -f Dockerfile.conda -t readmixer-conda:latest .
-docker run -v /path/to/data:/data readmixer-conda:latest -s -p /data
-```
-
-### Additional Resources
-
-For detailed installation instructions, troubleshooting, and environment-specific recommendations, see [INSTALLATION.md](readmixer/INSTALLATION.md).
-
-## Usage
-
-### Basic Obfuscation
-```bash
-python readmixer.py -s -p /path/to/fastq/files
-```
-
-### Advanced Usage with Resource Control
-
-#### Manual RAM Limit
-```bash
-# Limit to 8GB RAM
-python readmixer.py -s -p /path/to/fastq/files -m 8
-
-# Use 32GB RAM for large datasets
-python readmixer.py -s -p /path/to/fastq/files -m 32
-```
-
-#### Manual Worker and Chunk Size Control
-```bash
-# Use 16 workers with 2M read chunks
-python readmixer.py -s -p /path/to/fastq/files -w 16 -c 2000000
-
-# Let system auto-optimize (recommended)
-python readmixer.py -s -p /path/to/fastq/files
-```
-
-#### Full Example with All Options
-```bash
-python readmixer.py -s -p /path/to/fastq/files -o /output/directory -z -m 16 -w 8 -c 1000000 -l info
-```
-
-## Command Line Arguments
-
-### Core Operations
-- `-s, --scramble`: Scramble/obfuscate files in specified location
-- `-p, --pathname`: Input directory path (default: current directory)
-- `-o, --output`: Output directory path
-
-### Resource Management
-- `-m, --max-ram`: Maximum RAM to use in GB (auto-detected if not specified)
-- `-w, --workers`: Number of worker processes (auto-optimized if not specified)
-- `-c, --chunk_size`: Chunk size in number of reads (auto-calculated if not specified)
-
-### Additional Options
-- `-z, --zip`: Enable gzip compression of output files (by default, output files are NOT compressed)
-- `-l, --loglevel`: Logging level (error, warning, info, debug, critical)
-
-## Automatic Resource Optimization
-
-### Memory Management
-The tool automatically:
-- Detects total and available system RAM
-- Reserves memory for the OS and other processes
-- Calculates optimal chunk sizes based on available memory
-- Monitors memory usage during processing
-- Issues warnings when memory usage exceeds 85%
-
-### CPU Optimization
-- Detects physical and logical CPU cores
-- Optimizes worker count for I/O vs CPU intensive tasks
-- Balances worker count with available RAM per worker
-
-### Disk Space Management
-- Checks available disk space before processing with realistic estimates
-- Accounts for peak temporary file usage during chunk processing
-- Prevents processing if insufficient disk space (with safety margins)
-- Improved disk space calculations based on actual usage patterns
-
-### Buffer Size Optimization
-- Dynamically sets file I/O buffer sizes based on available RAM
-- Uses larger buffers on high-memory systems for better performance
-
-## Performance Benchmarks
-
-### Real-World Performance Data
-
-ReadMixer has been extensively benchmarked on high-performance systems. The following chart shows actual performance data from a production AMD Ryzen 9 9950X system (32 cores, 96GB RAM):
-
-![ReadMixer Performance Analysis](/readmixer/readmixer_performance.png)
-
-**Key Performance Metrics:**
-- **Average Processing Rate**: 1.150 ± 0.008 GB/min
-- **Linear Scaling**: Excellent linear relationship between input size and processing time
-- **Consistency**: <1% variation in processing rate across different dataset sizes
-- **Memory Efficiency**: Uses ~50GB RAM for optimal performance with 9 workers and 5M read chunks
-
-### Performance Estimates by System Configuration
-
-#### High-End Workstation (AMD Ryzen 9 9950X - Benchmarked)
-- **Specs**: 32 cores, 96GB RAM
-- **Optimal Config**: 9 workers, 5M read chunks, 50GB RAM usage
-- **Performance**: 1.15 GB/min
-- **Processing Times**:
-  - 10GB dataset: ~9 minutes
-  - 50GB dataset: ~43 minutes  
-  - 100GB dataset: ~87 minutes (1.4 hours)
-  - 500GB dataset: ~435 minutes (7.3 hours)
-  - 1TB dataset: ~870 minutes (14.5 hours)
-
-#### Mid-Range System (4 cores, 24GB RAM - Estimated)
-Based on scaling analysis and resource constraints:
-- **Optimal Config**: 4 workers, 1.5M read chunks, 7.2GB RAM usage
-- **Estimated Performance**: 0.40-0.50 GB/min (35-43% of high-end system)
-- **Processing Times**:
-  - 10GB dataset: ~20-25 minutes
-  - 50GB dataset: ~100-125 minutes (1.7-2.1 hours)
-  - 100GB dataset: ~200-250 minutes (3.3-4.2 hours)
-  - 500GB dataset: ~1000-1250 minutes (16.7-20.8 hours)
-  - 1TB dataset: ~2000-2500 minutes (33-42 hours)
-
-*Note: 4-core estimates are conservative and based on linear CPU scaling with memory constraints. Actual performance may vary based on storage speed, RAM speed, and system configuration.*
-
-#### Laptop System (4 cores, 8GB RAM - Estimated)
-- **Optimal Config**: 3 workers, 800K read chunks, 2.9GB RAM usage
-- **Estimated Performance**: 0.25-0.35 GB/min (22-30% of high-end system)
-- **Processing Times**:
-  - 10GB dataset: ~29-40 minutes
-  - 50GB dataset: ~143-200 minutes (2.4-3.3 hours)
-  - 100GB dataset: ~286-400 minutes (4.8-6.7 hours)
-  - Larger datasets: Not recommended due to memory constraints
-
-### Performance Factors
-
-#### CPU Scaling
-- Performance scales roughly linearly with available CPU cores
-- I/O intensive workload benefits from moderate parallelization
-- Optimal worker count is typically 50-75% of available cores
-
-#### Memory Impact
-- Larger chunks improve efficiency but require more RAM
-- Memory constraint is often the limiting factor, not CPU
-- System automatically balances chunk size vs worker count
-
-#### Storage Performance
-- SSD storage provides 2-3x better performance than traditional HDDs
-- Network storage may reduce performance by 20-50%
-- Temporary file I/O is the primary bottleneck for large datasets
-
-#### Input Data Characteristics
-- Larger FASTQ files process more efficiently (better chunk utilization)
-- Compressed input files add ~10-15% processing overhead
-- File fragmentation can impact performance on traditional HDDs
-
-### Optimization Recommendations
-
-#### For Maximum Throughput
-```bash
-# Let system auto-optimize (recommended)
-python readmixer.py -s -p /path/to/data -l info
-
-# For high-memory systems, increase RAM limit
-python readmixer.py -s -p /path/to/data -m 64 -l info
-```
-
-#### For Resource-Constrained Systems
-```bash
-# Limit RAM usage
-python readmixer.py -s -p /path/to/data -m 4 -w 2 -c 500000
-
-# Enable compression to save disk space
-python readmixer.py -s -p /path/to/data -m 4 -w 2 -z
-```
-
-#### For Debugging Performance Issues
-```bash
-# Detailed logging to analyze bottlenecks
-python readmixer.py -s -p /path/to/data -l debug
-```
-
-## Performance Examples
-
-### Laptop Environment (8GB RAM, 4 cores)
-```bash
-# System will automatically use:
-# - ~5GB RAM for processing
-# - 6-8 worker processes
-# - 2MB I/O buffers
-# - Chunk sizes around 800K-1M reads
-python readmixer.py -s -p /data/fastq -l info
-```
-
-### Workstation Environment (32GB RAM, 16 cores)
-```bash
-# System will automatically use:
-# - ~24GB RAM for processing  
-# - 16-24 worker processes
-# - 4MB I/O buffers
-# - Chunk sizes around 4-6M reads
-python readmixer.py -s -p /data/fastq -l info
-```
-
-### Supercomputer Environment (512GB RAM, 64 cores)
-```bash
-# System will automatically use:
-# - ~400GB RAM for processing
-# - 16-32 worker processes (limited by I/O)
-# - 8MB I/O buffers
-# - Chunk sizes around 50-100M reads
-python readmixer.py -s -p /data/fastq -l info
-```
-
-## Logging and Monitoring
-
-Set logging level to `info` to see detailed resource usage and processing status:
+From the repository root, in the activated environment:
 
 ```bash
-python readmixer.py -s -p /data/fastq -l info
+python -m pip install -e '.[dev]'
+python -m build
 ```
 
-Example output:
-```
-System capabilities detected:
-  Total RAM: 32.0 GB
-  Available RAM: 28.5 GB
-  CPU cores: 8 physical, 16 logical
-  Max RAM for processing: 22.8 GB
-Calculated optimal chunk size: 2,500,000 reads
-Optimal worker count: 12
-Estimated memory per chunk: 3.0 GB
-Disk space check passed:
-  Peak space needed: 45.2 GB
-  Available space: 125.7 GB
-  Safety margin: 80.5 GB
-Starting chunk processing...
-All 10 chunks processed successfully
-Merging output files...
-Process completed in 1234.5678 seconds
-```
-
-### Monitoring Features
-
-- **Resource Detection**: Automatic system capability detection and optimization
-- **Memory Monitoring**: Real-time memory usage tracking with warnings at 85%+ usage
-- **Disk Space Validation**: Pre-processing checks with realistic space estimates
-- **Processing Status**: Clear log messages showing processing phases and completion
-
-## Error Handling
-
-The tool includes comprehensive error handling:
-- Validates FASTQ file formats
-- Checks file permissions
-- Monitors memory usage with warnings
-- Graceful cleanup of temporary files
-- Detailed error messages with suggestions
-
-## Advanced Features
-
-### Memory Pressure Handling
-- Automatic memory usage monitoring
-- Warnings when memory usage exceeds safe thresholds
-- Graceful degradation under memory pressure
-
-### Temporary File Management
-- Creates temporary directories for intermediate processing
-- Robust cleanup with timeout protection to prevent hanging
-- Automatic cleanup even if processing is interrupted
-- Optimized temporary file locations
-
-### File Format Support
-- Supports both compressed (.gz) and uncompressed FASTQ files
-- Automatic format detection
-- Preserves file integrity during processing
-
-## Troubleshooting
-
-### Installation Issues
-
-**"NumPy requires GCC >= 9.3" error when running `pip install -r requirements.txt`:**
-
-This error occurs on systems with older GCC versions (e.g., GCC 4.8.5 on older cluster systems). The error message looks like:
-```
-../meson.build:28:4: ERROR: Problem encountered: NumPy requires GCC >= 9.3
-```
-
-**Quick Fix:** See [QUICKSTART_OLD_GCC.md](readmixer/QUICKSTART_OLD_GCC.md) for a step-by-step guide.
-
-**Solution:** Use conda to install numpy and contourpy instead of pip:
-```bash
-# Method 1: Use environment.yml (easiest)
-conda env create -f environment.yml
-conda activate readmixer-env
-
-# Method 2: Manual installation
-conda create -y -n readmixer-env python=3.11 numpy=2.3 contourpy=1.3
-conda activate readmixer-env
-pip install -r requirements-pip.txt
-```
-
-**"contourpy" build error:**
-Similar to numpy, contourpy may fail with older GCC versions. Use the same conda-based solution above.
-
-**Checking your GCC version:**
-```bash
-gcc --version
-```
-If the version is less than 9.3, use the conda installation method.
-
-### Runtime Issues
-
-**"Insufficient disk space" error:**
-- Check available disk space in output directory
-- Consider using a different output location with more space
-- The tool requires significant temporary space (up to 8-10x input size during peak processing)
-- Use `-z` flag to compress output files if disk space is limited
-
-**High memory usage warnings:**
-- Reduce chunk size with `-c` parameter
-- Limit RAM usage with `-m` parameter
-- Close other memory-intensive applications
-
-**Process hangs or takes too long:**
-- Normal processing time is ~2-3 hours for 100M reads
-- If process hangs for >3 hours, it may be stuck in cleanup - safe to kill
-- Check disk space - insufficient space can cause hanging during file operations
-
-**Slow processing:**
-- Increase worker count with `-w` parameter (if you have available CPU cores)
-- Use SSD storage for better I/O performance
-- Ensure sufficient RAM for larger chunk sizes
-- Consider using `-z` for compression to reduce final file sizes
-
-### Performance Tips
-
-1. **For large datasets**: Let the system auto-optimize resources (recommended)
-2. **For repeated processing**: Note the optimal parameters from logs and reuse them
-3. **For limited disk space**: Use `-z` flag to compress output files
-4. **For limited resources**: Set explicit RAM limits with `-m`
-5. **For debugging**: Use `-l info` for processing status or `-l debug` for detailed information
-6. **Expected timing**: ~2-3 hours for 100M reads, ~30-60 minutes for 10M reads
-
-## Testing
-
-ReadMixer includes a comprehensive test suite to verify functionality. For detailed testing documentation, see [TESTING.md](TESTING.md).
-
-### Quick Start
+The build creates `dist/readmixer_py-2.0.0.dev10-py3-none-any.whl` and
+`dist/readmixer_py-2.0.0.dev10.tar.gz`. To install the wheel in another environment:
 
 ```bash
-cd readmixer
-python -m pytest tests/ -v
+python -m pip install /path/to/ReadMixer/dist/readmixer_py-2.0.0.dev10-py3-none-any.whl
+readmixer-py --version
 ```
 
-### Test Data
+Pip installs runtime dependencies with the wheel. These commands build the
+current checkout; they do not reproduce or qualify a previously frozen release
+candidate. [Release tooling](tools/release/README.md) documents the separate
+archive, dependency-lock and qualification workflow. Build products are ignored
+by Git; generated FASTQ pools are not package contents.
 
-A minimal test dataset (`tests/testing.fastq.gz`) is included with 10 sequencing reads for unit and integration testing.
+## Run: inspect, mix, verify, recover one sample
 
-### Test Coverage
+Replace `/path/to/paired-inputs` with your input directory and `SAMPLE_A` with a
+sample ID discovered from its filenames or supplied in a sample sheet. For the
+local dataset, the input argument is `readmixer/input`. A pool requires at least
+**two nonempty samples**, even when recovering only one afterward.
 
-The test suite includes 19 tests covering:
-
-| Category | Description |
-|----------|-------------|
-| FASTQ Reading | File parsing, format validation, read counting |
-| Cryptographic Functions | Random base generation, tag creation, alphanumeric strings |
-| Resource Management | System capability detection, buffer sizing |
-| Integration | End-to-end scrambling workflow |
-
-### Example Test Run
+The following example uses fresh output directories below `output/`, outside
+the input tree. Its parent must exist. Keep the JSON reports: they contain elapsed
+time in seconds, counts and the exact generated completion-marker name.
 
 ```bash
-$ cd readmixer
-$ python -m pytest tests/ -v
+mkdir -p output
 
-============================= test session starts ==============================
-collected 19 items
+# Optional: scan every input record before mixing; this adds a separate read pass.
+readmixer-py inspect --input /path/to/paired-inputs --deep --max-ram 2GiB
 
-tests/test_readmixer.py::TestFastqReading::test_gzip_line_count PASSED
-tests/test_readmixer.py::TestFastqReading::test_open_fastq_file_yields_reads PASSED
-tests/test_readmixer.py::TestRandomGeneration::test_random_bases_valid_characters PASSED
-tests/test_readmixer.py::TestResourceManager::test_system_capabilities_detection PASSED
-tests/test_readmixer.py::TestIntegration::test_scramble_minimal_dataset PASSED
-...
-============================== 19 passed =======================================
+readmixer-py mix --input /path/to/paired-inputs \
+  --output output/pool --storage auto --max-ram 2GiB --workers 4 \
+  --json > output/mix-report.json
+
+# Use the exact manifest from this run, rather than choosing a pool by a wildcard.
+pool_manifest=$(python -c 'import json; print("output/pool/" + json.load(open("output/mix-report.json", encoding="utf-8"))["manifest"])')
+
+readmixer-py verify --manifest "$pool_manifest" \
+  --max-ram 2GiB --workers 4 --json > output/verify-report.json
+
+readmixer-py recover --manifest "$pool_manifest" \
+  --output output/recovered --sample SAMPLE_A \
+  --max-ram 2GiB --workers 4 --json > output/recover-report.json
 ```
 
-### Running with Test Data
+Run each step only after the preceding command succeeds. Without `--json`, the
+CLI prints a human-readable report. Indexed recovery is the default. The recovered
+mate FASTQs use BGZF compression with `.fastq.gz` names and `.gzi` indexes; the
+committed recovery receipt lists their exact names. A batch receipt commits the recovery
+last. Repeat `--sample` to recover multiple samples in one operation.
 
-You can also manually test ReadMixer using the included test data:
+Existing artifact files are never overwritten. Choose fresh destination names
+for another run. New output directories are private; an existing destination must
+be owned by the current user and not writable by others. Output and scratch
+paths must use real directories rather than symlink ancestors. Scratch defaults
+to the output destination for mixing and recovery; `--temp-dir` selects another
+existing directory outside the input tree.
+
+### Input layout and sample sheets
+
+Recursive discovery recognizes paired names such as:
+
+```text
+paired-inputs/
+  SAMPLE_A_R1.fastq.gz
+  SAMPLE_A_R2.fastq.gz
+  SAMPLE_B_R1.fastq.gz
+  SAMPLE_B_R2.fastq.gz
+```
+
+`ID_R1_001` / `ID_R2_001` and `ID_1` / `ID_2` are also recognized, with `.fastq`
+or `.fq`, optionally `.gz`. IDs must be unique. Missing mates, symlinks, duplicate
+physical files, recognizable lane layouts and mixed naming families within a sample are rejected.
+Plain/gzip files and concatenated gzip members are supported. Malformed FASTQ,
+mismatched mates and damaged gzip streams fail explicitly.
+
+For explicit IDs or filenames, create `samples.tsv` in the input directory with
+this exact **tab-separated** header and columns (not space-separated):
+
+```text
+sample_id	r1	r2
+SAMPLE_A	SAMPLE_A_R1.fastq.gz	SAMPLE_A_R2.fastq.gz
+SAMPLE_B	SAMPLE_B_R1.fastq.gz	SAMPLE_B_R2.fastq.gz
+```
+
+Paths resolve relative to the sheet's parent and must stay inside that directory.
+Replace `--input /path/to/paired-inputs` with
+`--samples /path/to/paired-inputs/samples.tsv` in `inspect` or `mix`.
+
+Full verification can additionally compare the explicitly supplied originals:
 
 ```bash
-cd readmixer
-python readmixer.py -s -p tests/ -o test_output/ -l info
+readmixer-py verify --manifest "$pool_manifest" \
+  --originals /path/to/paired-inputs/samples.tsv --max-ram 2GiB
 ```
 
-This will scramble the test FASTQ file and produce:
-- `ReadMixer.<id>.part000.fastq` - Anonymized output with scrambled read order
-- `ReadMixerKeys.<id>.testing.fastq.gz.csv` - Key file mapping original to scrambled reads
+The verifier never automatically reopens source paths stored in a manifest.
+To recover sequentially, including when mapping indexes are unavailable, request
+that mode explicitly and use another fresh destination:
 
-## Citation
-
-If you use ReadMixer in your research, please cite it! Proper citation helps us track the impact of our work and supports continued development.
-
-### How to Cite
-
-**Text Citation:**
-```
-Sawaya, S., & Parks, J. (2025). ReadMixer - Dynamic FASTQ Obfuscation Tool 
-(Version 1.0.1) [Computer software]. https://github.com/Geneinfosec-Inc/ReadMixer
+```bash
+readmixer-py recover --manifest "$pool_manifest" \
+  --output output/recovered-sequential --sample SAMPLE_A \
+  --io sequential --max-ram 2GiB
 ```
 
-**BibTeX:**
-```bibtex
-@software{sawaya_parks_2025_readmixer,
-  author       = {Sawaya, Sterling and Parks, Joseph},
-  title        = {ReadMixer - Dynamic FASTQ Obfuscation Tool},
-  year         = 2025,
-  publisher    = {GitHub},
-  url          = {https://github.com/Geneinfosec-Inc/ReadMixer},
-  version      = {1.0.1}
-}
+### Resource settings
+
+| Option | Meaning |
+| --- | --- |
+| `--max-ram 2GiB` | Admission and monitoring allowance, not an OS-enforced RSS limit. |
+| `--workers 4` | Upper bound; reports show actual admitted concurrency. `1` runs synchronously. |
+| `--storage auto` | Default; can spill protected algorithmic segments to disk. |
+| `--storage external` | Uses encrypted algorithmic scratch. |
+| `--storage memory` | Keeps admitted algorithmic state in RAM; refuses work that cannot fit. |
+| `--compression-level 0..9` | Mixing/recovery BGZF compression; default `6`. |
+| `--max-artifact-bytes 5GB` | Mixing file cap; recovery defaults to the pool's cap. Default is 5,000,000,000 bytes. |
+| `--max-record-bytes 1MiB` | Mixing/inspection normalized mate-record limit; default 1 MiB. |
+| `--max-total-uncompressed SIZE` | Caps actual normalized bytes processed by an operation. |
+| `--json` | Bounded aggregate report, including `elapsed_seconds`, without original sample IDs or read contents. |
+
+Sizes are exact: `5GB` is 5,000,000,000 bytes; `5GiB` is 5,368,709,120 bytes.
+Whole pairs roll together into synchronized bundles or recovery parts. Every
+artifact, including indexes and completion metadata, must fit the file cap;
+an oversized singleton fails. Use each command's `--help` for its accepted flags.
+
+## Keep the complete pool
+
+Each bundle contains R1/R2 BGZF FASTQs, their two `.gzi` sidecars, a private BGZF
+mapping CSV and a mapping index. The manifest is committed last. Keep and back up
+all artifacts together: the manifest and complete private mappings are essential
+for recovery. The ephemeral scratch encryption key is not saved or required to
+recover a completed pool. Generated files have mode `0600`.
+
+Full `verify` checks all declared artifacts, original/secured identity coverage,
+tag uniqueness, offsets, canonical bundle boundaries and reconstructed original
+digests. Indexed recovery checks selected records and complete indexes/sidecars;
+it does not constitute full pool verification. Both recovery modes prove selected
+original ordinals and normalized digests before committing the receipt.
+
+Final mappings, manifests and receipts are private metadata, not an encrypted
+keystore. Sequence content remains sensitive and pseudonymous tags do not imply
+anonymity. Unsigned hashes establish consistency with the supplied manifest,
+not authenticity against wholesale replacement. Hard stops can leave incomplete
+residue; a completed manifest or receipt identifies a committed operation.
+
+Exit codes: `0` success, `2` invalid configuration, `1` operational failure,
+`130` SIGINT and `143` handled SIGTERM.
+
+## Docker (optional)
+
+Build from the **repository root**; `.dockerignore` excludes local datasets,
+outputs, environments and Git metadata from the build context:
+
+```bash
+docker build -f readmixer/Dockerfile -t readmixer:dev .
+docker run --rm readmixer:dev --help
+mkdir -p output
+docker run --rm --user "$(id -u):$(id -g)" \
+  -v "/absolute/path/to/paired-inputs:/inputs:ro" \
+  -v "$PWD/output:/outputs" \
+  readmixer:dev mix --input /inputs --output /outputs/pool \
+  --max-ram 2GiB --workers 4
 ```
 
-### Citation File
+Allow sufficient RAM and disk in Docker's VM. The Conda alternative builds with
+`-f readmixer/Dockerfile.conda`. These are development images; container builds
+are separate from native release qualification.
 
-A `CITATION.cff` file is included in this repository with complete citation metadata. GitHub and other platforms can automatically generate citations from this file.
+## Validation and development
 
-### Archival and Preservation
+Install the development extra, then run the application and release-tool suites
+in **separate pytest processes**:
 
-ReadMixer is committed to long-term preservation and accessibility:
+```bash
+python -m pip install -e '.[dev]' pysam
+python scripts/run_tests.py
+python -m pytest -q tools/release/tests
+```
 
-- **GitHub**: Primary development and version control
-- **Zenodo**: Long-term archival with DOI (Digital Object Identifier) for academic citations
-- **Software Heritage**: Universal source code archive for permanent preservation
+`pysam` enables independent HTSlib interoperability checks. Install `bgzip` for
+the additional executable oracle (`brew install htslib` on macOS, or your Linux
+distribution's `tabix` package). These tools are optional for normal operation.
+Development CI builds packages and runs source and outside-checkout wheel tests
+on Linux/macOS with Python 3.11/3.14. Linux kernel-specific fixtures are individually
+nonapplicable on macOS; native portable limit/timeout checks run on both systems.
+An unexecuted CI matrix is not evidence of a passing platform.
 
-For detailed information about our archival strategy, preservation locations, and persistent identifiers, see [ARCHIVAL_STRATEGY.md](ARCHIVAL_STRATEGY.md).
+The application runner starts a fresh interpreter per test module, runs every
+case, and returns nonzero if any module fails. This keeps earlier modules' native
+allocator memory out of later resource-admission checks. To run one module,
+use `python -m pytest -q tests/test_pipeline.py`.
 
-## License
+For a small artificial-data trial, generate two samples and run the workflow
+above with `--input output/demo/input` and `--sample sample000000`:
 
-Copyright 2025 GeneInfoSec, created by Sterling Sawaya and Joseph Parks
+```bash
+mkdir -p output
+python scripts/generate_fixtures.py --output-dir output/demo --counts 1000,1000
+```
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Keep the pool and recovered directories outside `output/demo`, which is the
+fixture catalog root. To check a bounded prefix of the local dataset through
+mixing, full verification and both recovery modes:
 
-    http://www.apache.org/licenses/LICENSE-2.0
+```bash
+python scripts/check_roundtrip_inputs.py --input readmixer/input --pairs-per-sample 128
+```
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+That helper cleans its private temporary data; it does not process the full input.
+Automated tests use artificial data. See [TESTING.md](TESTING.md) for fault,
+resource, signal and oracle coverage.
 
-See the [LICENSE](LICENSE) file for full details.
+A complete local macOS arm64 / Python 3.11.9 run processed **48 samples,
+30,042,389 pairs (60,084,778 reads)**, verified the entire pool, and recovered one
+sample containing 1,358,331 pairs. An independent comparison consumed both
+original and restored mates to EOF and matched fields, order, normalized counts
+and digests. Original input files were unchanged.
 
-## Support
-For support or questions, please contact: [joe@geneinfosec.com](mailto:joe@geneinfosec.com)
+| Process | Measured wall time |
+| --- | --- |
+| Mix all 48 samples | 5 h 54 min 47 s |
+| Full pool verification | 1 h 41 min 19 s |
+| Indexed recovery of one sample | 6 min 17 s |
+| Independent recovered/original comparison | 15.43 s |
+
+This run used `auto`, a 24 GiB allowance, four requested workers and compression
+level 6. Timings are specific to that workload and machine, with existing OS
+caches; they are not universal performance or memory guarantees. The
+[aggregate validation record](docs/validation/local-macos-2026-10-21.json)
+contains settings and exact times without private paths or sample identifiers.
+Its source hashes identify the timed run before the subsequent CLI cancellation
+cleanup correction; that correction has separate regression validation.
+
+Historical frozen-candidate evidence retains its original scope. The
+[implementation record](readmixer/python_update_plans/IMPLEMENTATION.md),
+[plans](readmixer/python_update_plans/README.md) and
+[release guide](tools/release/README.md) track remaining release gates. Historical
+CPython 3.14 fixture failures have working-tree corrections; local execution of
+that Python version remains unverified. Do not relabel historical evidence as
+qualification of a newly built archive. Library callers that launch workers must
+use Python's `if __name__ == "__main__":` guard.
+
+## Attribution, license and support
+
+ReadMixer was created by GeneInfoSec, Sterling Sawaya and Joseph Parks.
+[CITATION.cff](CITATION.cff) and [ARCHIVAL_STRATEGY.md](ARCHIVAL_STRATEGY.md)
+describe the historical release and preservation record.
+
+Copyright 2025 GeneInfoSec. Licensed under [Apache License 2.0](LICENSE).
+Contact [joe@geneinfosec.com](mailto:joe@geneinfosec.com) for support.

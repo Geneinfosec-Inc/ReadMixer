@@ -1,0 +1,2 @@
+# Space-only context lines are part of unified-diff syntax.
+*.patch -whitespace

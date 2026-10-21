@@ -34,3 +34,14 @@ Thumbs.db
 
 # Internal documentation
 SECURITY.md
+
+# Local development environments and test caches
+.venv/
+.pytest_cache/
+
+# Local credentials and agent state
+.env
+.env.*
+.aws/
+.codex/
+.agents/

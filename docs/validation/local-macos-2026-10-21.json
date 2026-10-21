@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "scope": "local complete input workflow and one-sample recovery; not frozen-archive release qualification",
+  "completed_date": "2026-10-21",
+  "package_version": "2.0.0.dev10",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "physical_ram_bytes": 68719476736,
+    "dependencies": {
+      "readmixer-py": "2.0.0.dev10",
+      "numpy": "2.4.6",
+      "pycryptodome": "3.24.1",
+      "psutil": "7.2.2"
+    }
+  },
+  "runtime_source_sha256": {
+    "src/readmixer_py/__init__.py": "c9ee8b768b874f0b2a41f809b26d4a8002b5a29bd3a6d7fe241e6920b1cff71f",
+    "src/readmixer_py/__main__.py": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7",
+    "src/readmixer_py/artifacts/__init__.py": "ee72f791a07c24ad8783297d4295cd46afdd644b322fca651cbd4423e33eb2a0",
+    "src/readmixer_py/artifacts/bgzf.py": "48a541671e038455db22f514e9e37e4c719cdda724d8e5d3986778fb04e52034",
+    "src/readmixer_py/artifacts/bundles.py": "cddc9f27c3a4f1db14cf730d090d9abf3cb782c8a390cd88a9d51679276223df",
+    "src/readmixer_py/artifacts/index.py": "3d5bed98e4959733fc3d700cd018988d554a16abe8dc43a09f79cfbb885f342a",
+    "src/readmixer_py/artifacts/key.py": "de203bd7bc5d416df97eaab1cb2f173671dd7c6224f8c5b0ddf86a4dfa404328",
+    "src/readmixer_py/artifacts/manifest.py": "26f80594007cd509574ee79e4226d20d7f818c67f364fbe0d7436133c90af767",
+    "src/readmixer_py/catalog.py": "81ef81e891bd7bb33d0cf33ed969a7a41ea88fec8377c816e2ecfd7be1aec6bf",
+    "src/readmixer_py/cli.py": "532482e051e6aedaf8840b79c8245fdae56c317355a804b84c36e740831fd59f",
+    "src/readmixer_py/config.py": "2ec4ae3e1effbf2dca3228e48f063b2868679bc30e144fd66c335338e67692c6",
+    "src/readmixer_py/crypto.py": "5febbffa792899371ab1041da4a526cf1ef5712aca3976ac51bb1d429c720703",
+    "src/readmixer_py/direct_scatter.py": "a378d737335b4190c6bc961fff9f401b9dbfb9c3bb68f10f839ecc0bc43a39c9",
+    "src/readmixer_py/disk.py": "e73445a01413d58cd31ef826093b9eb32681a971b024cad731077cefb5951144",
+    "src/readmixer_py/errors.py": "72bfb4d82dd982390a78bfdffa8f444669bc98a6716feb164d101b2c406fa50a",
+    "src/readmixer_py/execution.py": "2e22feeaf97d9ed5aca6eac1bdc079a75f53711cf0d50af86ebcc7c5f7859642",
+    "src/readmixer_py/fastq.py": "238220368d2f514b19b7440f9643abaee29cf7dc7c44f93834c564cfe265ce1f",
+    "src/readmixer_py/inspection.py": "6d3196802134dd8ffe02207e3558cd40d7b5096d8c88bda58e7a4fd8c2dad12c",
+    "src/readmixer_py/ledger.py": "96f331ff3addad7c3c79bed7e4e00c41f26120778839503d6a6fb3a88dcea5d4",
+    "src/readmixer_py/metadata.py": "6757dbdf428c48a3d1398d3dde663a045b6184f61aaa69e082ea0f0c284a0651",
+    "src/readmixer_py/mixing.py": "7e1160f288df7a5d9ebec5b464cf0e1b9c930a76d126c599af6672ca3145c872",
+    "src/readmixer_py/ownership.py": "e28c3fc42422e971de9a6ec89a418c69231033082cb81547dda18db5a252656f",
+    "src/readmixer_py/paircodec.py": "cc403a1b50a14b50eef751db60b285f28687925a2ef41dd31d19e225b3c3ab9d",
+    "src/readmixer_py/parser_stage.py": "67f48f50a5fd9ee24889ba0e4baf24130356c9c610a0e3c41312c020199ad0fa",
+    "src/readmixer_py/paths.py": "68062ee0a155c7b10173265b2ae522ea27449cf01130c22325e250eec3e9d729",
+    "src/readmixer_py/pool.py": "daaba9a0a54d3adc10ce840391b5a591065502dbc7a0332f82228daf5d9bb257",
+    "src/readmixer_py/recovery.py": "3d71ba0dd6b843dc0263aec3cc469162b09c3b763144e17fe1bc1c22516dd240",
+    "src/readmixer_py/resources.py": "b87d21d87e3603b37385346c49eae425c13009e6d452ceb9674597181e40784f",
+    "src/readmixer_py/runtime.py": "e3930e2f4c8339f8a8ff57af1ce092de919f90be772f5c932e55f8961ef46324",
+    "src/readmixer_py/scan.py": "962e11e45bd1235e9f69941bba4fb2363458a8d80eb91eeef689d1dc64e491b8",
+    "src/readmixer_py/scatter_stage.py": "a41450f7a555bea09f9523e44567a3651d485f5ad55b078cac844c21d19b82e1",
+    "src/readmixer_py/shuffle.py": "1fa1be5121cca4d1ed92409eaee283562f68e7374a6e27185927a3d6a36a00a1",
+    "src/readmixer_py/sorting.py": "12e309af2ae44c7c31d3789c0309ecfd4fb9d425c3cb8bd2a11e72a0dee960ee",
+    "src/readmixer_py/stage_admission.py": "157086b244882df56a3663ccad1949cf9d061f7072b50f6260d9f48805b3d440",
+    "src/readmixer_py/stage_policy.py": "c12ab9f5eb0fe1d9d8cb13a5bedf88fc500883b275cf37da1d6f68d71e2df25c",
+    "src/readmixer_py/stage_scheduler.py": "4573bdf58024e2cd6911857a082096f6ed32b97864f543c089593da1be9985fb",
+    "src/readmixer_py/storage.py": "fc85c25dee760eb1c635074491af5f008a3c91363352a2eae84fc7c4f0da806f",
+    "src/readmixer_py/transaction.py": "aabeca366524c94f0f5fbc6bb58a52ca8d6fa3061fd53c5af417520579b6823f",
+    "src/readmixer_py/verification.py": "3b5771e5678810e2041cf812f9559d8d28623d36638428e9e564e4e6ffc41ffa",
+    "src/readmixer_py/worker_bootstrap.py": "f02fac0e6535bfb53ee1277448d2d8b33f20d6e4a48203cd65e72a2b935f2130",
+    "src/readmixer_py/worker_memory.py": "3a8606d45c475d186142b4b54345b86db4121b840e5cb66b1ecd5ec3a034d9ac",
+    "src/readmixer_py/worker_protocol.py": "2a888d75d1e2f3b80647658797a513848bb0d6d302249bc5c8c405e7ccc862c3",
+    "src/readmixer_py/worker_scatter.py": "c847f0c46e8c13172c0aae5efa3b9fde1954c04900a5509044b0496c0d037877",
+    "src/readmixer_py/worker_storage.py": "f74a1191b7f48ac11aee6584fc969c015a9e260fae972f92db164a6d6bc173b1",
+    "src/readmixer_py/worker_transport.py": "b1da9a6c1e80cc5468bd58f61414b8e87d1889b5be6baab10e1e258641dca887"
+  },
+  "configuration": {
+    "max_ram": 25769803776,
+    "storage": "auto",
+    "workers": 4,
+    "compression_level": 6,
+    "max_artifact_bytes": 5000000000
+  },
+  "input": {
+    "samples": 48,
+    "files": 96,
+    "compressed_bytes": 1691881688,
+    "pairs": 30042389,
+    "reads": 60084778,
+    "normalized_bytes": 10983150366
+  },
+  "operations": {
+    "mix": {
+      "completed": true,
+      "wall_seconds": 21287.107490083,
+      "pairs": 30042389,
+      "reads": 60084778,
+      "workers_effective": 3
+    },
+    "recover_indexed": {
+      "completed": true,
+      "wall_seconds": 376.5254155000148,
+      "pairs": 1358331,
+      "reads": 2716662,
+      "workers_effective": 3
+    },
+    "verify": {
+      "completed": true,
+      "wall_seconds": 6079.08360295801,
+      "pairs": 30042389,
+      "reads": 60084778,
+      "workers_effective": 4
+    }
+  },
+  "independent_comparison": {
+    "completed": true,
+    "fields_and_order_equal": true,
+    "normalized_counts_and_sha256_equal_manifest": true,
+    "original_and_restored_streams_consumed_to_eof": true,
+    "samples": 1,
+    "pairs": 1358331,
+    "reads": 2716662,
+    "normalized_bytes": 498138054,
+    "wall_seconds": 15.433479166997131
+  },
+  "pool_fully_verified": true,
+  "indexed_recovery_equal_originals": true,
+  "original_files_unchanged": true,
+  "timing_scope": "API operation wall time after runner imports; unchanged OS caches",
+  "total_wall_seconds": 27758.182080000028,
+  "limitations": [
+    "One machine and workload; unchanged OS caches.",
+    "Admission allowance is not an OS-enforced RSS ceiling.",
+    "Indexed recovery validates selected records; separate verify covered the complete pool.",
+    "Private paths, sample IDs, artifact names and read digests are omitted.",
+    "Runtime source hashes identify the timed run before repository preparation; later documentation, whitespace cleanup and cancellation ownership correction do not constitute a new full-data timing."
+  ]
+}

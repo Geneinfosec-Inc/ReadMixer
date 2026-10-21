@@ -1,0 +1,78 @@
+# Development feedback only: jobs rebuild source and resolve dependencies.
+# Frozen-candidate release qualification is release-qualification.yml.
+name: Python development checks (not release qualification)
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installed-wheel:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install independent BGZF oracle
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = Linux ]; then
+            sudo apt-get update
+            sudo apt-get install -y tabix
+          else
+            brew install htslib
+          fi
+      - name: Build development artifacts
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+          python -m pip install '.[dev]' pysam
+          python -m pip freeze > dependency-versions.txt
+      - name: Run source suite
+        run: python scripts/run_tests.py --junit-dir output/source-tests
+      - name: Run external qualification tooling checks
+        # Linux namespace/cgroup mechanism tests are explicitly nonapplicable
+        # on macOS; these exercise real portable child limits and timeout cleanup
+        # on every development platform, independently of the package suite.
+        run: python -m pytest -q tools/release/tests
+      - name: Install wheel and test outside checkout
+        shell: bash
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          stage="$RUNNER_TEMP/readmixer-wheel-tests"
+          mkdir -p "$stage/readmixer"
+          cp -R tests scripts "$stage/"
+          cp readmixer/readmixer.py "$stage/readmixer/"
+          cd "$stage"
+          export READMIXER_TEST_CONSOLE="$(command -v readmixer-py)"
+          python scripts/run_tests.py --junit-dir "$GITHUB_WORKSPACE/output/wheel-tests"
+          readmixer-py --help
+          python -m readmixer_py --version
+      - name: Record environment and hashes
+        if: always()
+        shell: bash
+        run: |
+          python -c 'import json, platform; print(json.dumps({"python": platform.python_version(), "system": platform.system(), "machine": platform.machine()}))' > platform.json
+          python -c 'from pathlib import Path; import hashlib,json; print(json.dumps({p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path("dist").glob("*")}))' > artifact-hashes.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: development-${{ matrix.os }}-py${{ matrix.python }}
+          path: |
+            dist/
+            dependency-versions.txt
+            platform.json
+            artifact-hashes.json
+            output/source-tests/
+            output/wheel-tests/

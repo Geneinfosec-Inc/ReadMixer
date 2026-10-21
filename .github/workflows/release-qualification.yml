@@ -1,0 +1,283 @@
+name: Immutable candidate platform qualification
+
+# This workflow executes ordinary platform lanes only. It does not qualify
+# constrained/resource hosts, close Plan 10, publish packages, or upload real data.
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_url:
+        description: HTTPS URL of the candidate-only packet produced by tools/release/packet.py
+        required: true
+        type: string
+      candidate_sha256:
+        description: Independently verified lowercase SHA-256 of that exact packet
+        required: true
+        type: string
+      candidate_id:
+        description: Exact sha256:... candidate identity from candidate.json
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  ordinary-platform:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            python: '3.11'
+            architecture: x64
+            machine: x86_64
+            system: Linux
+            cell: linux-x86_64-py311
+          - runner: ubuntu-24.04
+            python: '3.14'
+            architecture: x64
+            machine: x86_64
+            system: Linux
+            cell: linux-x86_64-py314
+          - runner: macos-15
+            python: '3.11'
+            architecture: arm64
+            machine: arm64
+            system: Darwin
+            cell: macos-arm64-py311
+          - runner: macos-15
+            python: '3.14'
+            architecture: arm64
+            machine: arm64
+            system: Darwin
+            cell: macos-arm64-py314
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      CELL: ${{ matrix.cell }}
+      EXPECTED_MACHINE: ${{ matrix.machine }}
+      EXPECTED_SYSTEM: ${{ matrix.system }}
+      EXPECTED_PYTHON: ${{ matrix.python }}
+      CANDIDATE_URL: ${{ inputs.candidate_url }}
+      CANDIDATE_SHA256: ${{ inputs.candidate_sha256 }}
+      CANDIDATE_ID: ${{ inputs.candidate_id }}
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PIP_CONFIG_FILE: /dev/null
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      VECLIB_MAXIMUM_THREADS: '1'
+      BLIS_NUM_THREADS: '1'
+    steps:
+      - name: Check out the external qualification harness
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select the native interpreter
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: ${{ matrix.architecture }}
+      - name: Assert native architecture and create isolated preparation paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          python - <<'PY'
+          import os, platform, struct, sys
+          assert platform.python_implementation() == 'CPython'
+          assert struct.calcsize('P') * 8 == 64
+          assert platform.system() == os.environ['EXPECTED_SYSTEM']
+          assert platform.machine() == os.environ['EXPECTED_MACHINE']
+          assert '.'.join(map(str, sys.version_info[:2])) == os.environ['EXPECTED_PYTHON']
+          PY
+          root="$RUNNER_TEMP/readmixer-release-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-$CELL"
+          mkdir -m 700 "$root"
+          mkdir -m 700 "$root/public" "$root/transport" "$root/environment" "$root/environment/wheels" "$root/bootstrap-wheels"
+          printf 'READMIXER_RELEASE_ROOT=%s\n' "$root" >> "$GITHUB_ENV"
+      - name: Download and verify the unchanged candidate packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, os, re, sys, urllib.parse, urllib.request
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tools/release').resolve()))
+          from packet import MAX_PACKET
+          url = os.environ['CANDIDATE_URL']
+          expected = os.environ['CANDIDATE_SHA256']
+          candidate_id = os.environ['CANDIDATE_ID']
+          def check_url(value):
+              parts = urllib.parse.urlsplit(value)
+              if (parts.scheme != 'https' or not parts.hostname or parts.username is not None
+                  or parts.password is not None or parts.fragment or any(ord(c) < 33 for c in value)):
+                  raise ValueError('only an HTTPS URL without credentials or fragments is accepted')
+          class HTTPSOnly(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, request, file, code, message, headers, newurl):
+                  check_url(newurl)
+                  return super().redirect_request(request, file, code, message, headers, newurl)
+          try:
+              check_url(url)
+              if not re.fullmatch('[a-f0-9]{64}', expected) or not re.fullmatch('sha256:[a-f0-9]{64}', candidate_id):
+                  raise ValueError('invalid packet checksum or candidate identity')
+              path = Path(os.environ['READMIXER_RELEASE_ROOT']) / 'transport' / 'candidate.zip'
+              opener = urllib.request.build_opener(HTTPSOnly())
+              digest, count = hashlib.sha256(), 0
+              with opener.open(url, timeout=60) as response, path.open('xb') as output:
+                  check_url(response.geturl())
+                  while block := response.read(1 << 20):
+                      count += len(block)
+                      if count > MAX_PACKET:
+                          raise ValueError('packet exceeds transport bound')
+                      output.write(block)
+                      digest.update(block)
+              if digest.hexdigest() != expected:
+                  raise ValueError('packet checksum mismatch')
+          except Exception as error:
+              # Dispatch URLs may be signed; do not echo URL-bearing exceptions.
+              raise SystemExit('candidate download or checksum verification failed: ' + type(error).__name__)
+          PY
+          python -I tools/release/packet.py unpack \
+            --archive "$READMIXER_RELEASE_ROOT/transport/candidate.zip" \
+            --sha256 "$CANDIDATE_SHA256" --candidate-id "$CANDIDATE_ID" \
+            --output "$READMIXER_RELEASE_ROOT/candidate"
+      - name: Install the independent native BGZF oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$RUNNER_OS" = Linux ]; then
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends tabix
+            dpkg-query -W -f='${binary:Package}\t${Version}\n' tabix \
+              > "$READMIXER_RELEASE_ROOT/public/oracle-package-version.txt"
+          else
+            brew install htslib
+            brew list --versions htslib \
+              > "$READMIXER_RELEASE_ROOT/public/oracle-package-version.txt"
+          fi
+      - name: Prepare a pinned bootstrap and select native dependency wheels once
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -I -m venv "$READMIXER_RELEASE_ROOT/bootstrap"
+          bootstrap="$READMIXER_RELEASE_ROOT/bootstrap/bin/python"
+          "$bootstrap" -I -m pip download --only-binary=:all: --no-deps \
+            --dest "$READMIXER_RELEASE_ROOT/bootstrap-wheels" 'packaging==25.0'
+          python - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          root = Path(os.environ['READMIXER_RELEASE_ROOT'])
+          wheel, = (root / 'bootstrap-wheels').glob('*.whl')
+          digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
+          (root / 'bootstrap.lock').write_text('packaging==25.0 --hash=sha256:' + digest + '\n')
+          PY
+          "$bootstrap" -I -m pip install --no-index --require-hashes \
+            --find-links "$READMIXER_RELEASE_ROOT/bootstrap-wheels" -r "$READMIXER_RELEASE_ROOT/bootstrap.lock"
+          "$bootstrap" -I - <<'PY'
+          import os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tools/release').resolve()))
+          from lock_environment import DEFAULT_REQUIREMENTS
+          # Resolution is preparation, before capture/testing. Every subsequent
+          # qualification install uses only the captured --require-hashes lock.
+          pins = ['packaging==25.0', 'setuptools==68.2.2', 'wheel==0.41.2', 'build==1.2.2.post1']
+          subprocess.run([sys.executable, '-I', '-m', 'pip', 'download', '--only-binary=:all:',
+              '--dest', str(Path(os.environ['READMIXER_RELEASE_ROOT']) / 'environment/wheels'),
+              *DEFAULT_REQUIREMENTS, *pins], check=True)
+          PY
+          "$bootstrap" -I tools/release/lock_environment.py capture \
+            --wheelhouse "$READMIXER_RELEASE_ROOT/environment/wheels" \
+            --lock "$READMIXER_RELEASE_ROOT/environment/requirements.lock" \
+            --manifest "$READMIXER_RELEASE_ROOT/environment/environment.json" \
+            --require 'packaging==25.0' --require 'setuptools==68.2.2' \
+            --require 'wheel==0.41.2' --require 'build==1.2.2.post1'
+      - name: Preserve exact external harness and preparation identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os, shutil
+          from pathlib import Path
+          root = Path(os.environ['READMIXER_RELEASE_ROOT'])
+          public = root / 'public'
+          helpers = public / 'harness'
+          helpers.mkdir()
+          records = []
+          paths = sorted(Path('tools/release').glob('*.py'))
+          paths += [Path('tools/release/platform-applicability.json'), Path('.github/workflows/release-qualification.yml')]
+          for path in paths:
+              target = helpers / path.name
+              shutil.copyfile(path, target)
+              records.append({'name': path.name, 'bytes': target.stat().st_size,
+                              'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
+          shutil.copyfile(root / 'candidate/candidate.json', public / 'candidate.json')
+          shutil.copyfile(root / 'bootstrap.lock', public / 'bootstrap.lock')
+          shutil.copytree(root / 'bootstrap-wheels', public / 'bootstrap-wheels')
+          report = {'schema': 'readmixer.release.ci-preparation.v1',
+              'candidate_id': os.environ['CANDIDATE_ID'], 'packet_sha256': os.environ['CANDIDATE_SHA256'],
+              'cell': os.environ['CELL'], 'repository_commit': os.environ['GITHUB_SHA'],
+              'run_id': os.environ['GITHUB_RUN_ID'], 'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'harness_files': records, 'release_qualified': False,
+              'dependency_selection': 'Native binary wheels resolved once before capture; qualification installs are local and hash-locked.',
+              'bootstrap': 'Exact packaging 25.0 wheel and hash lock retained; bootstrap is separate from the fresh qualification environment.',
+              'omissions': ['Dispatch URL is intentionally omitted.',
+                  'Private paths/raw diagnostics are never uploaded in plaintext; optional authenticated encrypted transport requires the evidence secret.',
+                  'No supplied input dataset or generated recovery is included.',
+                  'Constrained/resource hosts and Plan 10 reconciliation are separate required work.']}
+          (public / 'preparation.json').write_text(json.dumps(report, sort_keys=True, indent=2) + '\n')
+          PY
+      - name: Execute complete source and outside-checkout installed suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$READMIXER_RELEASE_ROOT/bootstrap/bin/python" -I tools/release/platform_lane.py \
+            --candidate "$READMIXER_RELEASE_ROOT/candidate" \
+            --environment "$READMIXER_RELEASE_ROOT/environment" \
+            --workspace "$RUNNER_TEMP/readmixer-work-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-$CELL" \
+            --report "$READMIXER_RELEASE_ROOT/report" --expected-cell "$CELL"
+      - name: Preserve private raw diagnostics through optional authenticated encryption
+        if: always()
+        env:
+          READMIXER_EVIDENCE_KEY: ${{ secrets.READMIXER_EVIDENCE_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${READMIXER_RELEASE_ROOT:-}" ]; then
+            exit 0
+          fi
+          if [ -z "${READMIXER_EVIDENCE_KEY:-}" ] || [ ! -d "$READMIXER_RELEASE_ROOT/report/private" ]; then
+            python - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ['READMIXER_RELEASE_ROOT'])
+          status = {'schema': 'readmixer.release.private-evidence-status.v1',
+              'encrypted_raw_retained': False, 'final_raw_integrity_gate_ready': False,
+              'reason': 'Evidence key absent or private report unavailable; public summaries alone cannot satisfy final raw-integrity gates.',
+              'release_qualified': False}
+          (root / 'public/private-evidence-status.json').write_text(json.dumps(status, sort_keys=True) + '\n')
+          PY
+            exit 0
+          fi
+          evidence_python="$RUNNER_TEMP/readmixer-work-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-$CELL/venv/bin/python"
+          "$evidence_python" -I tools/release/private_evidence.py encrypt \
+            --source "$READMIXER_RELEASE_ROOT/report/private" \
+            --output "$READMIXER_RELEASE_ROOT/public/private-evidence.rmp17" \
+            > "$READMIXER_RELEASE_ROOT/public/private-evidence-status.json"
+      - name: Retain public synthetic evidence and exact dependency replay inputs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: platform-${{ matrix.cell }}-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            ${{ env.READMIXER_RELEASE_ROOT }}/public/
+            ${{ env.READMIXER_RELEASE_ROOT }}/environment/
+            ${{ env.READMIXER_RELEASE_ROOT }}/transport/candidate.zip
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/report.json
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/harness/
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/environment.json
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/requirements.lock
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/platform-applicability.json
+            ${{ env.READMIXER_RELEASE_ROOT }}/report/rebuilt/*.whl

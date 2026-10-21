@@ -1,14 +1,4 @@
-# ReadMixer Core Dependencies
-# Only packages that are actually imported and used in the codebase
-
-# Cryptographic random number generation (Crypto.Random)
-pycryptodome>=3.21.0
-
-# Array operations for read shuffling
-numpy>=2.2.0
-
-# System resource detection (RAM, CPU cores, disk space)
-psutil>=6.0.0
-
-# Performance chart generation (optional - only used by generate_performance_chart.py)
-matplotlib>=3.5.0
+# Core dependencies only; install the project from its root with python -m pip install -e .
+numpy>=1.26.4,<3
+pycryptodome>=3.23,<4
+psutil>=5.9.3,<8

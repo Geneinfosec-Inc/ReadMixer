@@ -1,0 +1,34 @@
+include TESTING.md requirements-foundations.lock
+include docs/validation/local-macos-2026-10-21.json
+include readmixer/readmixer.py
+include readmixer/process/__init__.py
+include readmixer/INSTALLATION.md
+recursive-include readmixer/python_update_plans *.md *.json
+# Acceptance evidence records archive hashes and stays outside those archives.
+exclude readmixer/python_update_plans/foundation-evidence.json
+exclude readmixer/python_update_plans/storage-evidence.json
+include scripts/check_storage_inputs.py
+exclude readmixer/python_update_plans/pipeline-evidence.json
+include scripts/check_roundtrip_inputs.py scripts/generate_fixtures.py scripts/benchmark_pipeline.py
+include scripts/run_tests.py
+include .github/workflows/python.yml
+
+exclude readmixer/python_update_plans/metadata-evidence.json
+exclude readmixer/python_update_plans/ownership-evidence.json
+exclude readmixer/python_update_plans/spawn-evidence.json
+exclude readmixer/python_update_plans/worker-handoff-evidence.json
+
+exclude readmixer/python_update_plans/parallel-pipeline-evidence.json
+
+exclude readmixer/python_update_plans/workflow-acceptance-evidence.json
+
+# Spawn/signal acceptance imports guarded non-test helper modules.
+recursive-include tests *.py
+
+# Plan 16 reproducible qualification tools and local isolated dependency lock.
+include requirements-qualification-linux-py311.lock
+include scripts/resource_telemetry.py scripts/benchmark_stages.py scripts/benchmark_fresh.py
+include scripts/qualification_controls.py scripts/qualification_matrix.py scripts/qualification_host.py
+include scripts/run_qualification.py scripts/calibrate_resources.py scripts/qualify_supplied_data.py
+exclude readmixer/python_update_plans/resource-qualification-evidence.json
+exclude readmixer/python_update_plans/resource-qualification-dev9-evidence.json

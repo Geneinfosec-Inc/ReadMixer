@@ -1,0 +1,645 @@
+{
+  "candidate": "2.0.0.dev3",
+  "collected_test_count": 1233,
+  "commands": {
+    "build": "setuptools.build_meta.build_sdist(\"dist/dev3-local-validation\"); setuptools.build_meta.build_wheel(\"dist/dev3-local-validation\")",
+    "collection": "python -m pytest --collect-only -q",
+    "installed_tests": "outside checkout, after copying tests/scripts/forwarder without src: VENV_PYTHON -m pytest -q --junitxml=INSTALLED_RESULTS.xml tests",
+    "prefix": "VENV_PYTHON scripts/check_roundtrip_inputs.py --input SUPPLIED_INPUT_DIRECTORY --pairs-per-sample 128 --workers 4",
+    "source_tests": "python -m pytest -q --junitxml=SOURCE_RESULTS.xml"
+  },
+  "date_utc": "2026-09-24",
+  "environment": {
+    "architecture": "x86_64",
+    "dependencies": {
+      "numpy": "1.26.4",
+      "psutil": "5.9.3",
+      "pycryptodome": "3.23.0",
+      "pysam": "0.23.3",
+      "pytest": "7.4.0",
+      "setuptools": "68.2.2",
+      "wheel": "0.41.2"
+    },
+    "dependency_lock_qualified": false,
+    "installed_virtual_environment_system_site_packages": true,
+    "os": "Linux",
+    "pointer_bits": 64,
+    "python": "3.11.7",
+    "python_implementation": "CPython",
+    "zlib_build": "1.2.13",
+    "zlib_runtime": "1.2.13"
+  },
+  "installed_wheel_tests": {
+    "elapsed_seconds": 30.476,
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "91594e6e3c8b90eda5b2ae99013fd98aca8904e153558e82009d8762d8f0304b",
+    "passed": 1233,
+    "skipped": 0,
+    "tests": 1233
+  },
+  "limitations": [
+    "The 256/512 MiB workflow cases use fresh interpreters to avoid prior pytest native allocator retention; these are admission regressions, not process-tree RSS calibration.",
+    "No Linux constrained-host, macOS arm64, CPython 3.14 or isolated hash-locked dependency matrix was executed.",
+    "No new performance benchmark or greater-than-four-times-admitted-RAM workflow was executed.",
+    "The full 30,042,389-pair supplied dataset was not mixed/recovered; only 128 pairs per sample were consumed by the new prefix validation.",
+    "Paged output ownership, spawn scheduler, and deterministic parallel production stages remain unimplemented.",
+    "Historical dev2 source/install results, prefix and tiny benchmark retain their original candidate scope."
+  ],
+  "new_local_test_case_count": 111,
+  "new_local_test_nodes": [
+    "tests/test_catalog_metadata.py::test_shared_metadata_exact_peak_and_one_byte_over",
+    "tests/test_catalog_metadata.py::test_catalog_and_unrelated_owner_cannot_each_spend_shared_ceiling",
+    "tests/test_catalog_metadata.py::test_close_and_dispose_keep_retained_record_alias_charged[sample]",
+    "tests/test_catalog_metadata.py::test_close_and_dispose_keep_retained_record_alias_charged[source]",
+    "tests/test_catalog_metadata.py::test_close_and_dispose_keep_retained_record_alias_charged[snapshot]",
+    "tests/test_catalog_metadata.py::test_dispose_waits_for_open_reader_descriptor_ownership",
+    "tests/test_catalog_metadata.py::test_third_live_reader_is_rejected_without_losing_admission",
+    "tests/test_catalog_metadata.py::test_discovery_frontier_and_dedup_metadata_is_released_after_construction",
+    "tests/test_catalog_metadata.py::test_retained_failed_traceback_does_not_retain_catalog_graph[orphan]",
+    "tests/test_catalog_metadata.py::test_retained_failed_traceback_does_not_retain_catalog_graph[allocation]",
+    "tests/test_catalog_metadata.py::test_retained_failed_traceback_does_not_retain_catalog_graph[root-check]",
+    "tests/test_catalog_metadata.py::test_encoded_limit_is_independent_of_shared_resident_metadata",
+    "tests/test_catalog_metadata.py::test_inspection_returned_report_holds_only_its_own_metadata[False]",
+    "tests/test_catalog_metadata.py::test_inspection_returned_report_holds_only_its_own_metadata[True]",
+    "tests/test_catalog_metadata.py::test_failed_deep_inspection_releases_metadata_with_traceback_held",
+    "tests/test_catalog_metadata.py::test_inspection_report_owner_allocation_failure_releases_acquired_lease",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[268435456-auto]",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[268435456-external]",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[268435456-memory]",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[536870912-auto]",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[536870912-external]",
+    "tests/test_metadata_workflows.py::test_shared_metadata_complete_workflows_and_returned_report_ownership[536870912-memory]",
+    "tests/test_metadata_workflows.py::test_bundle_descriptors_remain_charged_after_codec_close_until_publication",
+    "tests/test_metadata_workflows.py::test_shared_metadata_refusal_leaves_no_marker_or_live_owners",
+    "tests/test_metadata_workflows.py::test_pool_close_sources_retains_manifest_and_identity_metadata",
+    "tests/test_metadata_workflows.py::test_json_serialization_overlap_competes_with_retained_metadata",
+    "tests/test_metadata_workflows.py::test_pool_parser_is_not_entered_without_shared_overlap_admission",
+    "tests/test_metadata_workflows.py::test_recovery_report_descriptors_stay_charged_through_final_cleanup",
+    "tests/test_resources.py::test_P11_T01_shared_metadata_exact_boundary_and_subset_accounting",
+    "tests/test_resources.py::test_P11_T01_invalid_shared_metadata_limits[-1]",
+    "tests/test_resources.py::test_P11_T01_invalid_shared_metadata_limits[True]",
+    "tests/test_resources.py::test_P11_T01_invalid_shared_metadata_limits[1.5]",
+    "tests/test_resources.py::test_P11_T01_invalid_shared_metadata_limits[65537]",
+    "tests/test_resources.py::test_P11_T01_invalid_shared_metadata_limits[18446744073709551616]",
+    "tests/test_resources.py::test_P11_T01_metadata_must_be_an_integer_subset[-1]",
+    "tests/test_resources.py::test_P11_T01_metadata_must_be_an_integer_subset[True]",
+    "tests/test_resources.py::test_P11_T01_metadata_must_be_an_integer_subset[1.5]",
+    "tests/test_resources.py::test_P11_T01_metadata_must_be_an_integer_subset[101]",
+    "tests/test_resources.py::test_P11_T01_metadata_must_be_an_integer_subset[18446744073709551616]",
+    "tests/test_resources.py::test_P11_T01_metadata_default_and_bookkeeping_are_admitted",
+    "tests/test_resources.py::test_P11_T02_resize_and_split_preserve_all_ownership_dimensions",
+    "tests/test_resources.py::test_P11_T02_invalid_split_does_not_mutate_parent[amounts0]",
+    "tests/test_resources.py::test_P11_T02_invalid_split_does_not_mutate_parent[amounts1]",
+    "tests/test_resources.py::test_P11_T02_invalid_split_does_not_mutate_parent[amounts2]",
+    "tests/test_resources.py::test_P11_T02_invalid_split_does_not_mutate_parent[amounts3]",
+    "tests/test_resources.py::test_P11_T02_invalid_split_does_not_mutate_parent[amounts4]",
+    "tests/test_resources.py::test_P11_T02_failed_resize_or_split_preserves_original[ram]",
+    "tests/test_resources.py::test_P11_T02_failed_resize_or_split_preserves_original[metadata]",
+    "tests/test_resources.py::test_P11_T02_failed_resize_or_split_preserves_original[descriptors]",
+    "tests/test_resources.py::test_P11_T02_failed_resize_or_split_preserves_original[registry]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[False-acquire]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[False-transfer]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[False-resize]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[False-split]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[False-release]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[True-acquire]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[True-transfer]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[True-resize]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[True-split]",
+    "tests/test_resources.py::test_P11_T02_interrupted_commit_has_one_owner_and_unchanged_counters[True-release]",
+    "tests/test_resources.py::test_P11_T02_state_allocation_failure_preserves_original[acquire]",
+    "tests/test_resources.py::test_P11_T02_state_allocation_failure_preserves_original[transfer]",
+    "tests/test_resources.py::test_P11_T02_state_allocation_failure_preserves_original[resize]",
+    "tests/test_resources.py::test_P11_T02_state_allocation_failure_preserves_original[split]",
+    "tests/test_resources.py::test_P11_T02_state_allocation_failure_preserves_original[release]",
+    "tests/test_resources.py::test_P11_T02_concurrent_metadata_growth_is_atomic",
+    "tests/test_resources.py::test_P11_T02_released_handles_cannot_resize_or_split",
+    "tests/test_rollover_boundaries.py::test_P15_T02_index_and_sidecars_are_dominated_at_every_valid_cap_step",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r1-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r1-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r1-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r2-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r2-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-r2-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-key-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-key-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[0-key-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r1-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r1-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r1-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r2-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r2-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-r2-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-key-65564]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-key-131099]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_public_reachable_lane_exact_and_one_over[1-key-131100]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[99]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[101]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[999]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[1001]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[9999]",
+    "tests/test_rollover_boundaries.py::test_P15_T02_rollover_rerenders_decimal_offsets_before_empty_bundle_admission[10001]",
+    "tests/test_storage_metadata.py::test_shared_metadata_rejects_segment_before_identity_or_registry_mutation",
+    "tests/test_storage_metadata.py::test_reader_pin_admission_competes_with_other_metadata_owner",
+    "tests/test_storage_metadata.py::test_payload_blocks_do_not_consume_their_byte_length_as_metadata",
+    "tests/test_storage_metadata.py::test_registry_page_retention_and_authenticated_handoff_use_shared_metadata[memory]",
+    "tests/test_storage_metadata.py::test_registry_page_retention_and_authenticated_handoff_use_shared_metadata[external]",
+    "tests/test_storage_metadata.py::test_registry_page_retention_and_authenticated_handoff_use_shared_metadata[auto]",
+    "tests/test_storage_metadata.py::test_failed_page_metadata_admission_retains_pending_bytes_and_original_root",
+    "tests/test_storage_metadata.py::test_authenticated_ledger_cleanup_retains_metadata_overlap_under_pressure[memory]",
+    "tests/test_storage_metadata.py::test_authenticated_ledger_cleanup_retains_metadata_overlap_under_pressure[external]",
+    "tests/test_storage_metadata.py::test_authenticated_ledger_cleanup_retains_metadata_overlap_under_pressure[auto]",
+    "tests/test_storage_metadata.py::test_sort_row_and_coverage_metadata_remain_charged_until_disposal",
+    "tests/test_storage_metadata.py::test_shuffle_metadata_rejection_does_not_allocate_untracked_frontier",
+    "tests/test_storage_metadata.py::test_disk_registry_is_lazy_shared_and_disposed_only_at_owner_close",
+    "tests/test_storage_metadata.py::test_disk_registry_allocation_failure_rolls_back_lazy_admission",
+    "tests/test_storage_metadata.py::test_reader_pin_allocation_failure_rolls_back_counts_and_metadata",
+    "tests/test_storage_metadata.py::test_retained_page_failure_traceback_does_not_retain_decoded_metadata",
+    "tests/test_storage_metadata.py::test_disk_context_keeps_primary_error_and_pending_metadata_owner",
+    "tests/test_storage_metadata.py::test_segment_registry_insertion_failure_retires_transferred_buffer",
+    "tests/test_storage_metadata.py::test_segment_allocation_cleanup_failure_preserves_primary_and_retry_owner"
+  ],
+  "packaging": {
+    "archive_input_data_excluded": true,
+    "archives": {
+      "readmixer-py-2.0.0.dev3.tar.gz": {
+        "bytes": 372002,
+        "sha256": "63934b4787d8f10ceeb11c93a7aa9a72a85ce41103bcd690fee55f89ec64ec5f"
+      },
+      "readmixer_py-2.0.0.dev3-py3-none-any.whl": {
+        "bytes": 130945,
+        "sha256": "66f37d555bde5a2f70e06d96401c9a1d05c7ff2b3bf2ebd2535501f421f4dfbb"
+      }
+    },
+    "build_frontend": "declared setuptools backend called directly; optional build frontend unavailable",
+    "build_isolation": false,
+    "import_within_installed_venv_asserted": true,
+    "outside_checkout_import_asserted": true,
+    "rebuilt_sdist_wheel_sources_equal_candidate": true,
+    "sdist_sources_equal_checkout": true,
+    "wheel_sources_equal_checkout": true
+  },
+  "plan_status": {
+    "11": "implemented locally; downstream owner integration and measured platform qualification remain open",
+    "12": "planned",
+    "13": "planned",
+    "14": "planned",
+    "15": "partial P15-T02; remaining boundary/workflow/failure cases open",
+    "16": "planned; no scale qualification or complete supplied-data run",
+    "17": "planned; local package check is not the isolated locked release matrix"
+  },
+  "preserved_historical_sha256": {
+    "dist/dev2-local-validation/readmixer-py-2.0.0.dev2.tar.gz": "0d13f17a9adc0407874a9db368e8a4dc533cc183efac9e1a1a781542c44496c0",
+    "dist/dev2-local-validation/readmixer_py-2.0.0.dev2-py3-none-any.whl": "241aea7fd56dbcbb492df478956406bba86b35dc0506a2515abf9f886f88cae1",
+    "readmixer/python_update_plans/foundation-evidence.json": "7edfdf2d7d19e57f59e3a288d004e58d20e4ed42fa9215a310556bd80a71ef07",
+    "readmixer/python_update_plans/pipeline-evidence.json": "bf0d687dbf1068d4ae57f6ba0408264b63d0b1cd4d262248ac5bffd185176680",
+    "readmixer/python_update_plans/source-snapshot.json": "dc6de6cae0700a4f5b2ffcc3cb1f51f62b03a993d3492b43110bbc44c3c3e4bc",
+    "readmixer/python_update_plans/storage-evidence.json": "6cfd479ad32928d6f83cc20103dcc95993f6287bc0c631e5ce49bb82ea47d95d"
+  },
+  "release_qualified": false,
+  "schema": "readmixer-python-local-metadata-evidence",
+  "schema_version": 1,
+  "scope": "Plan 11 local accounting/lifetime implementation and partial Plan 15 boundary coverage; not release qualification",
+  "source_files": {
+    ".github/workflows/python.yml": {
+      "bytes": 2262,
+      "sha256": "38d5448de961bf147d8dd8872f68336451d519904f0b4cdffff1b7ff9cac5470"
+    },
+    "CHANGES.md": {
+      "bytes": 9898,
+      "sha256": "01d113b5429217d86df3d8c8d05b3c2a837a262f42a1a00462f7c5943cd487f2"
+    },
+    "MANIFEST.in": {
+      "bytes": 715,
+      "sha256": "428687b3b3efb5210a4f8b0bbdba8c7eba19fef230c2e788eb1eefc751df5d80"
+    },
+    "README.md": {
+      "bytes": 8911,
+      "sha256": "57f31e0e05e1c03631babd70f5b33c752f2f71bd11ef8f82fd8e4684ec2dbfeb"
+    },
+    "TESTING.md": {
+      "bytes": 7137,
+      "sha256": "79570c1982029584f802f050aaf7448dfb6b31552fba636b4090d561d2e28013"
+    },
+    "pyproject.toml": {
+      "bytes": 865,
+      "sha256": "6d3b76cca40bddaaa281dce9c00e16ab5cc7cc4c5b59f4ebdac6b1594b18c646"
+    },
+    "readmixer/INSTALLATION.md": {
+      "bytes": 1305,
+      "sha256": "d7ac2cdf5d98e7e465ad7f6b1e836068bd12b807a91bd0ae4d3f019018b17069"
+    },
+    "readmixer/process/__init__.py": {
+      "bytes": 284,
+      "sha256": "1b68187cb6c721055888393048adf54f99e73140174eb54b240a5909ace83c4b"
+    },
+    "readmixer/python_update_plans/00-audit-and-transfer-decisions.md": {
+      "bytes": 19465,
+      "sha256": "118152677487bec51f275bd1ac5d1bcfbbb49a5664ee6ed0d52ed67a9ee74e95"
+    },
+    "readmixer/python_update_plans/01-packaging-interfaces-and-compatibility.md": {
+      "bytes": 15062,
+      "sha256": "777d8d708eae0994809b5675b67ff1df91bb068a0796b73898b46e47e2441e6a"
+    },
+    "readmixer/python_update_plans/02-paired-input-and-lossless-parsing.md": {
+      "bytes": 16568,
+      "sha256": "ad418d3bb8de2e5f7cabe196dcc5520648a952ec0ccc08a96ecbe3db47840f30"
+    },
+    "readmixer/python_update_plans/03-resource-admission-and-storage.md": {
+      "bytes": 15546,
+      "sha256": "4fc2a04196337039abacbb814f7f666027ae591a7dae3bc4cd20d28c733c034e"
+    },
+    "readmixer/python_update_plans/04-global-pair-randomization-and-sharding.md": {
+      "bytes": 17614,
+      "sha256": "a03ff0bfe79717791aa05ed1e0d0d76dbc4a6ec02a494c4be2c429b717e9949f"
+    },
+    "readmixer/python_update_plans/05-encrypted-scratch-and-safe-publication.md": {
+      "bytes": 17465,
+      "sha256": "31ef7adab79fbeb8267d54b32448590ce58279e1a09924b23eca682600bfb114"
+    },
+    "readmixer/python_update_plans/06-bundles-keys-indexes-and-manifests.md": {
+      "bytes": 21542,
+      "sha256": "68757b2d81c357df15a275afe08d1c141eca01bdf3f9bab10ed4ac7edab84171"
+    },
+    "readmixer/python_update_plans/07-complete-verification.md": {
+      "bytes": 17611,
+      "sha256": "9241c2d5516b3e74441c00feb46bcba2325cbec616aee51c76088590147cb125"
+    },
+    "readmixer/python_update_plans/08-multi-sample-recovery.md": {
+      "bytes": 21718,
+      "sha256": "35e35ea3986bd4dd4a03876216e1a98a2394246e96c6d3044791cc08b5e60a5e"
+    },
+    "readmixer/python_update_plans/09-parallel-execution-and-performance.md": {
+      "bytes": 15146,
+      "sha256": "e621530405778fb49e495b0e1fb40177e29f8ca590932bf368cbde4c6f1727c1"
+    },
+    "readmixer/python_update_plans/10-acceptance-documentation-and-release.md": {
+      "bytes": 17534,
+      "sha256": "bd31b13b611006b86ab99cc5906af8338b0083d25e47f942f53253837dfb7f3c"
+    },
+    "readmixer/python_update_plans/11-shared-metadata-budget-and-lifetimes.md": {
+      "bytes": 13877,
+      "sha256": "13375131581d0ed76306d6c9a03a86c609ffb79be68c85ff4549051cbdbf6429"
+    },
+    "readmixer/python_update_plans/12-paged-output-ownership-and-publication.md": {
+      "bytes": 13810,
+      "sha256": "47a74853c584c68c13c578285bbe6e958709ba60660ca950164f43b2670b45d1"
+    },
+    "readmixer/python_update_plans/13-spawn-workers-and-bounded-storage-handoffs.md": {
+      "bytes": 16178,
+      "sha256": "2c3e137a0b91d3c43a7d96efdb2d2f92c188eae72f76682951dd7d05d32cc79c"
+    },
+    "readmixer/python_update_plans/14-deterministic-parallel-pipeline.md": {
+      "bytes": 15544,
+      "sha256": "df80aa04aeafc36051ac3560b53aa2cc5e3e924194d9b828dc2945a805602353"
+    },
+    "readmixer/python_update_plans/15-workflow-boundaries-and-failure-acceptance.md": {
+      "bytes": 15350,
+      "sha256": "ed4f196c7559f96d760b7641ee63c7c90a3fe8f622b06b33cade58a01093459c"
+    },
+    "readmixer/python_update_plans/16-resource-scale-and-performance-qualification.md": {
+      "bytes": 14899,
+      "sha256": "78c499d7a09006ef910e7de80a3ea37b8ae29fe1dcf355a5e36ece7812aeb21e"
+    },
+    "readmixer/python_update_plans/17-platform-packaging-and-release-closure.md": {
+      "bytes": 15534,
+      "sha256": "1a3e4113a6897ad99dd0dd4021f96edf59e0c437c4820e421fc13d3ccc16ef3f"
+    },
+    "readmixer/python_update_plans/IMPLEMENTATION.md": {
+      "bytes": 26488,
+      "sha256": "b0dfc729c9b7e8801dcfab2f62d3e51b88a2e25671ee7eff6c93e878fa2264e1"
+    },
+    "readmixer/python_update_plans/README.md": {
+      "bytes": 15820,
+      "sha256": "0528caf5bb381935a5e7bb39867d090caae246722917513ed3d0d37e5aa23ca3"
+    },
+    "readmixer/python_update_plans/regression-coverage.json": {
+      "bytes": 99997,
+      "sha256": "4d7a31c00c2a54b64c631a9567114f4a17b31004f391648527abdd7e5220dab9"
+    },
+    "readmixer/readmixer.py": {
+      "bytes": 487,
+      "sha256": "d83828cf691c5e5a93aa1f6ac0b73a062415d406051b1dcb6c8596b842ed5c09"
+    },
+    "requirements-foundations.lock": {
+      "bytes": 303,
+      "sha256": "a0276dde65864a19e91b4f58e6c6caa61f130a3f66eb612bbfb303d0db061a41"
+    },
+    "scripts/benchmark_pipeline.py": {
+      "bytes": 18862,
+      "sha256": "bbef3ed3a345b90fa9ed2c441ff2fe97aa60473183f2f284f9b6a636e5313aeb"
+    },
+    "scripts/check_roundtrip_inputs.py": {
+      "bytes": 10746,
+      "sha256": "a5a5b05ee514ab62e0c85467348f21eb5a25b960b5debc0747cc6eba86cf9f7e"
+    },
+    "scripts/check_storage_inputs.py": {
+      "bytes": 10812,
+      "sha256": "31a37ff62aba3a57746bf4320b99d24dab87b20242d78dcd8bc9fbf298914799"
+    },
+    "scripts/generate_fixtures.py": {
+      "bytes": 9647,
+      "sha256": "1266375b282875d508c6dcde6bb17ce9dbcb430b231944cfd2cbeace0a718b61"
+    },
+    "src/readmixer_py/__init__.py": {
+      "bytes": 1914,
+      "sha256": "711eed3fe0364562f71253970b8d01115128eaaf04aa0d3fb1da840883f2b6fd"
+    },
+    "src/readmixer_py/__main__.py": {
+      "bytes": 79,
+      "sha256": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7"
+    },
+    "src/readmixer_py/artifacts/__init__.py": {
+      "bytes": 73,
+      "sha256": "ee72f791a07c24ad8783297d4295cd46afdd644b322fca651cbd4423e33eb2a0"
+    },
+    "src/readmixer_py/artifacts/bgzf.py": {
+      "bytes": 28271,
+      "sha256": "48a541671e038455db22f514e9e37e4c719cdda724d8e5d3986778fb04e52034"
+    },
+    "src/readmixer_py/artifacts/bundles.py": {
+      "bytes": 11481,
+      "sha256": "696a66269738c20e9cf64bc1b49e03e18ada48f41165a480a90ce4366321022b"
+    },
+    "src/readmixer_py/artifacts/index.py": {
+      "bytes": 6668,
+      "sha256": "3d5bed98e4959733fc3d700cd018988d554a16abe8dc43a09f79cfbb885f342a"
+    },
+    "src/readmixer_py/artifacts/key.py": {
+      "bytes": 7102,
+      "sha256": "de203bd7bc5d416df97eaab1cb2f173671dd7c6224f8c5b0ddf86a4dfa404328"
+    },
+    "src/readmixer_py/artifacts/manifest.py": {
+      "bytes": 20242,
+      "sha256": "26f80594007cd509574ee79e4226d20d7f818c67f364fbe0d7436133c90af767"
+    },
+    "src/readmixer_py/catalog.py": {
+      "bytes": 28765,
+      "sha256": "81ef81e891bd7bb33d0cf33ed969a7a41ea88fec8377c816e2ecfd7be1aec6bf"
+    },
+    "src/readmixer_py/cli.py": {
+      "bytes": 8438,
+      "sha256": "532482e051e6aedaf8840b79c8245fdae56c317355a804b84c36e740831fd59f"
+    },
+    "src/readmixer_py/config.py": {
+      "bytes": 6150,
+      "sha256": "2ec4ae3e1effbf2dca3228e48f063b2868679bc30e144fd66c335338e67692c6"
+    },
+    "src/readmixer_py/crypto.py": {
+      "bytes": 10732,
+      "sha256": "55c273d828a7c9a0a1f8f1e631e74b0a8b485e5c1fb9dc57aa3283e95f8278da"
+    },
+    "src/readmixer_py/disk.py": {
+      "bytes": 9995,
+      "sha256": "5bc2d4becefe8503a2770ce57b9a832ec25b3def8b07f942ea3482e823d5520c"
+    },
+    "src/readmixer_py/errors.py": {
+      "bytes": 1154,
+      "sha256": "72bfb4d82dd982390a78bfdffa8f444669bc98a6716feb164d101b2c406fa50a"
+    },
+    "src/readmixer_py/execution.py": {
+      "bytes": 21862,
+      "sha256": "8048e74609b1fa4160b0f5cd59409f53eff08c8b90a21bdd496e3cf1a32e7231"
+    },
+    "src/readmixer_py/fastq.py": {
+      "bytes": 19893,
+      "sha256": "4ef3c136c047c5633e36e630b5c13f2a2bf862247eca91affeae5fe34f0f16a5"
+    },
+    "src/readmixer_py/inspection.py": {
+      "bytes": 7593,
+      "sha256": "6d3196802134dd8ffe02207e3558cd40d7b5096d8c88bda58e7a4fd8c2dad12c"
+    },
+    "src/readmixer_py/ledger.py": {
+      "bytes": 15000,
+      "sha256": "cc5a19088c50274a9d86e16a37924d4ddc9116eb40281768c4a516e8c5da67e1"
+    },
+    "src/readmixer_py/metadata.py": {
+      "bytes": 2015,
+      "sha256": "6757dbdf428c48a3d1398d3dde663a045b6184f61aaa69e082ea0f0c284a0651"
+    },
+    "src/readmixer_py/mixing.py": {
+      "bytes": 11410,
+      "sha256": "093dd6098f5da8f6cdf46e79afda598abdce2c4a6b4247e60fdecb243a7fe9b3"
+    },
+    "src/readmixer_py/paircodec.py": {
+      "bytes": 7588,
+      "sha256": "858fc3fa00decbc406330438dbefbc6d3fbd253a5257c89cc05081405e4be74c"
+    },
+    "src/readmixer_py/paths.py": {
+      "bytes": 7462,
+      "sha256": "68062ee0a155c7b10173265b2ae522ea27449cf01130c22325e250eec3e9d729"
+    },
+    "src/readmixer_py/pool.py": {
+      "bytes": 8964,
+      "sha256": "15ddb5390ff7f2deba7876297fc25f2068f9e768741b91acb4276c3822842661"
+    },
+    "src/readmixer_py/recovery.py": {
+      "bytes": 19895,
+      "sha256": "dc9f947785c986502a2d0631a1387908f39c93c9bf2b8357859baf01f0962159"
+    },
+    "src/readmixer_py/resources.py": {
+      "bytes": 29381,
+      "sha256": "b87d21d87e3603b37385346c49eae425c13009e6d452ceb9674597181e40784f"
+    },
+    "src/readmixer_py/runtime.py": {
+      "bytes": 2313,
+      "sha256": "4e75a4ccdb63fd05c9b50f55ff0e0231dfa5f497e77505fdeab9b3ba8e284ca5"
+    },
+    "src/readmixer_py/scan.py": {
+      "bytes": 12350,
+      "sha256": "962e11e45bd1235e9f69941bba4fb2363458a8d80eb91eeef689d1dc64e491b8"
+    },
+    "src/readmixer_py/shuffle.py": {
+      "bytes": 24548,
+      "sha256": "7f0091012b658995be8e8ac67a2a7adc50d969abca0cb3f917332b5de44ad853"
+    },
+    "src/readmixer_py/sorting.py": {
+      "bytes": 24380,
+      "sha256": "f8a3ab8d30eb1141633a1459121e64abce19a1e36091f26393e64b8cbbdbd91b"
+    },
+    "src/readmixer_py/storage.py": {
+      "bytes": 42971,
+      "sha256": "951901a7e03f61e6cda6e4b35d386096fb3a52db9ee183d951ee7d210a3369c0"
+    },
+    "src/readmixer_py/transaction.py": {
+      "bytes": 28359,
+      "sha256": "3ba90d636e15816639bc37b734b38de4658e04b39c949644cbb198d0b8fa80cd"
+    },
+    "src/readmixer_py/verification.py": {
+      "bytes": 8971,
+      "sha256": "0618294aba727901737251c513599cdcb201400305e58289ec260f5915d19e02"
+    },
+    "tests/test_api.py": {
+      "bytes": 9864,
+      "sha256": "f614143d6b6e6acb1ce212e26589295674e9c29953c86354fbf026320d00281a"
+    },
+    "tests/test_artifact_metadata.py": {
+      "bytes": 12943,
+      "sha256": "5f5c16d5a6b1450df8fbccb1875a83a12ad0858b2196757f98ed1365d84ad997"
+    },
+    "tests/test_bgzf.py": {
+      "bytes": 20166,
+      "sha256": "d79a5272a65fce21522a08fd32900a37810b021b616e441d6f1c1e4cbf3951ef"
+    },
+    "tests/test_catalog.py": {
+      "bytes": 15516,
+      "sha256": "f245af9cfe103097cb79e45015a46250567d344e592e7762c191031b1e37d2ea"
+    },
+    "tests/test_catalog_metadata.py": {
+      "bytes": 9245,
+      "sha256": "3bce65e303e4e3e7a8516ebba82fd434f9c46afdad9d743d130f22e1e7f6bbfa"
+    },
+    "tests/test_check_roundtrip_inputs.py": {
+      "bytes": 3032,
+      "sha256": "40a66992f436304ee5d6fb36d4de354652b6728bbf7619250aaa66e42dc62649"
+    },
+    "tests/test_check_storage_inputs.py": {
+      "bytes": 3353,
+      "sha256": "7be96ab1b94229e8df520c9373ab615cb5b3fa2fcecb723ce9d57dc87a31e51f"
+    },
+    "tests/test_cli_workflow.py": {
+      "bytes": 4886,
+      "sha256": "10233c28c7d9d5e0973e00be7d51aac8786c6e1c67d6e4c27ad5ac4e389796e4"
+    },
+    "tests/test_crypto.py": {
+      "bytes": 8875,
+      "sha256": "e7c50a706749a3a282754b3b1d3198d82ae5d6b4244aa55edbb0fb22c5b4618e"
+    },
+    "tests/test_disk_paths.py": {
+      "bytes": 4975,
+      "sha256": "e428a5bf62335427ba691831c25b4d5bc476415b15c6ef80e6d1e049a7816877"
+    },
+    "tests/test_execution.py": {
+      "bytes": 13352,
+      "sha256": "1ac2379c7a20babbcd2c7d443583c0631fc398afe4778c16ac5abf8ecab90343"
+    },
+    "tests/test_fastq.py": {
+      "bytes": 19298,
+      "sha256": "30f39d349fb4f250a163ab7446c5d1da355c85c3589295240047445fd4b52918"
+    },
+    "tests/test_ingress_workflow.py": {
+      "bytes": 9251,
+      "sha256": "6cf48248f05f0fef0c9e080dff879d8d2becb2bcf7a6ac977792127f352d524b"
+    },
+    "tests/test_large_records.py": {
+      "bytes": 9721,
+      "sha256": "0f0aa01697dcbd8bd81bc2acf7ea80075cb703018f7653246281317dc3e9f845"
+    },
+    "tests/test_ledger.py": {
+      "bytes": 5575,
+      "sha256": "e53da7e2e956f2c07a79c05f727a6e6a5f55c58e48814954876d595b28ec3472"
+    },
+    "tests/test_ledger_faults.py": {
+      "bytes": 9875,
+      "sha256": "63b693051104afd3e95cdafdeae19ee4bfb31fa623c13595c0118aaa0d264c24"
+    },
+    "tests/test_metadata_workflows.py": {
+      "bytes": 10101,
+      "sha256": "2bab690553f9784968c21f823c2b789d3153c4cd343829c8afe5cc6c8fc17dc0"
+    },
+    "tests/test_paircodec.py": {
+      "bytes": 7164,
+      "sha256": "dd2ec7031e85a92c0b097daa45fe92738f44c62c458ac872d06febe56519f642"
+    },
+    "tests/test_parallel_pipeline.py": {
+      "bytes": 2041,
+      "sha256": "1290412997d0ef0de5da7ccb7d511eee98c8409d6c9816cbf074745c114f908d"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 9024,
+      "sha256": "56cff5a83647712fe7b94229caf462c75fc0598154ec93bc881699ad78483c0a"
+    },
+    "tests/test_pool_scan.py": {
+      "bytes": 10414,
+      "sha256": "d1c34c2c774fb675a3b158332ead8570e12ad2605972bb12d5b260d4789ae37f"
+    },
+    "tests/test_recovery.py": {
+      "bytes": 18199,
+      "sha256": "983f5739505df1c91a7a17589b80fceebd96411a6b5270f7ae5fd78fafaa411b"
+    },
+    "tests/test_recovery_lifetimes.py": {
+      "bytes": 6792,
+      "sha256": "493c4771cf91f16b51df5263a2fefc13c208b8646d57a1790767ec57fb2957c6"
+    },
+    "tests/test_resources.py": {
+      "bytes": 23123,
+      "sha256": "dae3452c9405c725b654247165119d2c0417f462c62cf806ce44a0f893eb22eb"
+    },
+    "tests/test_rollover_boundaries.py": {
+      "bytes": 10714,
+      "sha256": "2d672bc44c68e7f68631d843c3702db4568066852268001def46734ad1cb7865"
+    },
+    "tests/test_shuffle.py": {
+      "bytes": 21220,
+      "sha256": "4f8f7a630582145bedf7e1f4c5fadc6d7cc2305b70023dace8592043388788a6"
+    },
+    "tests/test_shuffle_oracle.py": {
+      "bytes": 7344,
+      "sha256": "7fe9d81d03bc453075bcfcf235e2cbb5f4d43b6c146596cdef75ad53a2ac1bd8"
+    },
+    "tests/test_sorting.py": {
+      "bytes": 16318,
+      "sha256": "ac6a9efe90c5ac23aac3dab471e7dd3791a7ac2855595e9dcb497809c2931932"
+    },
+    "tests/test_storage.py": {
+      "bytes": 25614,
+      "sha256": "2a3f33ff35b75cafd8924bac1be69ec2937c1fe904cde8cd9889600d074915cb"
+    },
+    "tests/test_storage_integration.py": {
+      "bytes": 11683,
+      "sha256": "10b2340ab1a740ffd07f22741a9ab18c05543fe54c44e0cd49030c509144992d"
+    },
+    "tests/test_storage_metadata.py": {
+      "bytes": 14573,
+      "sha256": "f2b7bc21c245eda89b660112dbea743df19cc43555b56a933f8924cbcd26783f"
+    },
+    "tests/test_synthetic_tooling.py": {
+      "bytes": 11532,
+      "sha256": "f2c390369860305dfc87a16734397d981db1d2f2d0d63654ac1ca1ea452ed287"
+    },
+    "tests/test_transaction.py": {
+      "bytes": 29652,
+      "sha256": "5f98088b0dde51f2598b6a66cce19f227600222caf85d38c216f52950b3d8e90"
+    },
+    "tests/test_verification_faults.py": {
+      "bytes": 5515,
+      "sha256": "da61aea69ddc2c9330f64f6358252bfb161e8f36055d57196abbed58aa8e5314"
+    }
+  },
+  "source_manifest_encoding": "UTF-8 JSON, sorted keys, compact separators, no final newline",
+  "source_manifest_sha256": "9a75bc39c2ea0828136705f73cb14f93573c78cb0a462c2a175621d3541c23cc",
+  "source_tests": {
+    "elapsed_seconds": 30.201,
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "3b0c6c431aa4fe23499b7827ba95d8d59e8452d8cb85c596e5255548cdb21575",
+    "passed": 1233,
+    "skipped": 0,
+    "tests": 1233
+  },
+  "supplied_data_prefix": {
+    "completed": true,
+    "external_storage": true,
+    "full_input_validation": false,
+    "independent_gzip_hashes_and_counts_equal": true,
+    "indexed_recovery_equal": true,
+    "mix_compression_slots": 3,
+    "nonempty_prefixes": 48,
+    "normalized_bytes": 2154240,
+    "pairs": 6144,
+    "pairs_per_sample_limit": 128,
+    "pool_artifacts": 13,
+    "pool_bundles": 2,
+    "prefix_pool_fully_verified": true,
+    "private_temp_cleanup_complete": true,
+    "reads": 12288,
+    "recovery_artifacts_total": 386,
+    "recovery_parts_total": 96,
+    "samples": 48,
+    "scope": "bounded_prefix_mix_verify_recovery_check",
+    "sequential_recovery_equal": true,
+    "source_files_modified": false,
+    "workers_requested": 4
+  }
+}

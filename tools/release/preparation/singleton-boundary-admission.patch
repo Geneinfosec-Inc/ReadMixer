@@ -1,0 +1,11 @@
+--- a/tests/test_pipeline.py
++++ b/tests/test_pipeline.py
+@@ -115,7 +115,7 @@
+     inputs = tmp_path / 'inputs'
+     fixtures(inputs, metadata=2000)
+     with pytest.raises(ResourceError, match='complete pair'):
+-        _mix(MixConfig(input_dir=inputs, output=tmp_path / 'pool', max_artifact_bytes=65564, max_ram=512 << 20))
++        _mix(MixConfig(input_dir=inputs, output=tmp_path / 'pool', max_artifact_bytes=65564, max_ram=512 << 20, workers=1))
+     assert not list((tmp_path / 'pool').iterdir())
+ 
+ 
